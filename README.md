@@ -2,7 +2,7 @@
 
 **Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
 
-## MVP: British Columbia
+## Planned MVP: British Columbia
 - Project intelligence registry with construction stage, estimated budget, source provenance, and confidence
 - Pipeline for commercial mortgage/financing opportunities
 - Stakeholder and company directory (developers, contractors, architects, property owners)
@@ -10,21 +10,90 @@
 - Qualified project ranking, dashboard, and CSV import/export
 - Account-based outreach workflows with compliance review (CASL/PIPEDA)
 
-## Stack
+## Application stack and planned services
 - Next.js App Router, TypeScript, Tailwind CSS
 - Clerk authentication and Organizations
 - Supabase PostgreSQL with row-level security (RLS)
 - shadcn/ui compatible component architecture
 - Vercel (frontend), Supabase (database); optional Railway workers
 
-## Local setup
-1. `npm install`
-2. Copy `.env.example` to `.env.local` and add credentials.
-3. Run `supabase/schema.sql` in your Supabase SQL editor.
-4. Run `npm run dev`.
-5. Configure Clerk organizations. Keep the database service-role key **server-only**.
+## Interactive dashboard
 
-The dashboard and demo dataset work without connected credentials. Production persistence requires authenticated API endpoints, JWT validation and RLS policies described in `docs/ARCHITECTURE.md`.
+**Private live demo:** https://konstructionos-dashboard.dennis-klicksmartai.chatgpt.site  
+**Development branch:** `feature/mock-dashboard`  
+**Draft pull request:** https://github.com/Ksdeng1559/KonstructionComOS/pull/1
+
+The dashboard contains eight fictional BC projects. All budgets, signals, scores and stakeholder roles are illustrative; each exported CSV row includes a synthetic-data disclosure. Shortlists and qualification changes are held in memory and reset on refresh.
+
+### Views and controls
+
+| View | Available behavior |
+| --- | --- |
+| Overview | Filtered project counts, assumed project value, high-priority counts, shortlist count and construction-stage distribution |
+| Project discovery | Search project/city/signal, combine construction-stage/location/score filters, sort results, save or remove shortlist items, and open intelligence briefings |
+| Stakeholders | Review roles to identify, project-specific validation steps and evidence gaps; expand each project into its intelligence briefing |
+| Capital pipeline | Drag project cards between **Discovered**, **Reviewing**, **Qualified** and **On hold**; use direct move buttons on mobile or with a keyboard |
+| CSV export | Download the currently filtered projects with qualification and shortlist state, explicitly labeled as synthetic |
+
+Construction-stage filters describe the project lifecycle. Kanban columns describe your qualification workflow; moving a card does not change its construction stage.
+
+### Expandable cards
+
+- Project and stakeholder cards have expand controls that open the project intelligence briefing.
+- Briefings support **80–140% magnification**, a full-width toggle and reset to the default size.
+- Metric and summary cards expand into larger modal views; the opportunities panel and full Kanban board also support expansion.
+- Dialogs support Escape dismissal, native modal focus containment and focus restoration.
+- Kanban columns show project counts and total assumed project value. These figures represent illustrative budgets, not requested loans or committed financing.
+
+### Demo boundaries
+
+The dashboard currently has no connected live permit sources, verified company/contact identities, authenticated tenant access, production database persistence, CSV import, CRM synchronization or outbound messaging. Clerk and Supabase dependencies and the initial schema are present, but production integration remains planned. The private preview's owner-only access is separate from future application-level organization authentication.
+
+The deployed preview is a separate static export of the demo. GitHub remains the application source of truth; GitHub commits do not automatically synchronize the hosted preview. Site-specific static-export configuration is maintained in the preview checkout.
+
+## Run locally
+
+Use **Node.js 22.18+** and npm. Credentials are unnecessary for the demo.
+
+```bash
+git clone --branch feature/mock-dashboard https://github.com/Ksdeng1559/KonstructionComOS.git
+cd KonstructionComOS
+npm ci
+npm run dev
+```
+
+Open http://localhost:3000.
+
+If you already have a checkout, commit or stash your current work before switching branches; then switch to `feature/mock-dashboard`, pull the latest changes, and run `npm ci`.
+
+### Validation
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```
+
+Typecheck, lint, the three automated data tests and production build passed for the dashboard implementation. The tests cover combined filters, score-factor totals and CSV escaping/disclosures. Browser drag-and-drop, responsive rendering, expansion and keyboard interactions remain unverified in this environment because browser tooling was unavailable; passing data tests does not verify those interactions.
+
+Manual smoke check: move a project by dragging and by its move buttons, including into an empty column; confirm column counts and export state; expand project, stakeholder, metric and summary cards; magnify, reduce and reset a briefing; close dialogs with Escape; repeat on mobile; refresh to confirm session changes reset.
+
+## Coding-agent handoff
+
+Read [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md), [docs/PRD.md](docs/PRD.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/FRONTEND_INTEGRATION.md](docs/FRONTEND_INTEGRATION.md) before implementation. [docs/DASHBOARD.md](docs/DASHBOARD.md) describes the initial dashboard handoff; the controls above reflect the subsequent card-expansion and Kanban updates.
+
+| File | Responsibility |
+| --- | --- |
+| `src/components/mock-dashboard.tsx` | Dashboard views, shared filters, shortlist and qualification state |
+| `src/components/project-kanban.tsx` | Drag-and-drop qualification board, direct move buttons and move announcements |
+| `src/components/project-briefing.tsx` | Project intelligence dialog, score explanation, evidence gaps and magnification |
+| `src/components/expandable-card.tsx` | Reusable larger modal view for dashboard cards and panels |
+| `src/lib/demo.ts` | Synthetic fixtures, filter logic and CSV serialization |
+| `src/app/globals.css` | Dashboard, Kanban, responsive and expanded-card styles |
+| `tests/demo.test.ts` | Data behavior checks |
+
+Next production slice: implement Clerk Organizations, verified server-side organization mapping, restrictive Supabase RLS and cross-organization denial tests before real project CRUD. Configure secrets via `.env.example`, keep service-role credentials server-only, and review the initial `supabase/schema.sql` before use. Merely adding credentials or running the schema does not complete production integration.
 
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
