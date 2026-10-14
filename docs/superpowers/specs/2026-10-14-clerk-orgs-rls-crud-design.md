@@ -13,6 +13,7 @@ This is the first coding workstream named in `CLAUDE.md`/`AGENTS.md`: Clerk Orga
 - Dev keys pulled into `.env.local` (gitignored). `CLERK_WEBHOOK_SECRET` is still blank — set once the webhook endpoint exists (section 2).
 - Supabase project confirmed: `amgknqnhiscryvcfeoyj` ("Mortgagesbydennis-ClearCloseDesk"). **This project already hosts a different, live product's schema** (`public.organizations`, `public.opportunities`, `public.companies`, `public.contacts`, `public.workspaces`, plus `mix_*`/`outreach_*`/`rios_*` tables) with an incompatible, `workspace_id`-based multi-tenancy model. KonstructionComOS tables must not go in `public` — see schema isolation below.
 - Both Clerk and Supabase credentials recorded in the Notion "API Keys — Minimal Registry" database.
+- `supabase init` run locally (`supabase/config.toml` created) for the local Docker test stack. **Not** linked to the remote project via `supabase link` — no personal access token / browser OAuth available in this environment. Remote schema work goes through the Supabase MCP tool instead (see section 5).
 
 ## 1. Schema isolation
 
@@ -47,7 +48,9 @@ CSV import (listed as P0 in `PRD.md`/`AGENTS.md`'s broader scope) is **out of sc
 
 ## 5. Migrations & local dev
 
-`supabase/schema.sql` becomes the first Supabase CLI migration (`supabase/migrations/<ts>_initial_schema.sql`, rewritten for the `konstruction` schema); RLS policies and `current_org_id()` become a second migration. This unlocks `supabase start` / `supabase db reset` for local dev and CI. README's "run schema.sql in the SQL editor" instruction is replaced with "run `supabase db push`" (plus the manual exposed-schema step above, once, on the actual project).
+`supabase/schema.sql` becomes the first Supabase CLI migration (`supabase/migrations/<ts>_initial_schema.sql`, rewritten for the `konstruction` schema); RLS policies and `current_org_id()` become a second migration. This unlocks `supabase start` / `supabase db reset` for local dev and CI, using the local project config from `supabase init` (local Docker stack only — not remotely linked).
+
+The CLI is **not** linked to the remote project (`supabase link` needs a personal access token and browser OAuth, unavailable in this environment). Migrations are applied to the real `amgknqnhiscryvcfeoyj` project directly via the Supabase MCP tool's `apply_migration`, which is already authenticated. README's "run schema.sql in the SQL editor" instruction is replaced with "migrations applied via Supabase MCP" (plus the manual exposed-schema step above, once, on the actual project). CLI remote linking can be revisited later if `db push`/`db diff` workflows are wanted.
 
 ## 6. Testing
 
