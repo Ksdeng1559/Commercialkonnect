@@ -17,6 +17,12 @@
 - shadcn/ui compatible component architecture
 - Vercel (frontend), Supabase (database); optional Railway workers
 
+## Interactive dashboard
+
+The `feature/mock-dashboard` branch contains a responsive demo workspace with four distinct views: overview, project discovery, stakeholder research, and a capital qualification board. Search by project/city/signal, combine stage/location/score filters, sort results, save a shortlist, inspect score breakdowns and evidence gaps, change qualification stages, and export the filtered projects as CSV. All eight BC examples are synthetic; each exported row includes that disclosure. Shortlist and stage changes are in memory and reset on refresh.
+
+Run without credentials: `npm ci` then `npm run dev`, and open http://localhost:3000. Use Node.js 22.18+ for the built-in TypeScript test runner. Checks: `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`. See [docs/DASHBOARD.md](docs/DASHBOARD.md) for the implementation and Claude Code handoff.
+
 ## Local setup
 1. `npm install`
 2. Copy `.env.example` to `.env.local` and add credentials.
