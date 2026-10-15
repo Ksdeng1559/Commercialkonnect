@@ -116,6 +116,8 @@ If numeric scores are later approved, version the rubric, show factor contributi
 
 ## 9. User experience and activation
 
+Follow [docs/GTM_WIREFRAME.md](GTM_WIREFRAME.md) for the recommended queue, expandable detail, verification forms, Kanban, responsive behavior and SVG layout references.
+
 Add a GTM Opportunities view and an expandable panel in project intelligence. Show: segment, factual trigger with date/link, why it may matter, proposed service, role to verify, unknowns, disqualifiers, evidence freshness, next action and reviewer state. Include filters for segment, strategy, source, territory, queue, owner and due date.
 
 Use segment-specific qualification Kanban:

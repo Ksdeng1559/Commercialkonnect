@@ -9,6 +9,7 @@ You are implementing a **British Columbia-first, multi-tenant B2B construction i
 4. `docs/ARCHITECTURE.md` (security, tenant isolation and ingestion pipeline)
 5. `docs/FRONTEND_INTEGRATION.md` (approved public frontend and design mapping)
 6. `docs/GTM_LEAD_SOURCE_PLAYBOOK.md` (lead-source signals, GTM strategies, evidence gates and implementation sequence)
+7. `docs/GTM_WIREFRAME.md` (recommended layouts, SVG references, responsive states and UI acceptance checks)
 
 ## Public frontend is already chosen
 Use **https://clearconnectcom.lovable.app/** as the marketing and demo frontend. Lovable editor/source: `https://lovable.dev/projects/136ade9c-5e7f-4aea-95d7-de34af9aabc0`. Preserve its UX and navigation.

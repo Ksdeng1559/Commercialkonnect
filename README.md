@@ -59,3 +59,5 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a
 ## GTM lead-source implementation handoff
 
 Claude Code: read [docs/GTM_LEAD_SOURCE_PLAYBOOK.md](docs/GTM_LEAD_SOURCE_PLAYBOOK.md) before implementing opportunity discovery. It defines financing, contractor, commercial real estate and referral strategies; source evidence and qualification gates; categorical review queues; segment Kanban; internal promotion; attribution; and acceptance scenarios. The first implementation slice targets this repository's Mortgage Mix financing workflow. The separate Atomic CRM contractor plan retains its own repository, auth and scoring boundaries. This is a documentation handoff; no live source, scoring engine or outreach integration is enabled by it.
+
+Recommended UI: [GTM wireframe and Claude Code UI task](docs/GTM_WIREFRAME.md), including editable [opportunity queue](docs/wireframes/gtm-opportunity-queue.svg) and [capital Kanban](docs/wireframes/gtm-capital-kanban.svg) references. These are proposed layouts with synthetic examples, not implemented screens.
