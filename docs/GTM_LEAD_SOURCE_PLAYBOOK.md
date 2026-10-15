@@ -64,6 +64,8 @@ Follow [GTM_ENRICHMENT.md](GTM_ENRICHMENT.md) for the staged identity, company, 
 
 ## 5. Configurable customer-fit profile
 
+Use [client.brain.md](../client.brain.md) as the versioned client-profile contract: goals, evidenced strengths, weaknesses/constraints, preferred opportunities, exclusions, capacity and reviewed feedback. Active profiles are private per workspace, not shared repository files. Recommendations must state which profile version, strengths and interests support the fit and which gaps may prevent it.
+
 Each workspace defines target geography, project types/stages, service capabilities, size ranges, exclusions, capacity, preferred roles and existing relationships. Contractors additionally need trade/package scope and procurement timing; brokers need financing products and sponsor-confirmed timing, with unknown need allowed; commercial teams need mandate/service type and owner context.
 
 Use these settings to filter and explain fit, not to infer confidential financial facts. No validated profile means research-only results. A firm's role in a project does not establish interest in buying this SaaS.

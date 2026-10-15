@@ -11,6 +11,7 @@ You are implementing a **British Columbia-first, multi-tenant B2B construction i
 6. `docs/GTM_LEAD_SOURCE_PLAYBOOK.md` (lead-source signals, GTM strategies, evidence gates and implementation sequence)
 7. `docs/GTM_WIREFRAME.md` (recommended layouts, SVG references, responsive states and UI acceptance checks)
 8. `docs/GTM_ENRICHMENT.md` (identity resolution, company/stakeholder/relationship enrichment, field evidence, provider jobs and review)
+9. `client.brain.md` (client-profile template: goals, strengths, weaknesses, preferred opportunities, constraints and reviewed learning)
 
 ## Public frontend is already chosen
 Use **https://clearconnectcom.lovable.app/** as the marketing and demo frontend. Lovable editor/source: `https://lovable.dev/projects/136ade9c-5e7f-4aea-95d7-de34af9aabc0`. Preserve its UX and navigation.
@@ -41,3 +42,7 @@ Implement **Clerk Organizations + verified server-side org mapping + complete Su
 For lead-source discovery and opportunity activation, follow [docs/GTM_LEAD_SOURCE_PLAYBOOK.md](docs/GTM_LEAD_SOURCE_PLAYBOOK.md). Read the current approved Mortgage Mix design before schema work: `workspaces` is the tenant boundary and `organizations` stores business entities. Reconcile older generic schema notes against that design and the actual checkout. The Atomic CRM retrofit is a separate repository; do not merge its auth, tenancy or DSCOS scoring into this workstream.
 
 Implement one source-independent financing slice first: project evidence → segment/strategy fit → research/review queue → verification task → human-approved internal promotion. Keep unknown financing needs and appointment status explicit. Reuse existing entities, show source/date and reasoning, deduplicate opportunities and test isolation/retries. Keep live source and external activation gates closed until verified. These instructions describe proposed work, not completed integration.
+
+## Client brain
+
+Use `client.brain.md` as the structured profile/template contract for GTM fit and enrichment scope. Store active, versioned client profiles privately under verified workspace access; never commit confidential client facts. Tie recommendations to confirmed interests, evidence-backed strengths, capacity and exclusions. Preserve Unknown states and propose feedback changes for authorized review rather than silently rewriting preferences.

@@ -184,3 +184,7 @@ Run available typecheck/lint/build and meaningful interaction/authorization chec
 ## Enrichment process and UI
 
 Follow [GTM_ENRICHMENT.md](GTM_ENRICHMENT.md) for project/company resolution, stakeholder and relationship enrichment, source-backed field assertions, bounded jobs and human review. Add the specified Enrichment tab to expanded detail and show the most relevant missing/changed fact in queue cards. Keep company identity, project role, contact accuracy, contact eligibility and commercial need visibly separate. Enrichment completion never automatically qualifies a prospect or sends outreach.
+
+## Client Profile / client brain
+
+Use [client.brain.md](../client.brain.md) as the profile contract. Expand Edit target profile into a Client Profile screen: identity and goals; strengths with proof; weaknesses/capability gaps; ranked opportunity interests; exclusions; capacity/economics; relationships; and review history. Show draft/approved version and required missing fields. Opportunity detail adds “Why this fits this client” and “What may prevent a fit”, tied to the active profile version. Accept/reject/defer feedback can propose a profile change for review. Actual client profiles remain tenant-private and must not be committed to this repository.

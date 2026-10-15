@@ -25,6 +25,10 @@ Keep these stages distinct: source import → normalization → identity resolut
 
 Prioritize role-level research when a person cannot be verified. It is better to return "Sponsor finance lead — person unknown" than a plausible but wrong name.
 
+## Client profile before enrichment
+
+Read the authorized workspace's active client brain, using [client.brain.md](../client.brain.md) as the template. Prioritize enrichment that resolves a gap relevant to the client's confirmed interests, strengths and capacity. Return insufficient_profile where required preferences are unknown; propose an intake task instead of broad provider spending. Do not infer weaknesses or rewrite preferences from one interaction. Record the profile version used in enrichment recommendations.
+
 ## 2. Retrieval order and provider contracts
 
 1. Search the authorized workspace's existing company/contact/project records and permitted cached assertions.
