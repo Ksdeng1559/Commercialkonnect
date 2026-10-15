@@ -21,15 +21,15 @@
 1. `npm install`
 2. Copy `.env.example` to `.env.local` and add credentials.
 3. Run `supabase start` (Supabase CLI, requires Docker) to bring up the local Postgres/Auth/Studio stack for development and tests. The CLI is **not** linked to the remote project — no personal access token available in this environment — so `supabase link`/`db push` are not used.
-   - **If Docker/local stack isn't available or has port conflicts:** point `NEXT_PUBLIC_SUPABASE_URL` at the live project (`https://amgknqnhiscryvcfeoyj.supabase.co`) instead and skip `supabase start`. This project already hosts a different, live product's tables under `public` — KonstructionComOS data lives in the `konstruction` schema only. Never run untargeted SQL or migrations against `public` on this project.
-4. Apply `supabase/schema.sql` to the local stack via `supabase db reset`, or to the live Supabase project via the Supabase MCP tool's `apply_migration`. Do not paste schema SQL into the dashboard SQL editor for the live project; see `docs/superpowers/specs/2026-10-14-clerk-orgs-rls-crud-design.md` for why (schema isolation under `konstruction`, not `public`).
+   - **If Docker/local stack isn't available or has port conflicts:** point `NEXT_PUBLIC_SUPABASE_URL` at the live project (`https://amgknqnhiscryvcfeoyj.supabase.co`) instead and skip `supabase start`. This project hosts a live multi-tenant platform (Mortgage Mix + RIOS) under `public` — KonstructionComOS now builds directly on that schema (see workstream below). Still never run untargeted SQL or migrations against it outside the Supabase MCP tool's `apply_migration`.
+4. Apply `supabase/schema.sql` to the local stack via `supabase db reset`, or to the live Supabase project via the Supabase MCP tool's `apply_migration`. Do not paste schema SQL into the dashboard SQL editor for the live project.
 5. Run `npm run dev`.
 6. Configure Clerk organizations. Keep the database service-role key **server-only**.
 
 The dashboard and demo dataset work without connected credentials. Production persistence requires authenticated API endpoints, JWT validation and RLS policies described in `docs/ARCHITECTURE.md`.
 
 ## Current workstream
-Clerk Organizations + Supabase RLS + project/stakeholder/opportunity CRUD is in progress — design approved, implementation underway. See `docs/superpowers/specs/2026-10-14-clerk-orgs-rls-crud-design.md` for the schema-isolation decision, tenant identity flow, and local-test harness (Vitest against the Supabase CLI's local stack).
+Refactoring Mortgage Mix (`mix_*` tables in the live `amgknqnhiscryvcfeoyj` Supabase project) into the commercial-financing opportunity engine, fed by BC construction-project data as a new lead source — design approved, implementation underway. See `docs/superpowers/specs/2026-10-14-mortgage-mix-commercial-financing-design.md` for the tenancy unification, FK-convention decisions, and local-test harness (Vitest against the Supabase CLI's local stack). This supersedes the earlier `2026-10-14-clerk-orgs-rls-crud-design.md` schema-isolation plan, kept for history only.
 
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.

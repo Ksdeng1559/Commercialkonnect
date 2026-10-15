@@ -1,7 +1,7 @@
 # Clerk Organizations + Supabase RLS + Project/Stakeholder/Opportunity CRUD — design
 
 Date: 2026-10-14
-Status: approved, pending implementation
+Status: **superseded** by `2026-10-14-mortgage-mix-commercial-financing-design.md` — the schema-isolation approach below (separate `konstruction` schema) was abandoned in favor of building directly on the existing live platform in `amgknqnhiscryvcfeoyj`. Kept for historical context only; do not implement against this version.
 
 ## Context
 
