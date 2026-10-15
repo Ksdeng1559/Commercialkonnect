@@ -8,6 +8,7 @@ You are implementing a **British Columbia-first, multi-tenant B2B construction i
 3. `docs/PRD.md` (scope, priorities and definition of done)
 4. `docs/ARCHITECTURE.md` (security, tenant isolation and ingestion pipeline)
 5. `docs/FRONTEND_INTEGRATION.md` (approved public frontend and design mapping)
+6. `docs/GTM_LEAD_SOURCE_PLAYBOOK.md` (lead-source signals, GTM strategies, evidence gates and implementation sequence)
 
 ## Public frontend is already chosen
 Use **https://clearconnectcom.lovable.app/** as the marketing and demo frontend. Lovable editor/source: `https://lovable.dev/projects/136ade9c-5e7f-4aea-95d7-de34af9aabc0`. Preserve its UX and navigation.
@@ -32,3 +33,9 @@ Implement **Clerk Organizations + verified server-side org mapping + complete Su
 - Run typecheck/lint/build/tests where available. Do not claim unexecuted checks pass.
 - Never log or commit secrets/PII. CASL/PIPEDA and lending/security obligations require explicit review.
 - End each task with changes, test evidence, limitations and exact next step.
+
+## GTM opportunity workstream
+
+For lead-source discovery and opportunity activation, follow [docs/GTM_LEAD_SOURCE_PLAYBOOK.md](docs/GTM_LEAD_SOURCE_PLAYBOOK.md). Read the current approved Mortgage Mix design before schema work: `workspaces` is the tenant boundary and `organizations` stores business entities. Reconcile older generic schema notes against that design and the actual checkout. The Atomic CRM retrofit is a separate repository; do not merge its auth, tenancy or DSCOS scoring into this workstream.
+
+Implement one source-independent financing slice first: project evidence → segment/strategy fit → research/review queue → verification task → human-approved internal promotion. Keep unknown financing needs and appointment status explicit. Reuse existing entities, show source/date and reasoning, deduplicate opportunities and test isolation/retries. Keep live source and external activation gates closed until verified. These instructions describe proposed work, not completed integration.

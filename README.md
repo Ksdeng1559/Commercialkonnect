@@ -55,3 +55,7 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a
 6. Validate organization isolation, Clerk/Supabase integration, demo vs verified data boundaries, lawful contact handling, analytics and cross-domain navigation before marking integrated.
 
 **Implementation reference:** [docs/FRONTEND_INTEGRATION.md](docs/FRONTEND_INTEGRATION.md). Coding agents should read it alongside [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md).
+
+## GTM lead-source implementation handoff
+
+Claude Code: read [docs/GTM_LEAD_SOURCE_PLAYBOOK.md](docs/GTM_LEAD_SOURCE_PLAYBOOK.md) before implementing opportunity discovery. It defines financing, contractor, commercial real estate and referral strategies; source evidence and qualification gates; categorical review queues; segment Kanban; internal promotion; attribution; and acceptance scenarios. The first implementation slice targets this repository's Mortgage Mix financing workflow. The separate Atomic CRM contractor plan retains its own repository, auth and scoring boundaries. This is a documentation handoff; no live source, scoring engine or outreach integration is enabled by it.
