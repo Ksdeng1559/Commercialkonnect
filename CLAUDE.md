@@ -50,3 +50,7 @@ Use `client.brain.md` as the structured profile/template contract for GTM fit an
 ## GTM execution loop
 
 Read [docs/GTM_EXECUTION_LOOP.md](docs/GTM_EXECUTION_LOOP.md): confirmed offer playbook → explainable pursuit/partner/nurture/pass decision (or Needs research) → relationship ownership → Today action queue → evidenced outcomes and reviewed client-brain learning. Implement in that MVP order, reuse CRM tasks/entities and keep recommendation, eligibility and qualification distinct.
+
+## Goals and success
+
+Read [docs/GTM_GOALS_SUCCESS.md](docs/GTM_GOALS_SUCCESS.md). Tie goals to the client brain and offers; measure qualified meetings, signed mandates and evidenced economics where available. Keep unknown baseline/targets explicit and client outcomes separate from SaaS metrics. Start with one meeting goal and evidence-linked actual/drill-through.

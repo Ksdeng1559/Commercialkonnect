@@ -200,3 +200,7 @@ Acceptance scenarios: two clients receive different recommendations for the same
 ## Linked offer and execution contracts
 
 Maintain versioned offers using [docs/GTM_EXECUTION_LOOP.md](docs/GTM_EXECUTION_LOOP.md). Link active offer IDs/versions to this profile instead of duplicating their terms. Each recommendation states offer/profile versions, disposition, strengths/gaps, ownership and next action. Feedback may propose a reviewed change to the brain or offer; it must not silently update either.
+
+## Goals and scorecard contract
+
+Use [docs/GTM_GOALS_SUCCESS.md](docs/GTM_GOALS_SUCCESS.md) for goal IDs/versions, owner, baseline/target and timeframe, outcome evidence and review cadence. Link active goals to offers and actions; maintain unknown baseline/targets until confirmed. Qualified meetings, mandates and realized fees are separate outcomes. A completed task is not a business outcome.

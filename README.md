@@ -63,3 +63,5 @@ Claude Code: read [docs/GTM_LEAD_SOURCE_PLAYBOOK.md](docs/GTM_LEAD_SOURCE_PLAYBO
 Recommended UI: [GTM wireframe and Claude Code UI task](docs/GTM_WIREFRAME.md), including editable [opportunity queue](docs/wireframes/gtm-opportunity-queue.svg) and [capital Kanban](docs/wireframes/gtm-capital-kanban.svg) references. These are proposed layouts with synthetic examples, not implemented screens.
 
 The [GTM execution and learning loop](docs/GTM_EXECUTION_LOOP.md) adds offer playbooks, pursuit decisions, relationship ownership, a Today action queue and outcome feedback, with an ordered MVP handoff. These remain proposed implementation work.
+
+[Client goals and success metrics](docs/GTM_GOALS_SUCCESS.md) defines client-approved outcome goals, baselines/targets, KPI calculations and a Goals & Success scorecard; no actual results or target commitments are asserted.

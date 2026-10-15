@@ -146,3 +146,7 @@ Run meaningful logic, interaction and authorization tests alongside available ty
 ## Pasteable Claude Code task
 
 > Read client.brain.md and the GTM playbook, enrichment, wireframe and execution-loop handoffs. Implement one complete synthetic finance workflow: client-confirmed offer → evidence-backed pursuit recommendation → human decision with account/pursuit ownership → Today task → evidenced feedback/outcome → proposed client-profile update for review. Reuse existing CRM entities/tasks and preserve separate lifecycle, eligibility, disposition and qualification states. Test ambiguity, exclusions, ownership conflicts, dates/timezones, retries, reviewed learning and tenant isolation. Do not enable paid providers or external sends from mock work.
+
+## Goals and success
+
+Use [GTM_GOALS_SUCCESS.md](GTM_GOALS_SUCCESS.md) to connect the execution loop to client-approved outcome goals, metric definitions, evidence, baseline/target review and a Goals & Success scorecard. Tasks and enrichment counts do not increment business outcomes.

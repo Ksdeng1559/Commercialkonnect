@@ -192,3 +192,7 @@ Use [client.brain.md](../client.brain.md) as the profile contract. Expand Edit t
 ## Execution and learning additions
 
 Follow [GTM_EXECUTION_LOOP.md](GTM_EXECUTION_LOOP.md) for an Offers tab in Client Profile, pursuit decision/rationale and ownership in opportunity detail, a Today view over existing tasks, and outcome/feedback capture with reviewed learning. Keep pursuit disposition separate from review eligibility, project lifecycle and qualification stage. Implement one offer → decision/owner → action → outcome flow before expanding results screens.
+
+## Goals & Success view
+
+Follow [GTM_GOALS_SUCCESS.md](GTM_GOALS_SUCCESS.md). Add a Client Profile tab and linked scorecard with goal statement, actual/target/baseline, gap/time remaining, source/update date and authorized drill-through. Show missing measurement explicitly; include blockers and next actions. Keep business outcomes distinct from tasks, enriched-record counts and SaaS acquisition metrics.
