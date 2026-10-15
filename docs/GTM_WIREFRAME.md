@@ -180,3 +180,7 @@ Run available typecheck/lint/build and meaningful interaction/authorization chec
 ## Pasteable Claude Code UI task
 
 > Read docs/GTM_LEAD_SOURCE_PLAYBOOK.md and docs/GTM_WIREFRAME.md. Use the two SVG references as the layout guide. Inspect the actual branch and reuse available project briefing, expansion and Kanban components. Build the queue-first finance workspace with a selected evidence/action panel, full detail, verification task/confirmation forms and guarded capital qualification board. Preserve unknown financing need and demo boundaries; no fabricated scores. Support desktop/mobile, keyboard moves and clear loading/empty/error states. Start with synthetic data and one complete review flow; connect production only when verified tenancy and source gates pass. Report implemented screens and checks actually run.
+
+## Enrichment process and UI
+
+Follow [GTM_ENRICHMENT.md](GTM_ENRICHMENT.md) for project/company resolution, stakeholder and relationship enrichment, source-backed field assertions, bounded jobs and human review. Add the specified Enrichment tab to expanded detail and show the most relevant missing/changed fact in queue cards. Keep company identity, project role, contact accuracy, contact eligibility and commercial need visibly separate. Enrichment completion never automatically qualifies a prospect or sends outreach.

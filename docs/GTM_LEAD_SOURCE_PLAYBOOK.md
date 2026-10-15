@@ -58,6 +58,10 @@ Normalize stable source_record_id, source_name, source_url, published_at/event_a
 
 Resolve project identity using source IDs and verified address/parcel links. Resolve companies and people separately; an applicant may be an agent or consultant rather than the owner. Keep ambiguous matches in review. Preserve conflicting assertions with their sources instead of overwriting them as facts. Re-imports are idempotent; amendments append history. Corrections/retractions re-evaluate linked hypotheses and warn the reviewer.
 
+## Enrichment before qualification
+
+Follow [GTM_ENRICHMENT.md](GTM_ENRICHMENT.md) for the staged identity, company, stakeholder, contact, relationship and commercial-investigation process. Preserve field-level evidence and conflicts, use bounded provider jobs and review results before qualification. Enrichment success is not confirmed demand or contact permission.
+
 ## 5. Configurable customer-fit profile
 
 Each workspace defines target geography, project types/stages, service capabilities, size ranges, exclusions, capacity, preferred roles and existing relationships. Contractors additionally need trade/package scope and procurement timing; brokers need financing products and sponsor-confirmed timing, with unknown need allowed; commercial teams need mandate/service type and owner context.
