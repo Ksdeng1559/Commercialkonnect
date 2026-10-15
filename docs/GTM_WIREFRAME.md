@@ -188,3 +188,7 @@ Follow [GTM_ENRICHMENT.md](GTM_ENRICHMENT.md) for project/company resolution, st
 ## Client Profile / client brain
 
 Use [client.brain.md](../client.brain.md) as the profile contract. Expand Edit target profile into a Client Profile screen: identity and goals; strengths with proof; weaknesses/capability gaps; ranked opportunity interests; exclusions; capacity/economics; relationships; and review history. Show draft/approved version and required missing fields. Opportunity detail adds “Why this fits this client” and “What may prevent a fit”, tied to the active profile version. Accept/reject/defer feedback can propose a profile change for review. Actual client profiles remain tenant-private and must not be committed to this repository.
+
+## Execution and learning additions
+
+Follow [GTM_EXECUTION_LOOP.md](GTM_EXECUTION_LOOP.md) for an Offers tab in Client Profile, pursuit decision/rationale and ownership in opportunity detail, a Today view over existing tasks, and outcome/feedback capture with reviewed learning. Keep pursuit disposition separate from review eligibility, project lifecycle and qualification stage. Implement one offer → decision/owner → action → outcome flow before expanding results screens.

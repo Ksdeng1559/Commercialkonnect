@@ -46,3 +46,7 @@ Implement one source-independent financing slice first: project evidence → seg
 ## Client brain
 
 Use `client.brain.md` as the structured profile/template contract for GTM fit and enrichment scope. Store active, versioned client profiles privately under verified workspace access; never commit confidential client facts. Tie recommendations to confirmed interests, evidence-backed strengths, capacity and exclusions. Preserve Unknown states and propose feedback changes for authorized review rather than silently rewriting preferences.
+
+## GTM execution loop
+
+Read [docs/GTM_EXECUTION_LOOP.md](docs/GTM_EXECUTION_LOOP.md): confirmed offer playbook → explainable pursuit/partner/nurture/pass decision (or Needs research) → relationship ownership → Today action queue → evidenced outcomes and reviewed client-brain learning. Implement in that MVP order, reuse CRM tasks/entities and keep recommendation, eligibility and qualification distinct.

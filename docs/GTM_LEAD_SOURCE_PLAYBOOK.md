@@ -187,3 +187,7 @@ Run available typecheck, lint and build scripts plus meaningful engine/integrati
 ## Source basis
 
 Repository documents above were reviewed on 2026-10-15. The supplied KonstructionComOS_TAM_SAM_Product_Market_Fit.md informs segment hypotheses, qualification definitions, pilot measures and the distinction between project signals and confirmed needs. No new market statistics or live provider capabilities are asserted here.
+
+## Execution and learning completion
+
+Follow [GTM_EXECUTION_LOOP.md](GTM_EXECUTION_LOOP.md) to connect the client brain, confirmed offers, pursuit decisions, relationship ownership, daily work and evidenced business outcomes. MVP order: offer → pursuit decision/owner → Today action queue → outcome feedback and reviewed learning. The Today view is on-demand and does not authorize scheduled notifications or autonomous outreach.

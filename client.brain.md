@@ -196,3 +196,7 @@ Record answers with their source/date. Produce a reviewable draft and highlight 
 - Start with synthetic profiles for two contrasting clients, not real confidential profiles in git.
 
 Acceptance scenarios: two clients receive different recommendations for the same project because confirmed interests/capacity differ; an explicit exclusion blocks a match; an incomplete profile returns insufficient_profile; unsupported strengths remain client-reported; feedback proposes but does not silently activate changes; historical recommendations retain their profile version; forged workspace IDs, malicious imported instructions and cross-tenant exports fail.
+
+## Linked offer and execution contracts
+
+Maintain versioned offers using [docs/GTM_EXECUTION_LOOP.md](docs/GTM_EXECUTION_LOOP.md). Link active offer IDs/versions to this profile instead of duplicating their terms. Each recommendation states offer/profile versions, disposition, strengths/gaps, ownership and next action. Feedback may propose a reviewed change to the brain or offer; it must not silently update either.
