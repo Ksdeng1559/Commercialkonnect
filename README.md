@@ -116,3 +116,12 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a
 6. Validate organization isolation, Clerk/Supabase integration, demo vs verified data boundaries, lawful contact handling, analytics and cross-domain navigation before marking integrated.
 
 **Implementation reference:** [docs/FRONTEND_INTEGRATION.md](docs/FRONTEND_INTEGRATION.md). Coding agents should read it alongside [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md).
+
+## BuildData API — planned verified BC source adapter
+
+**Implementation spec:** [docs/BUILDDATA_INTEGRATION.md](docs/BUILDDATA_INTEGRATION.md)  
+**Provider contract:** https://www.builddata.ca/openapi.json
+
+BuildData is the proposed initial provider for planning applications, major projects, development permits, building permits and contractor intelligence. The implementation must measure per-dataset city coverage, retain record-level provenance, avoid same-address false merges and distinguish verified activity from hypothesized commercial demand. Server-only API credentials, rate/quota handling and licensing review are required. Client-specific scoring via `client.brain.md` supports finance brokers, contractors and commercial real estate teams. **No BuildData ingestion has been implemented or authenticated API calls performed on this branch.** Finish tenant isolation before exposing real records in SaaS.
+
+Claude Code should follow the work packages and acceptance criteria in the integration spec, in addition to the existing RLS-first project priorities.
