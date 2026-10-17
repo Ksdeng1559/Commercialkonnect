@@ -67,3 +67,9 @@ PMF targets from the supplied 2026-10-14 study: activation in seven days (five v
 
 ## Completion protocol
 For each slice report behavior delivered, files/migrations changed, commands actually run, test results, screenshots where possible, remaining operational gaps and the next exact ticket. Record approved ADRs and update README truth. Do not connect production or merge unrelated work merely to make a checklist green.
+
+## Agency Agents coverage of the backlog
+
+Use [AGENCY_AGENTS.md](AGENCY_AGENTS.md), `agent-sources.lock.json` and `workflow-registry.json` as reference contracts. WF-01 maps to MC-02/04; WF-02 to MC-05/06/08; WF-03 to MC-05/06; WF-04 to MC-08/09/10/16; WF-05 spans the engineering backlog; WF-06 maps to MC-10/13/15. MC-00 reconciles role/source adoption; MC-13 supplies typed delegation/policy, MC-14 durable authenticated execution, MC-15 management views and MC-16 live adapters. This adds no new claim of completion and does not require a new runtime by default.
+
+Start with Chief of Staff, Workflow Architect, Discovery Coach and Evidence Collector. Add specialist roles only when their dependencies are met. Source hash verification and workflow graph checks validate reference consistency, not a functioning agent system. Test role-specific boundaries and two-tenant isolation during implementation.
