@@ -32,3 +32,11 @@ Implement **Clerk Organizations + verified server-side org mapping + complete Su
 - Run typecheck/lint/build/tests where available. Do not claim unexecuted checks pass.
 - Never log or commit secrets/PII. CASL/PIPEDA and lending/security obligations require explicit review.
 - End each task with changes, test evidence, limitations and exact next step.
+
+## Mission Control MVP handoff — 2026-10-17
+
+The user selected the Mission Control + Client Brain wireframe as the first commercial mortgage/finance broker MVP experience. Read `docs/mission-control/README.md`, `SYSTEM_DESIGN.md`, `CLIENT_BRAIN.md`, `IMPLEMENTATION.md` and `START_HERE.md` in that directory before continuing this work. Runnable synthetic reference: `docs/mission-control/prototype/index.html`.
+
+Preserve the Next.js app and public Lovable frontend. For the approved Mortgage Mix track, **`workspace_id` via existing `workspaces.clerk_org_id` is the tenant key**, while `organization_id` denotes a company relationship; this clarifies the generic organization terminology above. Inspect actual migrations and existing rows before schema work. Do not resurrect the abandoned isolated schema or mix the separate Atomic CRM project into this implementation.
+
+The new handoff expands the target MVP experience beyond the earlier mock-only GTM queue; ingestion/security remain production dependencies. Reconcile parallel PRs instead of overwriting or silently merging them. Prototype fit numbers are specialization indicators, separate from categorical GTM readiness and evidence/contact/approval gates. Draft Client Brain edits cannot change active priorities until reviewed activation. Actual profiles and lender relationships remain private per workspace, never committed to Git. Follow the ticket acceptance criteria and report exact test evidence and gaps.
