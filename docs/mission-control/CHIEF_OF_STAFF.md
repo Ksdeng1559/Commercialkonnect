@@ -71,3 +71,7 @@ Production view should additionally show run traces, model/tool usage, SLA/deadl
 - Stand-up reconciles persisted task usage and true meeting outcomes, labels missing usage unknown, and never reports task completion as appointments booked.
 
 No production agent execution is accepted until these gates and the prior Mission Control security/source/appointment gates pass.
+
+## Agency Agents role sources
+
+[AGENCY_AGENTS.md](AGENCY_AGENTS.md) maps the reviewed Agency Agents fork into this coordinator. `agent-sources.lock.json` pins 15 source roles; `workflow-registry.json` defines six design-only workflows with dispatch disabled. Use Chief of Staff for business priority/decision routing and Agents Orchestrator for implementation execution. Workflow Architect defines branches; Multi-Agent Systems Architect defines runtime coordination. Retain this document's task scope, tenancy, budget, retry and independent-approval rules where generic source instructions differ. Role sources do not grant authority or provide a running process.
