@@ -54,3 +54,7 @@ This handoff adds the broader broker-first MVP destination beyond the previously
 ## Agency Agents adoption
 
 The [adoption guide](AGENCY_AGENTS.md) maps the synchronized fork into engineering and broker-operations teams, beginning with four core roles. The [source manifest](agent-sources.lock.json) pins 15 role files with SHA-256 provenance; the [workflow registry](workflow-registry.json) defines WF-01–WF-06 with dispatch disabled. Use these alongside the existing Chief of Staff and MC-00–MC-16 contracts. No source bodies are installed, no runtime is connected, and payment/loan assistance requires separate domain review.
+
+## Latest synchronized reference
+
+Read [the current status map](LATEST_REFERENCE.md), [Client Briefings](CLIENT_BRIEFINGS.md) and [research-provider contract](RESEARCH_PROVIDERS.md). The static source now matches the October 17 Sites client-briefing release and includes Market Intelligence and pilot validation. New server implementation packages are MC-17–MC-20; none is complete merely because the reference renders it. Run the six suites listed in `prototype/README.md`.

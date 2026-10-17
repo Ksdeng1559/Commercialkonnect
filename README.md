@@ -12,6 +12,12 @@
 | Purpose-led Content Bible | 12 topic/CTA/diagnostic candidates, three drafted content assets and three resource/checklist drafts in Notion | No publishing, automated DMs, campaigns or paid promotion enabled |
 | Billing SOP | Contract-based lead, appointment, setup, custom-build, subscription and metered-service billing requirements | No Billr/Stripe connection, invoice issuance or payment collection activated |
 
+### Client Briefings, research providers and latest dashboard
+
+The [latest source/status map](docs/mission-control/LATEST_REFERENCE.md) and refreshed [runnable prototype](docs/mission-control/prototype/index.html) now include Client Briefings, Market Intelligence and PMF pilot validation alongside content/billing/data-readiness views. [Client Briefings](docs/mission-control/CLIENT_BRIEFINGS.md) adopts the October 12 Social Intelligence skill v1.1 for source-backed meeting preparation, evidence classification and reviewed exports.
+
+[Exa, Tavily and Serper research integration](docs/mission-control/RESEARCH_PROVIDERS.md) is the next engineering extension: Exa discovery, Tavily source search/extraction, optional Serper coverage. These are **planned server-side adapters**, not connected dashboard capabilities. No credentials, automated research, outreach or billing are enabled. Implement MC-17–MC-20 with existing workspace security and Chief of Staff dependencies; keep the Next.js application and approved tenancy unchanged.
+
 ### Content Bible → qualified appointments
 
 [Notion GTM playbook and Content Bible](https://app.notion.com/p/3fa9e94cf0a481498623c0fdcd866571) applies the existing Content Bible, Get Clients and evidence-backed Power Content methods:

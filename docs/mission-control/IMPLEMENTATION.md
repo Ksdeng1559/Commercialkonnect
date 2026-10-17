@@ -73,3 +73,17 @@ For each slice report behavior delivered, files/migrations changed, commands act
 Use [AGENCY_AGENTS.md](AGENCY_AGENTS.md), `agent-sources.lock.json` and `workflow-registry.json` as reference contracts. WF-01 maps to MC-02/04; WF-02 to MC-05/06/08; WF-03 to MC-05/06; WF-04 to MC-08/09/10/16; WF-05 spans the engineering backlog; WF-06 maps to MC-10/13/15. MC-00 reconciles role/source adoption; MC-13 supplies typed delegation/policy, MC-14 durable authenticated execution, MC-15 management views and MC-16 live adapters. This adds no new claim of completion and does not require a new runtime by default.
 
 Start with Chief of Staff, Workflow Architect, Discovery Coach and Evidence Collector. Add specialist roles only when their dependencies are met. Source hash verification and workflow graph checks validate reference consistency, not a functioning agent system. Test role-specific boundaries and two-tenant isolation during implementation.
+
+
+## Client Briefings and research providers
+
+See [CLIENT_BRIEFINGS.md](CLIENT_BRIEFINGS.md), [RESEARCH_PROVIDERS.md](RESEARCH_PROVIDERS.md) and [latest status](LATEST_REFERENCE.md). These packages extend the existing backlog and are not marked implemented.
+
+| ID | Deliverable | Dependencies | Acceptance evidence |
+| --- | --- | --- | --- |
+| MC-17 | Typed briefing domain, subject resolution and persistent evidence/revisions/review/export | MC-01–MC-04; reconcile entity schema in MC-00 | Four modes, exact subject/collision register, V/C/S/U/A/N/X, stable claim IDs and dated source provenance; immutable profile-bound reviews, stale-source/edit holds, optimistic locking and tenant denial/export tests |
+| MC-18 | Bounded research gateway and Exa adapter | MC-03/04/14/17 | Authorized idempotent research/cancel/status operations; server secrets, quotas/budget reservations, safe public-source retrieval/SSRF defense; normalized provider errors and fixture + one bounded real-run receipt |
+| MC-19 | Tavily adapter and optional Serper coverage policy | MC-18 | Explicit enabled-provider/fallback policy; source extraction, common-origin deduplication, independent-source review, partial failure/cost-unknown handling; per-configured-provider real-run checks |
+| MC-20 | Source-backed report synthesis and Chief of Staff review UI | MC-15/17/18; MC-19 for multi-provider rollout | Source-referenced draft generation with configured model ADR, gaps/collisions, no automatic verification; report edit/review invalidation, private exports, browser flow and no outbound/calendar/billing side effects |
+
+Adjacent Market Intelligence and pilot-validation views are UX references to scope during MC-00/01, not silently added live ingestion/paid analytics. Government yield API refresh needs a hosted browser check; curated zoning/news need source-specific freshness/adoption/effect handling. Pilot outcomes require independent records and measured definitions before external traction claims. MC-11's source accuracy, baseline and retention gates still apply.
