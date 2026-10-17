@@ -74,3 +74,7 @@ Protect exports, redact borrower information in logs, define retention/residency
 
 ## Decisions before implementation
 Record ADRs for route mapping and responsive component plan; actual schema compatibility/backfill; numeric-fit versus categorical readiness presentation; funding-purpose taxonomy; source licenses and measured coverage; calendar provider and participant authorization; Client Brain roles/version conflicts; final brand alignment and pilot-to-paid entitlements. Keep unconfigured integrations visibly unavailable, rather than simulating production success.
+
+## Chief of Staff orchestration layer
+
+See [CHIEF_OF_STAFF.md](CHIEF_OF_STAFF.md) for the delegation envelope, roster, state machine, permission matrix, resource controls and acceptance tests. The coordinator reads active Client Brain and opportunity/evidence versions, plans finite task dependencies and delegates through typed server-side adapters. Reuse existing agent runs where possible; reconcile durable plans/tasks/attempts/leases/artifacts/approvals/usage ledger against actual schema. All are workspace-scoped. External side effects remain in independently authorized, idempotent adapters. Model output cannot confer permissions, verify borrower intent or count as a held meeting. Runtime selection is an ADR, not a dependency introduced by this reference.
