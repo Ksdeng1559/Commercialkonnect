@@ -74,3 +74,7 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a
 6. Validate organization isolation, Clerk/Supabase integration, demo vs verified data boundaries, lawful contact handling, analytics and cross-domain navigation before marking integrated.
 
 **Implementation reference:** [docs/FRONTEND_INTEGRATION.md](docs/FRONTEND_INTEGRATION.md). Coding agents should read it alongside [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md).
+
+## Chief of Staff agent coordinator
+
+The MVP now includes a Chief of Staff operating layer. Read [the orchestration contract](docs/mission-control/CHIEF_OF_STAFF.md). It coordinates discovery, enrichment, financing qualification, GTM, appointment and quality roles from the active Client Brain, with dependency-aware tasks, output review, bounded retries/resources and reporting. The checked-in prototype adds a `#chief` manual dry-run view; no real agents or integrations execute. Preserve human activation and action approval gates; the coordinator cannot grant itself permissions or approve its own outbound. Implement MC-13–MC-16 alongside the existing backlog dependencies.
