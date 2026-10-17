@@ -9,6 +9,10 @@
 | Mission Control and Client Brain | Browser-local MVP reference with reviewed interview activation, specialization matching, GTM and appointment/outcome planning | Production authentication, tenant persistence, live feeds and calendar integrations remain engineering work |
 | Chief of Staff | Checked-in manual dry-run agent roster, task dependencies, output reviews, retries and stand-up view | No live agent dispatch or background scheduling |
 | Agency Agents | 15 pinned source-role references and six design-only workflows; engineering and broker-operations teams | Role installation and authenticated runtime adapters are not implemented |
+| Client Briefings | Quick brief, Standard, Investor-grade and Battlecard drafts; evidence register, source dates, Client Brain snapshots, review and Markdown export | Manual research and operator-assessed evidence; no automated due diligence or provider dispatch |
+| Research providers | Exa, Tavily and Serper integration contract and MC-17–MC-20 engineering tasks | Server adapters, configured provider accounts, usage controls and live verification remain to build |
+| Market Intelligence | Curated source-linked news/zoning, status and effective dates, profile relevance, saved briefing context and on-demand Bank of Canada yield refresh | News is not an automatic feed; hosted yield refresh remains browser-unverified; government yields are not mortgage quotes |
+| Pilot validation | 90-day PMF plan, segment offers, planning assumptions and empty manual paid-team evidence register | No independently verified customer traction, payments, usage or renewal results |
 | Purpose-led Content Bible | 12 topic/CTA/diagnostic candidates, three drafted content assets and three resource/checklist drafts in Notion | No publishing, automated DMs, campaigns or paid promotion enabled |
 | Billing SOP | Contract-based lead, appointment, setup, custom-build, subscription and metered-service billing requirements | No Billr/Stripe connection, invoice issuance or payment collection activated |
 
@@ -17,6 +21,54 @@
 The [latest source/status map](docs/mission-control/LATEST_REFERENCE.md) and refreshed [runnable prototype](docs/mission-control/prototype/index.html) now include Client Briefings, Market Intelligence and PMF pilot validation alongside content/billing/data-readiness views. [Client Briefings](docs/mission-control/CLIENT_BRIEFINGS.md) adopts the October 12 Social Intelligence skill v1.1 for source-backed meeting preparation, evidence classification and reviewed exports.
 
 [Exa, Tavily and Serper research integration](docs/mission-control/RESEARCH_PROVIDERS.md) is the next engineering extension: Exa discovery, Tavily source search/extraction, optional Serper coverage. These are **planned server-side adapters**, not connected dashboard capabilities. No credentials, automated research, outreach or billing are enabled. Implement MC-17–MC-20 with existing workspace security and Chief of Staff dependencies; keep the Next.js application and approved tenancy unchanged.
+
+### Client Briefings → better financing conversations
+
+Use **Prepare client briefing** inside an opportunity, or open [Client Briefings](https://broker-mission-control.dennis-klicksmartai.chatgpt.site/#briefing). The workflow adopts the **Social Intelligence & Counterparty Due Diligence skill v1.1 (October 12, 2026)**.
+
+- Capture the exact person/company, domain, jurisdiction, purpose and known relationship; keep namesakes and cross-company identity bridges explicit.
+- Organize professional background, offering, relationships, project/transaction history, evidence gaps and three next actions.
+- Classify claims as verified, corroborated, self-reported, user-supplied, analyst inference, not verified or excluded namesake (V/C/S/U/A/N/X). Preserve stable evidence IDs and separate published, event and retrieved dates.
+- Prepare financing questions and talking points using the active Client Brain. Property financing and business financing use different discovery questions; a project signal alone does not establish borrowing intent.
+- Save and review the exact report revision. Claim/report/context changes invalidate review; a changed Client Brain requires refreshed context. Download the report or a research-handoff prompt.
+
+The four output modes are Quick brief, Standard, Investor-grade and Battlecard. These are working templates: missing evidence remains unknown, and an Investor-grade export does not certify completed diligence. Current reviews are local operator records, not independent verification or permission to contact.
+
+### Research-provider implementation order
+
+| Phase | Deliverable | Backlog |
+| --- | --- | --- |
+| Foundation | Workspace-authorized briefing records, source/claim relationships, immutable revisions, review and private exports | MC-17 |
+| Exa | Bounded discovery gateway with server-only credentials, idempotent jobs, quotas and source provenance | MC-18 |
+| Tavily / Serper | Tavily search/extraction and optional Serper coverage, with explicit fallback policy and common-origin deduplication | MC-19 |
+| Synthesis and review | Source-referenced report drafts, Chief of Staff visibility, stale-review holds and browser verification | MC-20 |
+
+These depend on the existing tenant security, Client Brain persistence and durable Chief of Staff task contracts. Keep provider secrets server-only; use public professional queries, safe source retrieval, bounded spend and honest partial-failure states. Multiple search providers returning the same article do not establish independent corroboration. A research result does not create a financing confirmation, outreach approval, appointment or billable event.
+
+### Market context and pilot evidence
+
+[Market Intelligence](https://broker-mission-control.dennis-klicksmartai.chatgpt.site/#market) brings dated financing news, government bond yields and municipal zoning context into meeting preparation. Keep proposed, adopted and effective zoning changes separate; distinguish published facts from broker interpretation. Saved items can inform Chief of Staff briefings and content drafts. Source dates and coverage limits remain visible.
+
+[Pilot validation](https://broker-mission-control.dennis-klicksmartai.chatgpt.site/#validation) follows the supplied October 14 PMF plan: broker-first launch, with adjacent contractor and commercial real estate pilots. Proposed targets include 28 interviews and eight paid team pilots (three broker, three contractor, two CRE), with activation, recurring usage, renewal, qualified-meeting and data-quality gates. Actual team evidence starts empty and stays separate from synthetic CRM totals. Pricing, TAM/SAM and acquisition scenarios are assumptions, not achieved results. [Read the source plan](docs/mission-control/prototype/pmf-source.md).
+
+### Run and verify the refreshed reference
+
+Serve `docs/mission-control/prototype/` with a static server and open `index.html`. No build dependencies are required. The reference saves changes in this browser under `kommercial-v1`; use non-sensitive demonstration inputs.
+
+```sh
+cd docs/mission-control/prototype
+node --check app.js
+node verify-reference.cjs
+node verify-chief.cjs
+node verify-latest.cjs
+node verify-market.cjs
+node verify-pilot.cjs
+node verify-briefing.cjs
+```
+
+**Latest verification:** syntax and all six limited domain/DOM-stub suites passed on October 17, 2026. These checks cover interview/matching, coordinator policies, content/billing boundaries, meeting-date attribution, market parsing, pilot evidence and briefing review/exports. Browser QA remains unavailable because the managed preview could not start. Hosted research/provider, database, calendar and billing integrations were not verified. Production Next.js code/dependencies were unchanged, so its typecheck/lint/build were not rerun for this reference update.
+
+For the next engineering session, read [START_HERE.md](docs/mission-control/START_HERE.md), reconcile current main and parallel PRs under MC-00, then follow the dependency-ordered [implementation backlog](docs/mission-control/IMPLEMENTATION.md). The refreshed static reference is the UX guide; port behavior into typed Next.js components and tenant-aware services.
 
 ### Content Bible → qualified appointments
 
@@ -85,7 +137,7 @@ The dashboard and demo dataset work without connected credentials. Production pe
 ## Current workstream
 Refactoring Mortgage Mix (`mix_*` tables in the live `amgknqnhiscryvcfeoyj` Supabase project) into the commercial-financing opportunity engine, fed by BC construction-project data as a new lead source — design approved, implementation **not yet started**. See `docs/superpowers/specs/2026-10-14-mortgage-mix-commercial-financing-design.md` for the tenancy unification, FK-convention decisions, and local-test harness (Vitest against the Supabase CLI's local stack). This supersedes the earlier `2026-10-14-clerk-orgs-rls-crud-design.md` schema-isolation plan, kept for history only.
 
-**2026-10-17 planning update.** Live Supabase check confirmed zero implementation of the spec above: no `construction_projects` table, no `workspace_id` on any `mix_*` table, no `clerk_org_id` on `workspaces`, no `current_workspace_id()` helper. Two corrections to the spec's own assumptions: (1) `mix_leads` (4 rows) and `mix_opportunities` (16 rows) are **not** empty as the spec claimed — the Phase 0 backfill-to-default-workspace step needs to actually run against this real data, not treat it as a no-op; (2) a stale, abandoned `konstruction` schema (RLS enabled, zero policies, dead) remains from the superseded schema-isolation plan — flagged for cleanup, not yet dropped. Decided next concrete slice: wire the real BuildData API (`https://api.builddata.ca`, free tier, BC construction permits) into the approved `construction_projects`/`mix_opportunities` schema — chosen over building a command-center/pipeline UI first, since real data should exist before building a UI to show it. A detailed implementation plan for this slice is in progress. The broker-facing landing-page pilot-signup capture (Klick2Client/Notion spec) is confirmed explicitly gated behind internal-pilot readiness per that product doc — intentionally not being built yet.
+**Earlier 2026-10-17 planning snapshot — historical, not current database verification.** Reinspect the actual schema and the [latest reference/status map](docs/mission-control/LATEST_REFERENCE.md) before engineering. At that check, the spec was not implemented: no `construction_projects` table, no `workspace_id` on any `mix_*` table, no `clerk_org_id` on `workspaces`, no `current_workspace_id()` helper. Two corrections to the spec's own assumptions: (1) `mix_leads` (4 rows) and `mix_opportunities` (16 rows) are **not** empty as the spec claimed — the Phase 0 backfill-to-default-workspace step needs to actually run against this real data, not treat it as a no-op; (2) a stale, abandoned `konstruction` schema (RLS enabled, zero policies, dead) remains from the superseded schema-isolation plan — flagged for cleanup, not yet dropped. Decided next concrete slice: wire the real BuildData API (`https://api.builddata.ca`, free tier, BC construction permits) into the approved `construction_projects`/`mix_opportunities` schema — chosen over building a command-center/pipeline UI first, since real data should exist before building a UI to show it. A detailed implementation plan for this slice is in progress. The broker-facing landing-page pilot-signup capture (Klick2Client/Notion spec) is confirmed explicitly gated behind internal-pilot readiness per that product doc — intentionally not being built yet.
 
 ## Parallel track: Atomic CRM construction-intelligence retrofit (separate repo)
 A Notion product-definition doc (§26, locked 2026-10-14) specifies a *different* build — forking the existing Atomic CRM app at `G:\AI-Applications\atomic-crm` into a multi-tenant (`tenant_id`/RLS, Supabase Auth) construction-intelligence CRM for two internal pilot tenants (Eng & Associates financing workflow, GPC Development contractor-bid workflow), fed by the BuildData API. This does **not** target this repository and does not touch the Mortgage Mix workstream above — documented here only because the conflict with this repo's own stack was discovered during a Notion review. Full phased plan (Phase 0 Contract → Phase 5 Real-data gate, with explicit blocking gates for unresolved BuildData licence/key/scoring questions): `docs/superpowers/plans/2026-10-15-atomic-crm-construction-intelligence-retrofit.md`.
