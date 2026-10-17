@@ -50,3 +50,7 @@ This handoff adds the broader broker-first MVP destination beyond the previously
 ## Chief of Staff addition
 
 [Chief of Staff](CHIEF_OF_STAFF.md) coordinates the agent team against the active Client Brain and held-qualified-meeting goal. The prototype's `#chief` screen is a manual simulation of task planning, dependencies, output review, failure/retry and stand-up reporting. It does not run LeadSniperAI, Harvey, providers, background agents or external actions. Production orchestration is MC-13–MC-16, with durable state, leases, budgets, tenant authorization and independent approval enforcement.
+
+## Agency Agents adoption
+
+The [adoption guide](AGENCY_AGENTS.md) maps the synchronized fork into engineering and broker-operations teams, beginning with four core roles. The [source manifest](agent-sources.lock.json) pins 15 role files with SHA-256 provenance; the [workflow registry](workflow-registry.json) defines WF-01–WF-06 with dispatch disabled. Use these alongside the existing Chief of Staff and MC-00–MC-16 contracts. No source bodies are installed, no runtime is connected, and payment/loan assistance requires separate domain review.
