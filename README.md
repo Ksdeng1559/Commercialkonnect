@@ -2,6 +2,46 @@
 
 **Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
 
+## Latest additions — 2026-10-17
+
+| Addition | Available now | Implementation boundary |
+| --- | --- | --- |
+| Mission Control and Client Brain | Browser-local MVP reference with reviewed interview activation, specialization matching, GTM and appointment/outcome planning | Production authentication, tenant persistence, live feeds and calendar integrations remain engineering work |
+| Chief of Staff | Checked-in manual dry-run agent roster, task dependencies, output reviews, retries and stand-up view | No live agent dispatch or background scheduling |
+| Agency Agents | 15 pinned source-role references and six design-only workflows; engineering and broker-operations teams | Role installation and authenticated runtime adapters are not implemented |
+| Purpose-led Content Bible | 12 topic/CTA/diagnostic candidates, three drafted content assets and three resource/checklist drafts in Notion | No publishing, automated DMs, campaigns or paid promotion enabled |
+| Billing SOP | Contract-based lead, appointment, setup, custom-build, subscription and metered-service billing requirements | No Billr/Stripe connection, invoice issuance or payment collection activated |
+
+### Content Bible → qualified appointments
+
+[Notion GTM playbook and Content Bible](https://app.notion.com/p/3fa9e94cf0a481498623c0fdcd866571) applies the existing Content Bible, Get Clients and evidence-backed Power Content methods:
+
+**One specific problem → useful teaching/process evidence → practical resource → relevant CTA → diagnostic conversation → qualified next step → recorded outcome.**
+
+Keep two commercial motions separate:
+
+- **Broker origination:** broker-authored content attracts suitable developers, commercial owners and business-finance prospects into a financing discovery conversation.
+- **Platform acquisition:** KommercialOS content attracts commercial-finance broker teams into a product/pilot discussion. Public SaaS acquisition remains gated by internal-pilot readiness.
+
+The initial drafts cover construction capital readiness, commercial refinance preparation and project-to-conversation intelligence for brokers. Associated worksheets support practical conversations rather than promises of financing approval. Client Brain selects audience, specialty, territory, financing range, qualification questions and the appropriate offer. Chief of Staff assigns content/research/review roles; a human approves claims and release.
+
+Preserve content asset, campaign, CTA, resource, conversation and opportunity identifiers through **qualified conversation → booked → held qualified → evidenced mandate**. Separate borrower and platform-sales reporting, deduplicate appointment attribution and distinguish net-new from assisted outcomes. Actual performance, keyword demand and conversion baselines are not yet established. Sample projects, role prompts and scenario sliders are not proof of results.
+
+### Verified outcomes → agreement-based billing
+
+[Canonical Billr outcome-based billing SOP](https://app.notion.com/p/3fc9e94cf0a481fcbae9d36363e39f4f) is linked to the project-specific billing section in the [GTM playbook](https://app.notion.com/p/3fa9e94cf0a481498623c0fdcd866571).
+
+- Define signed product/price/currency, qualification and acceptance criteria, source rights, uniqueness/allocation rules, dispute window, tax mapping and credit/refund terms before billing.
+- Qualified leads require evidenced delivery and the agreed acceptance process. The **proposed appointment-product default is held, qualified and accepted**; any other trigger must be explicit in the contract.
+- Setup/custom-build charges follow agreed deposits or accepted milestones. Subscriptions follow a valid billing period. Agent usage is billable only under an explicit rate/meter/acceptance agreement.
+- Resource requests, engagement, synthetic prospects, completed sample tasks and unverified agent claims are not automatically billable.
+- Use an append-only billing ledger, deterministic operation identity and database uniqueness. Prevent duplicate lead-plus-appointment charges unless the agreement explicitly defines separate fees, upgrades or credits. Rescheduling and charge revisions must not silently create new entitlements.
+- Prepare draft invoices, route exceptions to an authorized billing reviewer and reconcile actual provider payment/refund events. Chief of Staff can propose candidates and assign reviews; it cannot self-approve disputed charges or change prices.
+- Verify Billr capabilities, payment-provider account/tenant mapping, webhook handling and one authoritative invoice/collection path before integration. Avoid duplicate billing by independent adapters.
+- Keep platform/service billing separate from regulated mortgage-broker compensation and financing success-fee arrangements; the latter require their own reviewed agreement and applicable approvals.
+
+For Claude Code/Codex: carry these requirements into the existing MC-08–MC-10 content-to-outcome flow, MC-12 billing/entitlements and MC-13–MC-16 orchestration work. These links extend the engineering brief; they do not mark those tickets complete or change the approved stack. Notion is the operating-document source; the authenticated tenant-aware backend remains the application record.
+
 ## Broker Mission Control — first MVP experience (2026-10-17)
 
 The user selected the interactive Mission Control + Client Brain wireframe as the first broker-focused MVP reference. [Open the private prototype](https://broker-mission-control.dennis-klicksmartai.chatgpt.site) or run the [checked-in static source](docs/mission-control/prototype/index.html). It covers opportunity intelligence, capital Kanban, appointment-focused GTM, outcomes and a reviewed client interview that customizes priorities, matching, playbooks and goals.
