@@ -2,6 +2,14 @@
 
 **Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
 
+## Broker Mission Control — first MVP experience (2026-10-17)
+
+The user selected the interactive Mission Control + Client Brain wireframe as the first broker-focused MVP reference. [Open the private prototype](https://broker-mission-control.dennis-klicksmartai.chatgpt.site) or run the [checked-in static source](docs/mission-control/prototype/index.html). It covers opportunity intelligence, capital Kanban, appointment-focused GTM, outcomes and a reviewed client interview that customizes priorities, matching, playbooks and goals.
+
+**Claude Code / Codex: start with [the engineering handoff](docs/mission-control/README.md), [system design](docs/mission-control/SYSTEM_DESIGN.md), [Client Brain contract](docs/mission-control/CLIENT_BRAIN.md), [acceptance backlog](docs/mission-control/IMPLEMENTATION.md) and [starting prompt](docs/mission-control/START_HERE.md).**
+
+This is a functional browser-local reference, not integrated production SaaS. Preserve the Next.js application, approved Mortgage Mix workspace tenancy, existing data and public Lovable frontend. The broader MVP experience does not cancel ingestion/security dependencies or merge the parallel PRs. Numeric reference scores express specialization only; reconcile production GTM categorical readiness separately. Live data, RLS, calendar, sending, billing and browser QA remain engineering work.
+
 ## MVP: British Columbia
 - Project intelligence registry with construction stage, estimated budget, source provenance, and confidence
 - Pipeline for commercial mortgage/financing opportunities
