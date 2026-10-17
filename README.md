@@ -39,6 +39,8 @@ A Notion product-definition doc (§26, locked 2026-10-14) specifies a *different
 ## In-progress design: GTM lead-source review queue
 A doc-only branch (`docs/gtm-lead-source-playbook`, open PR #2) hands off a client-brain + offer + strategy-matching + review-queue workflow for converting construction-project signals into evidence-backed, human-reviewed opportunities. Source docs: `client.brain.md`, `docs/GTM_LEAD_SOURCE_PLAYBOOK.md`, `docs/GTM_ENRICHMENT.md`, `docs/GTM_WIREFRAME.md`, `docs/GTM_EXECUTION_LOOP.md`, `docs/GTM_GOALS_SUCCESS.md` (on that branch, not yet on `main`).
 
+**Video sales workflow:** [Commercial & Business Financing Video Sales Workflow](docs/COMMERCIAL_FINANCING_VIDEO_SALES.md) defines the commercial mortgage and business-financing VSL sequence, audience-specific scripts, qualification and attribution measures, privacy safeguards, and staged Dubb/Sendspark/Hippo provider evaluation. This is GTM/product guidance; video features are not implemented in the app.
+
 Brainstorming is underway on this repo's `main` to scope and design the first buildable slice. Scoped so far (not yet approved/implemented):
 - First slice = pure TS strategy engine (`src/lib/gtm/`, CAP-01/02/03 only, categorical Research/Review/Ready/Hold output, no numeric scoring) + a review-queue UI (`/gtm`) — entirely mock-mode, two contrasting synthetic client-brain profiles, no persistence.
 - Explicitly deferred: fact-confirmation forms, capital qualification Kanban, internal opportunity promotion, Today view, outcome/feedback capture — all named in the source docs as later steps.
