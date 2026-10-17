@@ -18,6 +18,17 @@ Status: work to implement. Do not mark a ticket complete because the reference r
 | MC-11 | Internal pilot hardening and review | MC-03–MC-10 | Two isolated broker workspaces; backup restore; export/delete lifecycle; source accuracy/freshness sampling; end-to-end demo and unresolved limits. |
 | MC-12 | Subscription/seat/usage entitlements | Successful internal pilot and commercial plan | Server-side entitlements; signed idempotent billing webhooks; no denial of data export; verified checkout in test mode. |
 
+## Chief of Staff work packages
+
+| ID | Deliverable | Dependencies | Acceptance evidence |
+|---|---|---|---|
+| MC-13 | Coordinator domain planner and role/tool contracts | MC-00, MC-02 | Typed delegation/output schemas, bounded acyclic plans, profile-version binding, dependency and policy tests. No provider dispatch. |
+| MC-14 | Durable workspace task execution and resource accounting | MC-03, MC-04, MC-13 | Authorized roles, leases/heartbeats, retry/backoff, cancellation, quotas/budget reservations, audit and two-tenant denial tests; runtime ADR. |
+| MC-15 | Chief of Staff control view and human review queue | MC-01, MC-14 | Roster, tasks/traces/dependencies, stale-profile holds, output reviews, cost unknown states, caps, blocked-work decisions and stand-up. |
+| MC-16 | Connect specialist adapters and verify meeting outcomes | MC-05–MC-10, MC-14, MC-15 | Scoped LeadSniperAI/enrichment/Harvey dispatch, independent approvals, idempotent external actions, lease recovery and end-to-end outcome attribution. |
+
+The `#chief` reference is manual simulation only. Do not equate its sample task acceptance with verified financing facts. Full test/release gates are in [CHIEF_OF_STAFF.md](CHIEF_OF_STAFF.md).
+
 ## Recommended execution sequence
 First inspect and reconcile. Implement MC-01/02 as a source-independent UI/domain slice while keeping MC-03/05 as prerequisites for production. This preserves the existing ingest-first production decision without blocking useful prototype porting. Then persist the interview and wire real qualified priorities, pipeline and one calendar flow. Run an internal broker pilot before subscription or public signup changes. Contractor and investor/capital-raising products are separate later work.
 
