@@ -14,8 +14,9 @@ Runnable source: [prototype/index.html](prototype/index.html). Serve `docs/missi
 2. This handoff and [system design](SYSTEM_DESIGN.md).
 3. [Client Brain contract](CLIENT_BRAIN.md).
 4. [implementation backlog and acceptance criteria](IMPLEMENTATION.md).
-5. [starting prompt](START_HERE.md).
-6. The prototype source; then current active branches and the actual application code.
+5. [Chief of Staff orchestration contract](CHIEF_OF_STAFF.md).
+6. [starting prompt](START_HERE.md).
+7. The prototype source; then current active branches and the actual application code.
 
 ## What is implemented in the reference
 - Mission Control, opportunity search, expandable briefs and financing Kanban.
@@ -45,3 +46,7 @@ Prototype checks were run against a lightweight JavaScript DOM stub: ten view re
 PR numbers/branch states are a 2026-10-17 repository snapshot, not a claim they remain open. Recheck before merging or implementing.
 
 This handoff adds the broader broker-first MVP destination beyond the previously proposed mock-only strategy queue. It does not declare previously deferred features complete, merge other PRs, replace Next.js with static HTML, change the public website, choose final branding, or authorize destructive database changes.
+
+## Chief of Staff addition
+
+[Chief of Staff](CHIEF_OF_STAFF.md) coordinates the agent team against the active Client Brain and held-qualified-meeting goal. The prototype's `#chief` screen is a manual simulation of task planning, dependencies, output review, failure/retry and stand-up reporting. It does not run LeadSniperAI, Harvey, providers, background agents or external actions. Production orchestration is MC-13–MC-16, with durable state, leases, budgets, tenant authorization and independent approval enforcement.
