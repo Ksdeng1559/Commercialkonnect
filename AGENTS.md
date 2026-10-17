@@ -37,3 +37,11 @@ Before claiming a feature is finished, run applicable `npm run typecheck`, `npm 
 
 ## Current baseline
 `src/app/page.tsx` is a demo dashboard using `src/lib/demo.ts`. Supabase schema is an initial outline only with RLS enabled but no tenant access policies. Clerk, live ingestion, billing, APIs and Lovable-to-SaaS navigation are not yet integrated.
+
+## Mission Control MVP handoff — 2026-10-17
+
+The user selected the Mission Control + Client Brain wireframe as the first commercial mortgage/finance broker MVP experience. Read `docs/mission-control/README.md`, `SYSTEM_DESIGN.md`, `CLIENT_BRAIN.md`, `IMPLEMENTATION.md` and `START_HERE.md` in that directory before continuing this work. Runnable synthetic reference: `docs/mission-control/prototype/index.html`.
+
+Preserve the Next.js app and public Lovable frontend. For the approved Mortgage Mix track, **`workspace_id` via existing `workspaces.clerk_org_id` is the tenant key**, while `organization_id` denotes a company relationship; this clarifies the generic organization terminology above. Inspect actual migrations and existing rows before schema work. Do not resurrect the abandoned isolated schema or mix the separate Atomic CRM project into this implementation.
+
+The new handoff expands the target MVP experience beyond the earlier mock-only GTM queue; ingestion/security remain production dependencies. Reconcile parallel PRs instead of overwriting or silently merging them. Prototype fit numbers are specialization indicators, separate from categorical GTM readiness and evidence/contact/approval gates. Draft Client Brain edits cannot change active priorities until reviewed activation. Actual profiles and lender relationships remain private per workspace, never committed to Git. Follow the ticket acceptance criteria and report exact test evidence and gaps.
