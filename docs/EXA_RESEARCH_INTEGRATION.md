@@ -1,4 +1,4 @@
-# Planned feature: Exa research and project-signal integration
+# Planned feature: Multi-agent web research provider evaluation
 
 **Status:** Planned; not implemented or approved for production use  
 **Product:** KonstructionComOS / ClearConnect  
@@ -8,14 +8,50 @@
 
 ## Objective
 
-Evaluate Exa as a web discovery and content-retrieval provider for finding public project and company signals and preparing source-backed project briefings. Exa is a research input, not the system of record and not an authority for permitting, procurement, financing, or project status.
+Evaluate Exa, Tavily, and Parallel as interchangeable web discovery and content-retrieval providers for finding public project and company signals and preparing source-backed project briefings. Each provider is tested by a separate, identically instructed research agent. Providers are research inputs, not the system of record and not authorities for permitting, procurement, financing, or project status.
 
 The feature supports the product promise of turning early construction activity into qualified B2B relationships. It must keep discovery separate from qualification: a public permit, article, or project announcement does not prove financing demand, open contract scope, project viability, or decision-maker authority.
+
+## Comparative research-agent bake-off
+
+Run three independent agents against the same test set:
+
+| Agent | Assigned provider | Purpose |
+|---|---|---|
+| Exa Research Agent | Exa Search and Contents; use deeper research only if included in the agreed test mode | Test project-signal discovery and evidence retrieval |
+| Tavily Research Agent | Tavily Search and Extract; use Research/Crawl only if included in the agreed test mode | Test project-signal discovery, page extraction, and domain exploration |
+| Parallel Research Agent | Parallel Search and Extract; use Task only if included in the agreed test mode | Test structured, multi-step project research and source-grounded outputs |
+| Human baseline (control) | Existing manual research process and designated authoritative sources | Establish the quality and time baseline |
+
+All agents receive the same query packet, geography, target segments, signal definitions, time window, output schema, and per-run limits. Keep model instructions and post-processing identical. Record provider-specific features and extra tool calls; do not let one provider use a more permissive research budget. If advanced/deep modes are compared, run a separate tier so basic search results remain comparable.
+
+### Standard query packet
+
+Build a small, adjudicated set of BC examples covering municipal planning/rezoning, development and building permit signals, public project announcements, tender/procurement status, and company/stakeholder context. Include known positive projects, negative or irrelevant examples, duplicate mentions, stale pages, and cases where no reliable public evidence exists. Prefer primary government/procurement sources for ground truth. Freeze the query set and truth labels before running agents.
+
+### Shared output contract
+
+Each agent returns the same structured records: project identity and location; signal category; event/publication/retrieval dates; project stage; sponsor/owner if evidenced; relevant source URLs and excerpts; unsupported or unknown fields; duplicate candidates; field-level confidence; and a short rationale. Every factual field must cite at least one source. Agents must say “unknown” when evidence is absent and must not infer financing need or open contract availability.
+
+### Scoring and controls
+
+Have reviewers who do not know which provider produced each record adjudicate against the frozen reference set. Compare:
+
+- Precision and recall of relevant project signals
+- Novel, actionable projects per fixed query and time budget
+- Primary-source share and field-level evidence coverage
+- Accuracy of stage, dates, location, sponsor, and status after adjudication
+- Citation relevance, source freshness, duplicate rate, and unsupported-claim rate
+- Median time to a review-ready briefing
+- API cost and cost per verified, useful project
+- Failure, timeout, and rate-limit frequency
+
+Report results by signal category and segment as well as overall. Do not rank providers on raw result count. Set pass/fail thresholds with pilot users before testing; preserve raw outputs, queries, provider/version metadata, timestamps, and reviewer decisions for reproducibility. A provider may win different categories; retain a routing option if the evidence supports it.
 
 ## Proposed MVP
 
 1. A user or authorized workflow starts a research run for a geography, project type, target segment, and signal category.
-2. Exa Search discovers candidate public pages. Contents retrieves relevant text or highlights for selected pages.
+2. A provider-specific agent uses its assigned provider's search and content retrieval APIs to discover candidate public pages and retrieve relevant text or highlights.
 3. A server-side extraction step proposes structured project facts using a versioned schema.
 4. Each proposed fact retains its evidence URL, page title, publisher when available, quoted supporting passage/highlight, source publication date when available, retrieval timestamp, and extraction status.
 5. Candidates are deduplicated against existing projects and sources.
@@ -32,7 +68,7 @@ No scheduled monitoring, autonomous contact enrichment, outbound messaging, or a
 - Project stage: proposed, application, approved, tendering, under construction, completed, or unknown
 - Signal category and event date, distinct from publication and retrieval dates
 - Source URL, title, publisher, relevant passage, content retrieval timestamp
-- Exa query/run identifier and provider metadata needed for audit and cost attribution
+- Provider query/run identifier, agent identifier, provider/model/API version, and run metadata needed for audit and cost attribution
 - Extracted value, field-level confidence, and verification state
 - Duplicate/canonical project match and reviewer decision
 - Segment fit and rationale (broker, contractor/trade, developer, or commercial real estate)
@@ -42,11 +78,11 @@ Confidence is a review aid, not proof. Store uncertainty and missing values expl
 
 ## Provider boundary and data flow
 
-Implement Exa behind a provider interface such as `ResearchProvider`, keeping search and content retrieval replaceable. Calls and API keys must remain server-side. Persist normalized findings and source provenance in the existing application data model only after checking the approved tenancy/schema design. Do not create a parallel source of truth.
+Implement each provider behind the same `ResearchProvider` interface, keeping search and content retrieval replaceable. The evaluation harness should support Exa, Tavily, and Parallel adapters without changing prompts, schemas, or scoring rules. Calls and API keys must remain server-side. Persist normalized findings and source provenance in the existing application data model only after checking the approved tenancy/schema design. Do not create a parallel source of truth.
 
 Expected flow:
 
-`Research request → Exa search → selected page retrieval → structured extraction → deduplication → human review → verified project registry → segment-specific qualification`
+`Research request → provider-specific agent → search and page retrieval → structured extraction → deduplication → human review → verified project registry → segment-specific qualification`
 
 Official municipal, provincial, and procurement sources remain authoritative for their own records. Exa may discover or retrieve those sources; where a fact is material, link back to the authoritative record and verify against it.
 
@@ -72,10 +108,10 @@ Review ownership/developer relevance and project context. Discovery alone does n
 - Deduplicate by canonical URL, project/address, and organization; retain multiple independent sources.
 - Apply tenant isolation to requests, results, logs, and saved records.
 - Restrict API keys to server-side secrets; redact credentials and personal data from logs.
-- Respect source terms, robots/access restrictions, Exa plan limits, and applicable Canadian privacy and outreach rules.
+- Respect source terms, robots/access restrictions, each provider's plan limits, and applicable Canadian privacy and outreach rules.
 - Do not collect or use personal contact information for outreach without the product's separate compliance and permission checks.
 - Add per-tenant usage budgets, request logging, error handling, retries with limits, and a manual fallback.
-- Confirm Exa feature availability, terms, quotas, and pricing before implementation; API capabilities and costs can change.
+- Confirm each provider's feature availability, terms, quotas, and pricing before implementation; API capabilities and costs can change.
 
 ## Phased delivery
 
@@ -119,18 +155,20 @@ The feature is successful only if it improves a user outcome at an acceptable da
 ## Dependencies and open decisions
 
 - Approved project/source schema and tenant-isolation approach
-- Exa credentials and account-specific API entitlement
+- Exa, Tavily, and Parallel credentials and account-specific API entitlements for the comparative evaluation
 - Official source hierarchy for each signal type and BC municipality
 - Human reviewer role and promotion rules
 - Freshness windows by field and source
 - Pilot queries, reference projects, and pass/fail thresholds
 - Provider cost limits and fallback behavior
-- Whether future monitoring uses Exa or a separate source-specific feed
+- Which provider, if any, meets the pilot gates; whether routing should be category-specific
+- Whether future monitoring uses one selected provider or separate source-specific feeds
 
 ## References
 
 - Exa documentation: https://exa.ai/docs
-- Exa JavaScript SDK: https://github.com/exa-labs/exa-js
+- Tavily product and API: https://www.tavily.com/product
+- Parallel documentation: https://docs.parallel.ai/introduction
 - Existing product scope: `docs/PRD.md`
 - Existing project and source model work: see repository README and approved schema/design documents
 
