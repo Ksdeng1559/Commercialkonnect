@@ -50,7 +50,7 @@ Brainstorming is underway on this repo's `main` to scope and design the first bu
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
-**Planned research feature:** Exa-powered discovery of public project/company signals and human-reviewed, source-backed project briefings. Planned only; not implemented. See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for scope, architecture, provenance requirements, pilot gates, and phased rollout.
+**Planned research feature — Exa 3.0 evaluation:** Use Exa as a replaceable, server-side discovery and content-retrieval provider for public project/company signals. The proposed first release is user-triggered and human-reviewed, with field-level source evidence, timestamps, deduplication, and tenant isolation. It will not infer financing demand or contract availability from public signals, nor autonomously promote findings to verified opportunities. API access, current feature entitlements, terms, quotas, source coverage, and unit economics must be validated before implementation. **This is a plan only; no Exa integration is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the proposed architecture, pilot gates, data-quality controls, and phased rollout.
 
 ## Approved public frontend: ClearConnect (Lovable)
 
