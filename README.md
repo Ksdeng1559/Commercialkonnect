@@ -50,7 +50,7 @@ Brainstorming is underway on this repo's `main` to scope and design the first bu
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
-**Planned research feature — Exa 3.0 evaluation:** Use Exa as a replaceable, server-side discovery and content-retrieval provider for public project/company signals. The proposed first release is user-triggered and human-reviewed, with field-level source evidence, timestamps, deduplication, and tenant isolation. It will not infer financing demand or contract availability from public signals, nor autonomously promote findings to verified opportunities. API access, current feature entitlements, terms, quotas, source coverage, and unit economics must be validated before implementation. **This is a plan only; no Exa integration is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the proposed architecture, pilot gates, data-quality controls, and phased rollout.
+**Planned research feature — multi-agent provider evaluation:** Separate research agents will test Exa, Tavily, and Parallel on the same BC project-signal queries, output schema, and research budget, with manual research as a baseline. The evaluation will compare source-backed accuracy, relevance, freshness, duplicates, review time, reliability, and cost per verified project. **This is a plan only; no provider integration or agent bake-off is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the test protocol, safeguards, and rollout gates.
 
 ## Approved public frontend: ClearConnect (Lovable)
 
