@@ -50,6 +50,8 @@ Brainstorming is underway on this repo's `main` to scope and design the first bu
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
+**Planned research feature:** Exa-powered discovery of public project/company signals and human-reviewed, source-backed project briefings. Planned only; not implemented. See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for scope, architecture, provenance requirements, pilot gates, and phased rollout.
+
 ## Approved public frontend: ClearConnect (Lovable)
 
 **Source website:** https://clearconnectcom.lovable.app/  
