@@ -49,6 +49,9 @@ Brainstorming is underway on this repo's `main` to scope and design the first bu
 - Depends on nothing from the Mortgage Mix or Atomic CRM tracks above; reuses none of their tenancy work since this slice has no DB yet.
 - No spec file exists yet — this section is a status pointer for other sessions/tools picking up context, not a committed plan.
 
+
+**Planned AI Chief of Staff (OODA Loop):** [Decision framework and implementation specification](docs/OODA_CHIEF_OF_STAFF.md) applies **Observe → Orient → Decide → Act** to Mission Control, including a daily executive briefing, evidence-backed top-three actions, human approval gates, agent execution audit and outcome feedback. [Notion source](https://app.notion.com/p/3ff9e94cf0a4810a857bfb686383b314). This is a product design, **not yet implemented**.
+
 ## Roadmap
 See `docs/PRD.md` and `docs/ARCHITECTURE.md`. The evidence-backed market problem hypotheses and validation implications are summarized in [`docs/PRODUCT_MARKET_FIT_EVIDENCE.md`](docs/PRODUCT_MARKET_FIT_EVIDENCE.md); segment features and benefits are in [`docs/FEATURES_AND_BENEFITS.md`](docs/FEATURES_AND_BENEFITS.md). This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
