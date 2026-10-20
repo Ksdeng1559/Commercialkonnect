@@ -92,3 +92,6 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 
 
 **Prototype shared GTM enrichment adapter (feature branch only):** [`src/lib/gtm/providers/`](src/lib/gtm/providers/) defines opt-in provider contracts and validation for Treg, Deepline, Exa, Tavily, Parallel and manual research, without connecting to any vendor. See [`docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md`](docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md). Requires vendor-specific implementations, authentication/tenant authorization, provenance storage, tests and compliance review before production use.
+
+
+**Chief of Staff OODA integration prototype (feature branch only):** [`src/lib/gtm/ooda.ts`](src/lib/gtm/ooda.ts) transforms normalized GTM enrichment claims into draft Observe signals, Client Brain-aware Orient summaries and a human-review-only Decide proposal. **Act is not implemented.** No provider calls, persistent decisions, live ranking, automatic outreach or tenant authorization are delivered by this prototype. See [`docs/GTM_OODA_PIPELINE.md`](docs/GTM_OODA_PIPELINE.md) and the [OODA Chief of Staff architecture](docs/OODA_CHIEF_OF_STAFF.md) for implementation gates.
