@@ -83,3 +83,6 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 6. Validate organization isolation, Clerk/Supabase integration, demo vs verified data boundaries, lawful contact handling, analytics and cross-domain navigation before marking integrated.
 
 **Implementation reference:** [docs/FRONTEND_INTEGRATION.md](docs/FRONTEND_INTEGRATION.md). Coding agents should read it alongside [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md).
+
+
+**Planned GTM enrichment alternative — Deepline:** Evaluate [getaero-io / Deepline](https://github.com/getaero-io) for company and contact enrichment, decision-maker discovery, signal research and lead qualification alongside existing Exa/Tavily/Parallel options. This is **documentation and a proposed opt-in provider bake-off only**, not an implemented integration. See [`docs/DEEPLINE_GTM_ENRICHMENT_ALTERNATIVE.md`](docs/DEEPLINE_GTM_ENRICHMENT_ALTERNATIVE.md) for adapter design, BC sample evaluation, compliance safeguards, cost controls and adoption gates.
