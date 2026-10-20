@@ -95,3 +95,71 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 
 
 **Chief of Staff OODA integration prototype (feature branch only):** [`src/lib/gtm/ooda.ts`](src/lib/gtm/ooda.ts) transforms normalized GTM enrichment claims into draft Observe signals, Client Brain-aware Orient summaries and a human-review-only Decide proposal. **Act is not implemented.** No provider calls, persistent decisions, live ranking, automatic outreach or tenant authorization are delivered by this prototype. See [`docs/GTM_OODA_PIPELINE.md`](docs/GTM_OODA_PIPELINE.md) and the [OODA Chief of Staff architecture](docs/OODA_CHIEF_OF_STAFF.md) for implementation gates.
+
+
+## Claude Code execution plan — GTM enrichment + OODA Chief of Staff
+
+> **Engineering handoff (October 20, 2026).** Read `AGENTS.md` and `CLAUDE.md` first. This branch contains a **non-deployed prototype**, not an authorized production workflow. Plan, validate, implement and test a narrow end-to-end slice before expanding.
+
+### Objective and success definition
+Deliver a BC-first, multi-tenant Mission Control workflow: **verified project/CRM signal → provider enrichment → OODA Observe → Client Brain Orient → prioritized Decide → human approval → scoped Act → outcome review**. Users should receive a daily, evidence-backed Chief of Staff briefing (top three actions), with attributable outcomes and zero cross-tenant leakage or unauthorized external actions. Do not present unconfirmed financing need as verified demand.
+
+### Authoritative context and conflicts to resolve
+Read, in order:
+1. `AGENTS.md`, `CLAUDE.md`, this README, `docs/PRD.md`, `docs/ARCHITECTURE.md`.
+2. `docs/OODA_CHIEF_OF_STAFF.md`, `docs/GTM_OODA_PIPELINE.md`, `docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md`.
+3. `docs/DEEPLINE_GTM_ENRICHMENT_ALTERNATIVE.md`, `docs/TREG_GTM_DATA_GATEWAY.md`, `docs/EXA_RESEARCH_INTEGRATION.md`, `docs/PRODUCT_MARKET_FIT_EVIDENCE.md`.
+4. `docs/superpowers/specs/2026-10-14-mortgage-mix-commercial-financing-design.md` and `docs/FRONTEND_INTEGRATION.md`.
+
+**Do not invent completed infrastructure.** Existing Supabase Mortgage Mix tenancy refactor is pending; live `mix_*` rows require safe backfill. The separate Atomic CRM retrofit is **not** this repository's authorization model. Use established Clerk Organizations + Supabase workspace/RLS design only after its migration is implemented and tested. Do not mutate live Supabase tables, drop legacy schemas, import secrets, or overwrite existing rows without approved migration/backfill and rollback plans.
+
+### Step-by-step engineering sequence
+
+**Phase 0 — inspect and plan (blocking gate).**
+- Inspect current branch, git status, package scripts, schema/migrations, code paths, live integration assumptions and tests.
+- Create a written implementation plan with dependency graph, dataflow, sequence diagram, schema changes, threat model, cost model, acceptance tests, rollback and explicit open decisions.
+- Resolve owner-approved choices: current workspace authorization convention; existing `mix_*` mapping; Client Brain storage/versioning; target authenticated route; provider selection and contracts; approval roles; scheduling.
+- Identify critical path for first real BC data source and CRM signals. Do **not** implement dashboard-first on synthetic data.
+- Record plan in `docs/superpowers/plans/` and keep decisions/risks linked from this README.
+
+**Phase 1 — secure tenancy and real signal intake.**
+- Implement/verify Clerk server-side org membership → workspace mapping → Supabase RLS with two-tenant denial tests.
+- Write non-destructive migrations for `Signal`, `Orientation`, `DecisionProposal`, `Approval`, `AgentExecution`, `OutcomeReview` under existing workspace conventions; preserve provenance, observed vs ingested timestamps and idempotency/dedup keys.
+- Resolve the Mortgage Mix integration/backfill dependencies before attaching OODA to production records. Seed *clearly labeled* synthetic fixtures only in development.
+- Establish a real, licensed BC source test and a bounded, auditable ingestion job before claiming live project intelligence.
+
+**Phase 2 — provider evaluation and adapter hardening.**
+- Review `src/lib/gtm/providers/{types,registry,index}.ts`; keep vendors replaceable. Evaluate Treg (gateway), Deepline (workflow), direct Exa/Tavily/Parallel and manual baseline, recognizing different capabilities.
+- Add input/output schema validation, timeout, retries, circuit breaker, rate limiting, caching, per-tenant pre-call budget reservation, usage ledger, provenance, data minimization, secrets isolation and disabled-by-default flags.
+- Implement **one** documented server-only provider path after vendor API/rights verification; no unapproved outbound data sharing.
+- Benchmark 50 real BC companies/projects using quality, freshness, coverage, reviewer time, latency, duplicate rates, data rights and **CAD cost per verified usable record**. Record non-inferiority/fallback decisions with raw evidence.
+
+**Phase 3 — OODA decision services.**
+- Refactor `src/lib/gtm/ooda.ts` from pure in-memory draft into testable service boundaries; retain pure transformations and use stable persisted IDs in database services.
+- Observe: source-linked, timestamped, deduplicated claims; distinguish provider-labelled verification from platform/sponsor verification.
+- Orient: load only authorized, versioned Client Brain context; separate facts, hypotheses, unknowns, constraints and counter-evidence.
+- Decide: develop transparent ranking using value, urgency, probability, effort and risk, but do **not** present numerical probabilities as calibrated before validation; produce at most three reviewable recommendations, including reasons, alternatives, evidence and risks.
+- Act: do **not** enable autonomous outreach, lender submissions, payments, lead sales or destructive writes. Create explicit approval state transitions, least-privilege agent dispatch, idempotent execution, retry/failure audit and rejection/no-op paths.
+- Feedback: reconcile actual outcomes to proposals and log false positives, qualified meetings and follow-up actions.
+
+**Phase 4 — Mission Control UX and scheduling.**
+- Implement authenticated **Today briefing** and **Decision Queue** with expandable evidence, Client Brain context, approval/rejection actions, execution history, failures and outcomes.
+- Schedule a daily workspace-scoped briefing only after persistence/security gates; support event-driven triggers later. Show source freshness and staleness, never imply silent autonomous execution.
+- Keep public Lovable/Vite marketing site separate from the authenticated Next.js app; preserve live CTAs until tested migration.
+
+**Phase 5 — test, pilot, ship.**
+- Add unit tests for provider contract and OODA classification/dedup/ranking, workflow integration tests, RLS denial tests, approval/authorization negative tests, spend-limit tests, failure/retry/idempotency tests and provenance tests.
+- Run `npm run typecheck`, `npm run lint`, `npm run build` and relevant tests, capturing actual outputs; do not claim unrun checks pass.
+- Pilot on a bounded BC workspace with manual review. Track source-backed recommendation percentage, false positives, reviewer time, meeting conversion, decision-to-action time and verified cost/usable record.
+- Deploy only after explicit security, compliance, vendor-use and user approval gates; document rollback and support ownership.
+
+### First vertical slice to deliver
+Authenticated analyst selects one **real, rights-cleared BC project/company** → retrieves one approved provider enrichment result → persists sourced Signal(s) → generates an Orientation using versioned Client Brain → creates **one needs-review proposal** → operator can approve/reject a **non-outbound, internal-only** action → records the result and outcome review. Prove two-tenant isolation and auditability end to end before broad automation.
+
+### Definition of done and handoff
+- Evidence-based integration with real permitted records, durable auditable state and passing tenant-denial/approval tests; vendor or mocked data always labeled.
+- No financial intent derived solely from construction permits, hiring or business growth indicators; no bypass of CASL/PIPEDA or broker licensing obligations.
+- Each PR reports **files changed, observed test output, migration/rollback steps, measured limitations, remaining risks and next prioritized task**.
+- Prefer small reviewable PRs. Do not merge the feature branch or deploy production services until the gates pass.
+
+**Current implementation truth:** `src/lib/gtm/providers/` and `src/lib/gtm/ooda.ts` are feature-branch scaffolds. There are **no live vendor adapters, persistence, approved action executor or end-to-end tests**.
