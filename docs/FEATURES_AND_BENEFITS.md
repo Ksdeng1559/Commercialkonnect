@@ -32,6 +32,22 @@ Find projects earlier, prepare for a more informed sponsor conversation, and kee
   Support mandate matching and permission-aware follow-up as these capabilities are designed and validated.  
   **Benefit:** Create a more consistent handoff from research to broker action.
 
+- **Client intelligence and battlecards — Planned**  
+  Bring project context, stakeholder details, source dates, client-stated goals, open questions and possible financing discussion points into a reviewable briefing.  
+  **Benefit:** Prepare for a relevant conversation without treating inferred client needs, objections or financing fit as confirmed facts.
+
+- **Personalized video introductions — Planned service**  
+  Prepare short, audience-specific video sales letters using verified project context and broker-approved scripts. The broker reviews the recipient, message, disclosure and call to action before delivery.  
+  **Benefit:** Give a selected sponsor, referral partner or broker prospect a more contextual introduction. Video engagement is a follow-up signal, not proof of interest or qualification.
+
+- **Personalized email outreach — Planned service**  
+  Draft tailored one-to-one or small-batch email sequences from approved project and client context, with source references, review before sending, reply tracking and suppression handling.  
+  **Benefit:** Help a broker start a specific, timely conversation and manage replies and next steps in the opportunity workflow.
+
+- **Outreach response tracking — Planned**  
+  Associate approved sends, replies, opt-outs and booked conversations with the relevant contact and opportunity.  
+  **Benefit:** Keep outreach accountable and evaluate outcomes by audience and channel.
+
 **Best fit:** Commercial mortgage and development-finance teams that actively pursue business and property financing opportunities in British Columbia.
 
 **CTA:** Request a broker demo
@@ -118,7 +134,8 @@ A permit or planning update is a signal to investigate; it does not by itself co
 2. **Verify** its source, date, stage and relevant stakeholder details.
 3. **Qualify** it against your segment, territory, mandate or capacity.
 4. **Act** through a suitable conversation or follow-up.
-5. **Track** the next step and record the outcome.
+5. **Prepare** a client briefing or battlecard and, when appropriate, a broker-reviewed email or video introduction.
+6. **Track** delivery, replies, opt-outs, meetings, next steps and outcomes.
 
 ## Designed for a BC-first launch
 
@@ -158,3 +175,13 @@ Tell us which workflow you want to improve—commercial financing origination, c
 - Use only validated coverage and current product claims in published marketing copy.
 - Replace “MVP direction” and “Planned” labels only when implementation and testing confirm availability.
 - Route CTAs to existing, tested destinations; do not create a new lead-capture flow until the internal-pilot readiness gate is cleared.
+
+
+### Outreach service safeguards
+
+- Video scripts and personalized email drafts are preparation tools; an authorized broker or seller reviews the recipient, facts, message, disclosures and CTA before external delivery.
+- Use source-backed facts and approved templates. Label unconfirmed financing angles and possible objections as hypotheses to verify.
+- Record contact basis, consent where required, opt-outs and suppression status. Do not use scraped public contacts for outbound marketing without lawful authorization and suppression handling; follow CASL and applicable privacy requirements.
+- Keep borrower financial documents and sensitive intake off marketing email and video pages. Use approved secure channels.
+- Do not promise deliverability, response rates, meetings, financing, approvals or conversion lift. Measure campaigns against an appropriate baseline before making performance claims.
+- These services are planned GTM/product direction and are not implemented in the current application.
