@@ -89,3 +89,17 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 
 
 **Planned unified GTM tool gateway — Treg:** Evaluate [Treg](https://github.com/superdesigndev/treg) as an optional agent-facing catalog/proxy for third-party data and team-owned tools. Benchmark Treg-mediated enrichment against direct Exa/Tavily/Parallel routes and Deepline workflows; keep source provenance, spend controls, tenant privacy, human review and direct-provider fallback. **Planning only; not installed or production-integrated.** See [`docs/TREG_GTM_DATA_GATEWAY.md`](docs/TREG_GTM_DATA_GATEWAY.md).
+
+
+## GTM enrichment adapter — engineering status (October 20, 2026)
+
+The vendor-neutral GTM provider adapter **has been scaffolded on a separate feature branch**, not merged into `main` or deployed. It is intended to give Chief of Staff and GTM agents a consistent interface while comparing enrichment providers without lock-in.
+
+- **Implementation branch:** [`feature/gtm-provider-adapter`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter)
+- **Source:** [`src/lib/gtm/providers/`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter/src/lib/gtm/providers)
+- **Handoff:** [GTM provider adapter implementation](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md)
+- **Provider candidates:** Treg (tool gateway), Deepline (GTM enrichment workflows), Exa, Tavily, Parallel and manual baseline.
+- **Implemented in branch:** TypeScript contract, provider registry, capability validation, explicit feature flags (off by default), basic response validation, per-request spend-cap checks and mandatory review flags.
+- **Not implemented:** Vendor API calls, runtime tenant authorization, verified vendor pricing, persistence/audit ledger, automated tests, routing/approval UI or production integration. The scaffold's spend cap does not replace pre-call billing authorization.
+
+**Next steps:** Review upstream API terms and data rights; implement and test one server-side provider adapter behind a flag; compare 50 BC companies/projects against direct providers and manual research; add authenticated tenant scoping, Supabase provenance/usage persistence, consent/suppression controls and human approval before any outbound or broker routing. Do not expose the scaffold as a production API or assume a public construction signal proves financing need.
