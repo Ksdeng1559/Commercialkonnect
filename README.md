@@ -89,3 +89,6 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 
 
 **Planned unified GTM tool gateway — Treg:** Evaluate [Treg](https://github.com/superdesigndev/treg) as an optional agent-facing catalog/proxy for third-party data and team-owned tools. Benchmark Treg-mediated enrichment against direct Exa/Tavily/Parallel routes and Deepline workflows; keep source provenance, spend controls, tenant privacy, human review and direct-provider fallback. **Planning only; not installed or production-integrated.** See [`docs/TREG_GTM_DATA_GATEWAY.md`](docs/TREG_GTM_DATA_GATEWAY.md).
+
+
+**Prototype shared GTM enrichment adapter (feature branch only):** [`src/lib/gtm/providers/`](src/lib/gtm/providers/) defines opt-in provider contracts and validation for Treg, Deepline, Exa, Tavily, Parallel and manual research, without connecting to any vendor. See [`docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md`](docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md). Requires vendor-specific implementations, authentication/tenant authorization, provenance storage, tests and compliance review before production use.
