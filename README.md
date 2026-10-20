@@ -50,7 +50,7 @@ Brainstorming is underway on this repo's `main` to scope and design the first bu
 - No spec file exists yet — this section is a status pointer for other sessions/tools picking up context, not a committed plan.
 
 ## Roadmap
-See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
+See `docs/PRD.md` and `docs/ARCHITECTURE.md`. The evidence-backed market problem hypotheses and validation implications are summarized in [`docs/PRODUCT_MARKET_FIT_EVIDENCE.md`](docs/PRODUCT_MARKET_FIT_EVIDENCE.md); segment features and benefits are in [`docs/FEATURES_AND_BENEFITS.md`](docs/FEATURES_AND_BENEFITS.md). This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
 **Planned research feature — multi-agent provider evaluation:** Separate research agents will test Exa, Tavily, and Parallel on the same BC project-signal queries, output schema, and research budget, with manual research as a baseline. The evaluation will compare source-backed accuracy, relevance, freshness, duplicates, review time, reliability, and cost per verified project. **This is a plan only; no provider integration or agent bake-off is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the test protocol, safeguards, and rollout gates.
 
