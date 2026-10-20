@@ -1,6 +1,8 @@
-# KonstructionComOS
+# KommercialConnect
 
-**Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
+**Commercial & Business Financing, Connected.** KommercialConnect is the proposed borrower-facing brand for a Canadian B2B platform that connects businesses and commercial property owners with finance brokers. The platform is supported by a construction intelligence and capital origination system that discovers early project opportunities, identifies stakeholders, and manages financing workflows.
+
+> **Repository/product status:** The GitHub repository is still named `KonstructionComOS`. KommercialConnect is the proposed public brand; domain availability and trademark clearance are not confirmed. The application remains an MVP scaffold, and public-facing brand changes have not yet been implemented in the app.
 
 ## MVP: British Columbia
 - Project intelligence registry with construction stage, estimated budget, source provenance, and confidence
@@ -52,7 +54,15 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a
 
 **Planned research feature — multi-agent provider evaluation:** Separate research agents will test Exa, Tavily, and Parallel on the same BC project-signal queries, output schema, and research budget, with manual research as a baseline. The evaluation will compare source-backed accuracy, relevance, freshness, duplicates, review time, reliability, and cost per verified project. **This is a plan only; no provider integration or agent bake-off is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the test protocol, safeguards, and rollout gates.
 
-## Approved public frontend: ClearConnect (Lovable)
+## Public brand and frontend status
+
+**Proposed borrower-facing brand:** KommercialConnect — “Commercial & Business Financing, Connected.” Use this brand for business/property-owner acquisition, financing intake, broker matching, consent, and borrower status communication once validated and implemented.
+
+**Operating platform:** KonstructionComOS remains the construction intelligence and broker operations layer: project signals, stakeholder discovery, enrichment, human-reviewed qualification, broker workflows, and outcome tracking. The intended handoff passes only the data needed for routing and qualification, with consent and source provenance.
+
+The current ClearConnect/Klick2Client frontend below is an existing prototype and design source. It has not been rebranded or integrated as KommercialConnect. Domain registration, trademark clearance, and legal/compliance review remain outstanding.
+
+## Existing public frontend prototype: ClearConnect (Lovable)
 
 **Source website:** https://clearconnectcom.lovable.app/  
 **Editable Lovable project:** https://lovable.dev/projects/136ade9c-5e7f-4aea-95d7-de34af9aabc0
