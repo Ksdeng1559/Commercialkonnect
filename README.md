@@ -204,3 +204,10 @@ Advanced GTM, content, billing, data-readiness, full market/research, analytics 
 4. **Later:** content/video, broader market alerts/providers, billing and analytics based on retained pilot value. **Dashboard feedback, Slack routing and Google Meet interviews are deferred; nothing is connected, sent or scheduled.**
 
 Verification: source syntax and all eight reference/chief/latest/market/pilot/briefing/OODA/broker domain/DOM-stub suites passed. Desktop browser checks covered the three-screen navigation, opportunity detail, concise briefing save, shortlist save, pipeline/outcomes and preferences/rollout. Mobile/accessibility, secure backend and live integrations remain unverified. Run `node verify-broker.cjs` with the other prototype checks. Current Sites source: `6d87de456c95f4309130bf389cf4274a38673d36`. No production Next.js build or migration was performed.
+
+
+## Sales intelligence cards — October 21, 2026
+
+Opportunities now includes a sample sales intelligence card with signal, financing relevance as inference, unknown funding request, sponsor/authority gaps, discovery questions, source confidence and downloadable text. The hosted sample remains synthetic. A separate private five-project BuildData review pack was prepared from existing ClearClose records; it is not committed or embedded in public assets. No live provider query, personal contact lookup, CRM import or outreach occurred.
+
+Read [the BuildData population contract](docs/mission-control/SALES_INTELLIGENCE.md) before implementing real records. All 452 stored source records lacked publisher URL, licence and attribution; normalized owner roles can conflict with raw contractor fields. Preserve provenance and review those gaps before production population. Permit values are not financing requests. Run `node verify-sales-card.cjs` alongside the existing checks. Nine domain/DOM-stub checks pass; this card update has not had browser QA.
