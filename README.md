@@ -189,3 +189,18 @@ Read [Agency Agents adoption](docs/mission-control/AGENCY_AGENTS.md), the pinned
 This is an **on-demand browser-local reference**, not daily scheduled or live provider/agent execution. No outreach, CRM promotion, lender submission or payments occur. Ranking is an explicit ordinal heuristic; source presence is not verification or confirmed financing intent. Feedback does not activate Client Brain or count as a held qualified meeting. See [Chief of Staff details and verification](docs/mission-control/CHIEF_OF_STAFF.md#ooda-executive-reference-update--october-20-2026).
 
 Latest checks: syntax plus all seven domain/DOM-stub suites passed, including `node verify-ooda.cjs` from the prototype directory. Managed preview recovered this session: desktop browser testing covered synthetic profile activation → briefing → evidence detail → scoped approval → local preparation/audit → outcome review. Mobile/accessibility, production tenancy, hosted providers and scheduling remain unverified. Older browser-unavailable statements above describe the prior October 17 check. Production security and real-source engineering dependencies remain as specified on `feature/gtm-provider-adapter`; no production backend implementation or merge is claimed.
+
+
+## Broker-first version: three screens
+
+The [Mission Control dashboard](https://broker-mission-control.vercel.app/#today) now defaults to **Today / Opportunities / My Pipeline**. Chief of Staff priorities appear on Today. Source and financing context expands inside an opportunity; concise client briefing, preparation notes and call planning are available there. Saved opportunities and call outcomes stay in My Pipeline. Client Brain is reached from onboarding/preferences. Illustrative fit scores and potential financing volume are removed from the broker list/summary.
+
+Advanced GTM, content, billing, data-readiness, full market/research, analytics and agent-management views remain in the optional **Builder tools** display mode under preferences. This switch is not administrator authorization or tenant security. Existing records, deep links and earlier prototypes are retained; removing an item from My Pipeline does not delete it. The current product remains a browser-local demonstration with synthetic records, not an authenticated real-data pilot.
+
+[Phased rollout and acceptance gates](docs/mission-control/BROKER_MVP_ROLLOUT.md):
+1. **Now:** focused three-screen broker preview and contextual call preparation.
+2. **First working pilot:** tenant security, one licensed BC source, provenance/freshness, persistent profile/shortlist/notes and reliable outcomes, with two-tenant denial and end-to-end verification before paid access.
+3. **Next:** one reviewed research provider, durable Chief of Staff approval/audit and then one calendar adapter; scheduling only after reliability/security gates.
+4. **Later:** content/video, broader market alerts/providers, billing and analytics based on retained pilot value. **Dashboard feedback, Slack routing and Google Meet interviews are deferred; nothing is connected, sent or scheduled.**
+
+Verification: source syntax and all eight reference/chief/latest/market/pilot/briefing/OODA/broker domain/DOM-stub suites passed. Desktop browser checks covered the three-screen navigation, opportunity detail, concise briefing save, shortlist save, pipeline/outcomes and preferences/rollout. Mobile/accessibility, secure backend and live integrations remain unverified. Run `node verify-broker.cjs` with the other prototype checks. Current Sites source: `6d87de456c95f4309130bf389cf4274a38673d36`. No production Next.js build or migration was performed.
