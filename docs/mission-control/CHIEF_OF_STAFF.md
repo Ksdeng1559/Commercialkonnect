@@ -79,7 +79,7 @@ No production agent execution is accepted until these gates and the prior Missio
 
 ## OODA executive reference update — October 20, 2026
 
-The current main README and [OODA specification](../OODA_CHIEF_OF_STAFF.md), plus the [provider feature-branch execution plan](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/README.md) and GTM_OODA_PIPELINE contract, now guide the refreshed static Mission Control reference. `prototype/#today` is an on-demand local executive briefing; entry points appear on overview and Chief of Staff. The existing agent task queue is preserved.
+The current main README and [OODA specification](https://github.com/Ksdeng1559/KonstructionComOS/blob/main/docs/OODA_CHIEF_OF_STAFF.md), plus the [provider feature-branch execution plan](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/README.md) and GTM_OODA_PIPELINE contract, now guide the refreshed static Mission Control reference. `prototype/#today` is an on-demand local executive briefing; entry points appear on overview and Chief of Staff. The existing agent task queue is preserved.
 
 Observe: deduplicate synthetic/manual subject/claim/source signals, label source/date gaps and an illustrative seven-day stale threshold. Orient: bind active Client Brain and opportunity/signal snapshot, separate supplied facts from assumptions, and show mandate, capacity and qualification constraints. Decide: at most three expandable recommendations with owner/due/next review, evidence, rationale, alternatives, impact and downside. The transparent value + urgency + likelihood - effort - risk formula is an ordinal demonstration, not calibrated probability, credit scoring or a validated prioritization model.
 
