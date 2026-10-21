@@ -55,3 +55,60 @@ Add TinyFish as an *optional server-side enrichment provider* rather than replac
 - At least 90% of signals support their category and date (target).
 - Zero records labeled as owner-confirmed financing need from web research alone.
 - Track real cost and researcher review minutes per verified record.
+
+
+## Commercial financing opportunity expansion (2026-10-21)
+
+### Dual origination tracks
+**Track A — Business financing:** operating businesses seeking working capital, inventory/receivables finance, equipment leasing, acquisition capital, expansion funding and debt restructuring (need only confirmed through owner conversation).
+**Track B — Commercial real estate financing:** owner-occupied acquisitions, investment-property acquisitions/refinancing, industrial and retail facilities, land acquisition, development/construction financing, bridge loans and repositioning.
+
+A company can trigger both tracks. Link financing opportunities to separate entities: operating company, property-owning corporation, project/SPV and registered land title. Never assume the occupier owns the premises or that a development permit establishes loan demand.
+
+### Signal → financing conversation matrix
+| Verifiable signal | Finance hypothesis | Required extra verification |
+|---|---|---|
+| Purchase/sale of commercial property announced | Acquisition mortgage, bridge or vendor take-back | Buyer, asset, transaction stage, funding status |
+| Owner-occupied industrial facility expansion | Construction mortgage, capex, equipment | Land ownership, construction stage, disclosed funding |
+| New commercial or mixed-use development | Land, development, construction or take-out financing | Developer/sponsor, parcel PID, zoning/permit timeline, current lender |
+| Renovation/repositioning/tenant improvements | Capex, bridge or refinancing | Owner/tenant responsibility, project budget and existing funding |
+| Operating-business expansion at a leased site | Equipment, working capital, leasehold improvements | Lease versus ownership, investment and decision-maker |
+| Public mortgage registration / title charge | **Research only** for possible refinance | Official title, charge type, authorized borrower confirmation; no inferred maturity or distress |
+| Public funding/grant award | Possible residual capital need, not necessarily | Grant terms, total project cost, remaining capital requirement |
+
+### BC commercial-property research chain
+1. Discover candidate property/project via public planning/permit datasets, company announcements and permitted directory sources.
+2. Resolve civic address → PID using approved geospatial sources such as ParcelMap BC.
+3. Obtain a current LTSA title **only when needed and authorized**, then record registered owner and charges with source/access rights; distinguish corporate owner from beneficial owner.
+4. Match corporate title holder to BC Registry/OrgBook; research directors and authorized contacts through lawful sources. Director ≠ beneficial owner ≠ borrowing decision-maker.
+5. Enrich project details and lender/financing signals with TinyFish on accessible, permitted public pages.
+6. Build a short prospect briefing showing actual evidence, unanswered financing questions, and broker-mandate relevance.
+7. Route to a licensed professional after human review and lawful-contact checks; mark actual financing requirement **UNKNOWN** until borrower authorization/confirmation.
+
+### New data model (proposed)
+- `financing_opportunities`: opportunity_id, account_id, track (business|commercial_real_estate), scenario (acquisition|refinance|construction|bridge|equipment|working_capital|ABL|other), signal_id, estimated_need_range (nullable), need_confirmation (unknown|confirmed|not_interested), discovery_stage, broker_mandate_id, next_action.
+- `properties`: property_id, civic_address, PID (verified nullable), asset_type, property_use, ownership_verification_status, ownership_source, checked_at.
+- `property_parties`: property_id, entity_id, role (registered_owner|occupant|developer|borrower|property_manager), evidence_source, confidence.
+- `financing_signals`: source_url, published_at, retrieved_at, signal_type, exact_assertion, verification_state, evidence_license, stage.
+- `capital_context`: disclosed_grants, publicly_announced_financing, project_budget, existing_charge_verified, all with provenance and UNKNOWN defaults.
+- `decision_makers`: person_id, company_id, verified_role, source, observed_at, outreach_permission.
+
+Do not surface unverified estimated equity, LTV, mortgage balance, refinancing date, NOI, DSCR or owner personal contact data.
+
+### Revised commercial finance intelligence card
+**Operating company** / **property or project** / **linked ownership entity** (each separately verified)
+- Financing track and possible structures
+- Project stage and timing, official records and URLs
+- Existing publicly disclosed funding (if known)
+- Named authorized contact with source-date and role confidence
+- Unanswered qualification: property ownership, funding need, loan purpose, approximate amount, security, timing, current lender, exit
+- Broker match and next permitted action
+- Financing status: **UNCONFIRMED** until verified by authorized borrower
+
+### Example reinterpretation of pilot records
+- **ACSI:** dedicated industrial facility expansion indicates a *potential* construction, real estate or equipment financing conversation; public source does not establish that ACSI owns the land or needs debt. Investigate parcel/title and financing arrangements before qualification.
+- **Flagship Logistics:** new warehouse operation indicates potential fleet/material-handling equipment or growth funding; occupancy does not imply property ownership. Need owner/lease verification before discussing mortgage products.
+- **Government-supported Surrey companies:** publicly announced support reduces uncertainty about some financing already available. Do not label grant recipients as seeking additional capital.
+
+### Success criteria
+Measure separately by track: evidence-backed opportunities, verified decision-maker, owner-confirmed financing conversations, broker acceptance, accepted mandates, funded transactions, acquisition cost and elapsed days; never aggregate hypothetical leads with confirmed mandates.
