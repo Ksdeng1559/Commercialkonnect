@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Building2, CheckCircle2, CircleHelp, ExternalLink, FileSearch, Search, ShieldCheck, Sparkles } from "lucide-react";
 
@@ -21,6 +21,7 @@ const FEATURES: {id:Enrichment; label:string; description:string}[] = [
 export default function BusinessSearchPage() {
   const [query,setQuery]=useState("");
   const [city,setCity]=useState("British Columbia");
+  useEffect(()=>{const initial=new URLSearchParams(window.location.search).get("q");if(initial) setQuery(initial.slice(0,200));},[]);
   const [selected,setSelected]=useState<string|null>(null);
   const [features,setFeatures]=useState<Enrichment[]>(["leadership","signals","finance"]);
   const [requested,setRequested]=useState(false);
