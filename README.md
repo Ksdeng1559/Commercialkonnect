@@ -2,7 +2,7 @@
 
 **Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
 
-## Latest additions — 2026-10-17
+## Latest additions — 2026-10-20
 
 | Addition | Available now | Implementation boundary |
 | --- | --- | --- |
@@ -180,3 +180,12 @@ The MVP now includes a Chief of Staff operating layer. Read [the orchestration c
 ## Agency Agents source and team adoption
 
 Read [Agency Agents adoption](docs/mission-control/AGENCY_AGENTS.md), the pinned [source manifest](docs/mission-control/agent-sources.lock.json) and [workflow registry](docs/mission-control/workflow-registry.json). The synchronized `Ksdeng1559/agency-agents` fork is referenced at reviewed commit `652b2692f8d8ec2b1f1a38e559073e287dfdc469`. Begin with Chief of Staff, Workflow Architect, Discovery Coach and Evidence Collector; distinguish engineering and broker-operations teams. These are reference contracts, not installed agents. Keep runtime dispatch disabled until the existing MC security, orchestration and integration gates pass. Recheck upstream deliberately; preserve project permission rules and Canadian/lender-specific review over generic source instructions.
+
+
+## Chief of Staff OODA reference — October 20, 2026
+
+[Open Today briefing](https://broker-mission-control.dennis-klicksmartai.chatgpt.site/#today). Based on current main's [OODA specification](https://github.com/Ksdeng1559/KonstructionComOS/blob/main/docs/OODA_CHIEF_OF_STAFF.md) and the provider-branch phased plan, the refreshed reference adds Observe → Orient → Decide → Act, at most three expandable recommendations, source/freshness context, active Client Brain constraints, reasoned approval/rejection, a scoped internal preparation-note action, local audit and operator outcome feedback. Prior cycles are retained; changed inputs/profile/day hold approvals. Existing agent-management tasks remain separate and available.
+
+This is an **on-demand browser-local reference**, not daily scheduled or live provider/agent execution. No outreach, CRM promotion, lender submission or payments occur. Ranking is an explicit ordinal heuristic; source presence is not verification or confirmed financing intent. Feedback does not activate Client Brain or count as a held qualified meeting. See [Chief of Staff details and verification](docs/mission-control/CHIEF_OF_STAFF.md#ooda-executive-reference-update--october-20-2026).
+
+Latest checks: syntax plus all seven domain/DOM-stub suites passed, including `node verify-ooda.cjs` from the prototype directory. Managed preview recovered this session: desktop browser testing covered synthetic profile activation → briefing → evidence detail → scoped approval → local preparation/audit → outcome review. Mobile/accessibility, production tenancy, hosted providers and scheduling remain unverified. Older browser-unavailable statements above describe the prior October 17 check. Production security and real-source engineering dependencies remain as specified on `feature/gtm-provider-adapter`; no production backend implementation or merge is claimed.
