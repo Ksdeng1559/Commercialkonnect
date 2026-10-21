@@ -21,6 +21,22 @@
 ## Product evidence and market-sizing warning
 The prior construction/service-provider TAM and SAM describe a **different product boundary** and must not be used as the new business-owner-financing prospect TAM or broker origination SAM. New sizing must count distinct, actively originating commercial/business finance broker purchasing teams, then model addressable geographic data coverage, price, acquisition, retention and broker acceptance. Counts of BC businesses or dollar volume of commercial lending are **not** subscription-buyer counts. PMF is unproven pending measured paid-pilot results.
 
+## Broker dashboard: on-demand Search & Enrich (October 21, 2026)
+
+**Primary dashboard action:** A commercial finance broker can enter a company name or website into the prominent **Search & Enrich a Business** search bar on the executive dashboard. The form forwards the entered query to `/business-search?q=...`, where the broker confirms the intended company and chooses the research needed. The existing construction-project metrics remain visible beneath this action as a secondary workflow.
+
+**Implemented on `feature/leadsniper-multisource-discovery`:**
+- `src/app/page.tsx` — prominent dashboard search form with name/website input; linked to the business-search route.
+- `src/app/business-search/page.tsx` — responsive prototype displaying **fictional candidate businesses**, manual company selection, optional enrichment categories and an explicitly labeled intelligence-preview state.
+- Broker-selectable enrichment: **decision-makers and titles**, **expansion/growth signals**, **commercial property context**, and **potential business/commercial financing solutions**.
+- The requested dashboard query is preserved on the business-search screen. No live company lookup, TinyFish run, paid API request, financing qualification, data persistence or outreach is executed by this demo.
+
+**Next build gates:** Implement authenticated, workspace-isolated company lookup through approved licensed providers; resolve business duplicates before enrichment; provide per-run pricing/limits and human approval; orchestrate targeted TinyFish and approved website/corporate/property research; retain evidence links, dates, permissible fields and source rights; persist only authorized research in Supabase under RLS; and move owner-confirmed needs into the pipeline only after direct qualification. Add server-side rate limiting, tests, request audit logs and provider/tenant isolation before deployment.
+
+**Product rationale:** This action directly supports qualitative broker feedback: brokers frequently have a known company they want to investigate and need useful owner and financing context **on demand**, rather than browsing only pre-ranked construction opportunities. PMF and willingness to pay remain unproven.
+
+**Implementation details:** [Broker Search & Enrich MVP](docs/BROKER_SEARCH_AND_ENRICH_MVP.md). This is not deployed to production.
+
 ## Stack
 - Next.js App Router, TypeScript, Tailwind CSS
 - Clerk authentication and Organizations
