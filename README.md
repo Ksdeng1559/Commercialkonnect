@@ -1,6 +1,6 @@
 # commercialKonnect
 
-> **Frontend decision (October 21, 2026):** WordPress is the planned production public website for commercialKonnect.ca (SEO, borrower intake, directory, broker landing pages). Lovable is used solely for prototyping/design exploration; it is not the production frontend. The authenticated broker application remains a separate Next.js product. Read [Technical Implementation & Slack Operations](docs/TECHNICAL_IMPLEMENTATION_AND_SLACK_OPS.md) and [Architecture](docs/ARCHITECTURE.md). This documents the target; it does not claim deployment.
+> **Frontend decision (October 21, 2026):** WordPress is the planned production public website at **https://www.commercialkonnect.ca** (SEO, borrower intake, directory, broker landing pages). Lovable is used solely for prototyping/design exploration; it is not the production frontend. The authenticated broker application remains a separate Next.js product. Read [Technical Implementation & Slack Operations](docs/TECHNICAL_IMPLEMENTATION_AND_SLACK_OPS.md) and [Architecture](docs/ARCHITECTURE.md). This documents the target; it does not claim deployment.
 
 **Commercial & Business Financing, Connected.** KommercialConnect is the proposed borrower-facing brand for a Canadian B2B platform that connects businesses and commercial property owners with finance brokers. The platform is supported by a construction intelligence and capital origination system that discovers early project opportunities, identifies stakeholders, and manages financing workflows.
 
@@ -61,7 +61,7 @@ See `docs/PRD.md` and `docs/ARCHITECTURE.md`. The evidence-backed market problem
 
 ## Public brand and frontend status
 
-**Proposed borrower-facing brand:** commercialKonnect — “Commercial & Business Financing, Connected.” Use this brand for business/property-owner acquisition, financing intake, broker matching, consent, and borrower status communication once validated and implemented.
+**Proposed borrower-facing brand:** commercialKonnect — canonical public site: **https://www.commercialkonnect.ca** — “Commercial & Business Financing, Connected.” Use this brand for business/property-owner acquisition, financing intake, broker matching, consent, and borrower status communication once validated and implemented.
 
 **Operating platform:** KonstructionComOS remains the construction intelligence and broker operations layer: project signals, stakeholder discovery, enrichment, human-reviewed qualification, broker workflows, and outcome tracking. The intended handoff passes only the data needed for routing and qualification, with consent and source provenance.
 
