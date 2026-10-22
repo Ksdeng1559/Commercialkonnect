@@ -1,9 +1,9 @@
 # Architecture and security boundaries
 
-> Canonical intended division (2026-10-21): **WordPress is the production public website**, **Lovable is prototyping only**, **Next.js is the authenticated SaaS application**. These are target responsibilities; publication and integration are not thereby verified.
+> Canonical intended division (2026-10-21): **WordPress at **https://www.commercialkonnect.ca** is the production public website**, **Lovable is prototyping only**, **Next.js is the authenticated SaaS application**. These are target responsibilities; publication and integration are not thereby verified.
 
 ## Layers
-- **WordPress (commercialKonnect.ca):** public marketing, CMS, directory, SEO and financing education, consent-based financing intake, broker/demo CTAs. Production WordPress hosting and theme selection remain operational decisions. Keep CRM records in Supabase, not WordPress.
+- **WordPress (https://www.commercialkonnect.ca):** public marketing, CMS, directory, SEO and financing education, consent-based financing intake, broker/demo CTAs. Production WordPress hosting and theme selection remain operational decisions. Keep CRM records in Supabase, not WordPress.
 - **Next.js App Router + TypeScript + Tailwind/shadcn:** authenticated broker Mission Control, LeadSniperAI prospect and project review, verified intelligence cards, capital origination Kanban, client briefings and future OODA Chief of Staff.
 - **Clerk Organizations:** user authentication, organization context and role checks for the app; do not assume WordPress and Clerk share login without an explicit secure integration.
 - **Supabase Postgres:** canonical business and tenant records, RLS and audit logs. Resolve existing Mortgage Mix and separate Atomic CRM design before migrating.
@@ -23,3 +23,6 @@ CASL and applicable privacy requirements, data minimization, consent versioning,
 Next.js dashboard uses synthetic fixtures; production CRUD, Clerk JWT/RLS verification, billing, OODA Chief of Staff and multi-provider research remain unverified or planned in current docs. This document specifies target design, not implemented runtime.
 
 See [Technical Implementation and Slack Operations](TECHNICAL_IMPLEMENTATION_AND_SLACK_OPS.md) for full contracts, runbooks, support SLAs, phases and acceptance gates.
+
+## Public hostname and redirects
+The designated canonical public URL is **https://www.commercialkonnect.ca**. Configure TLS for both apex and www, redirect **https://commercialkonnect.ca** to the canonical www HTTPS hostname with a permanent redirect, and use the canonical URL in the sitemap, canonical tags and WordPress home/siteurl settings. DNS, certificates and live redirect behaviour have not been verified by this documentation change.
