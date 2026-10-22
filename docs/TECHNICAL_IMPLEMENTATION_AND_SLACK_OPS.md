@@ -2,7 +2,7 @@
 **Version:** 1.0 | **Date:** 2026-10-21 | **Owner:** Product/Engineering | **State:** Target specification, not proof of implementation
 
 ## 1. Executive architecture and canonical boundaries
-- **Public production website:** WordPress at the commercialKonnect.ca brand (hosting, domain activation and production readiness require verification). Owns SEO, 50-page content plan, business-financing education, landing pages, business directory, consent-based intake, broker demo CTAs, legal pages and WordPress editorial workflows. Preferred design system: Astra + Gutenberg/block patterns subject to build tests. IONOS VPS is a hosting candidate, not a confirmed deployment. WordPress must not be the canonical CRM database.
+- **Public production website:** WordPress at **https://www.commercialkonnect.ca** (hosting, domain activation and production readiness require verification). Owns SEO, 50-page content plan, business-financing education, landing pages, business directory, consent-based intake, broker demo CTAs, legal pages and WordPress editorial workflows. Preferred design system: Astra + Gutenberg/block patterns subject to build tests. IONOS VPS is a hosting candidate, not a confirmed deployment. WordPress must not be the canonical CRM database.
 - **Lovable:** design/prototyping only. Never present a Lovable URL as the production frontend or assume its React/Vite application is integrated with Next.js.
 - **Authenticated broker application:** existing Next.js/TypeScript scaffold; eventual app subdomain is TBD. Mission Control, project/business intelligence, LeadSniperAI discovery, verified prospects, sales intelligence cards, outreach review, qualification Kanban, account history and Chief of Staff.
 - **Identity:** Clerk with Organizations for application users; server validates active organization. Public WordPress accounts are *not* assumed to be the same identity domain; broker login handoff uses an explicit auth plan and verified redirect allowlist.
@@ -177,7 +177,7 @@ Agent safeguards: prompt-injection handling, untrusted web text as data only, no
 ## 13. Pending architectural decisions
 - WordPress hosting (IONOS VPS or alternative), backup provider and restoration objective.
 - Production WordPress theme (Astra proposed), allowed plugin list, directory data contract and editorial ownership.
-- Exact commercialKonnect.ca DNS and app subdomain; chosen broker SSO route.
+- DNS/TLS and apex-to-www redirect for https://www.commercialkonnect.ca, plus the app subdomain; chosen broker SSO route.
 - Canonical Mortgage Mix vs Atomic CRM schema, workspace key, how existing records migrate, and which app owns opportunities.
 - Business listing vendor/API terms, verified BC coverage, budget limits and consent/legal boundaries.
 - Slack workspaces, named on-call owners, deployment approvers and incident/security notification recipients.
@@ -185,3 +185,6 @@ Agent safeguards: prompt-injection handling, untrusted web text as data only, no
 
 ## 14. Change control
 Edit this handbook and the README together when scope/architecture changes. Open a PR for review; do not equate documentation merge with deployment. Include decision log, feature status evidence, screenshots/tests for UI changes, and proof that WordPress is the production public frontend and Lovable remains prototype-only.
+
+## 15. Public site canonical domain
+**Public production website:** https://www.commercialkonnect.ca (WordPress). Use this URL for all published public CTAs, SEO canonical references and the technical support service inventory. Treat https://commercialkonnect.ca as an alias that should permanently redirect to https://www.commercialkonnect.ca. Configure WordPress Address/Site Address, SSL, DNS, search sitemap and cache/CDN accordingly. Deployment and DNS configuration are separate tasks and are **not** performed by this documentation change. Lovable remains prototype-only; the authenticated Next.js app uses a separately approved hostname.
