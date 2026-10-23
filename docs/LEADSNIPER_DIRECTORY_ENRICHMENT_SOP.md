@@ -112,7 +112,7 @@ LeadSniperAI discovers companies showing *verifiable* expansion, new contracts, 
 1. **Discover and verify:** Yelp/GMB/Yellow Pages company → match domain/legal entity → Explee decision-maker enrichment → dated cited business signal.
 2. **Research and fit:** Match signal to financing education angle and broker's documented geography/mandate. Record uncertainty and citation.
 3. **Video brief:** Generate script with accurate observation, practical business benefit, neutral product education and a low-pressure question. Human reviews factual assertions, regulated claims, brand, and use of any AI avatar. Do not falsely suggest a personal relationship.
-4. **Produce:** Pilot a reusable presenter clip with personalized intro/text overlay or approved synthetic presenter. Compare HeyGen versus video-link tools already tracked (Dubb, Sendspark, Hippo); validate rights, event webhooks and all-in cost. Avoid spending on bespoke clips for unqualified contacts.
+4. **Produce with Hippo Video (preferred):** Use Hippo Video for the commercialKonnect video sales letter (VSL), reusable presenter recording, prospect-specific personalization, hosted video page and meeting CTA where supported by the selected plan. Validate API/SDK, merge fields, event webhooks, embedding/white-label rights and all-in cost before building automation. Avoid bespoke clips for unqualified contacts.
 5. **Distribute:** Embed a trackable landing-page/video link in an Explee email rather than a bulky attachment. Apply the SOP's explicit CASL basis, sender identity, unsubscribe, source-provider usage rights, suppression and human approval *before* importing contacts. Videos do not create a CASL exemption.
 6. **Follow up and qualify:** Explee reply classification and restrained permitted follow-up; owner confirms need, timing and introduction permission before broker routing.
 7. **Measure and learn:** Record message/video versions, company evidence, sends, video starts/completions where lawfully measured, positive replies, verified financing conversations, appointments held, broker acceptance and actual finance outcomes.
@@ -130,4 +130,8 @@ LeadSniperAI discovers companies showing *verifiable* expansion, new contracts, 
 ### Architecture handoff
 LeadSniperAI research → `financing_angle` (signal URL/date, product hypothesis, confidence) → `video_asset` (provider, template, script version, URL, approval) → Explee approved `outreach_campaign` / `message_event` → `reply_classification` → `intent_verification` → `appointment` → commercialKonnect Mission Control. Supabase is authoritative; per-tenant isolation, spend limits, provenance and approval audit required.
 
-**Implementation status:** documentation only; no automated video creation, email sends or Explee/HeyGen provider connection activated.
+**Implementation status:** documentation only; no automated video creation, email sends or Explee/Hippo Video provider connection activated.
+
+
+### Video-provider decision
+**Preferred vendor: Hippo Video (hippo.io as referenced by the business; verify the vendor's official product domain and API terms).** Do not assume HeyGen, Dubb or Sendspark is required for this experiment. Explee remains the candidate approved cold-email delivery/reply engine; Hippo Video owns video creation, hosting, personalization and video-engagement signals if available through its contracted API. LeadSniperAI provides verified research/personalization inputs and commercialKonnect manages qualified meetings. Integration is planned, not live.
