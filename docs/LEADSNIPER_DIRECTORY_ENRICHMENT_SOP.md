@@ -90,3 +90,44 @@ Start with at most 25 fully verified and individually approved BC prospect conta
 Track: eligible contacts, delivered emails, bounces, opt-outs, replies, meaningful positive replies, qualified owner conversations, held appointments, broker acceptance, contact-to-meeting rate, human review time, and cost per held qualified meeting. Maintain a manual/no-send control group where practical. **Success targets are proposed, not observed.**
 
 **Implementation status:** documented plan only. Campaigns, actual Explee keys, scheduling, automated replies and booking are **not activated**.
+
+
+## Proposed GTM experiment: signal-led personalized video outbound (October 2026)
+
+**Status:** Strategy hypothesis for the commercialKonnect founding-broker beta; not implemented or a proven conversion uplift.
+
+### Thesis
+LeadSniperAI discovers companies showing *verifiable* expansion, new contracts, capex, receivables, inventory or property activity. An analyst maps the observation to one or two **possible** financing instruments and creates a 45–60 second, factual personalized video. A CASL-reviewed Explee email carries a video link and offers a brief discovery call with a suitable commercial-finance broker. Never infer borrowing need, preapproval, distress or eligibility from a public signal.
+
+### Finance-product hypothesis matrix
+| Verified signal | Educational financing angle | Validate with owner |
+|---|---|---|
+| Large invoices or receivable growth | ABL against eligible receivables, factoring, or revolving working-capital facility | AR quality, concentration, debtor terms, existing liens |
+| New contracts / project backlog | Operating line of credit or purchase-order / contract finance where appropriate | Cash conversion cycle, margins, use of funds, lender restrictions |
+| Equipment expansion | Equipment lease/loan or asset-backed term facility | Asset type, vendor quote, cash flow and security |
+| Inventory expansion | Inventory-supported revolving credit subject to eligibility | Inventory quality, seasonality, reporting capacity |
+| Commercial premises acquisition or refinance | Commercial mortgage / bridge financing | Property, equity, cash flow, timeline |
+
+### Proposed process
+1. **Discover and verify:** Yelp/GMB/Yellow Pages company → match domain/legal entity → Explee decision-maker enrichment → dated cited business signal.
+2. **Research and fit:** Match signal to financing education angle and broker's documented geography/mandate. Record uncertainty and citation.
+3. **Video brief:** Generate script with accurate observation, practical business benefit, neutral product education and a low-pressure question. Human reviews factual assertions, regulated claims, brand, and use of any AI avatar. Do not falsely suggest a personal relationship.
+4. **Produce:** Pilot a reusable presenter clip with personalized intro/text overlay or approved synthetic presenter. Compare HeyGen versus video-link tools already tracked (Dubb, Sendspark, Hippo); validate rights, event webhooks and all-in cost. Avoid spending on bespoke clips for unqualified contacts.
+5. **Distribute:** Embed a trackable landing-page/video link in an Explee email rather than a bulky attachment. Apply the SOP's explicit CASL basis, sender identity, unsubscribe, source-provider usage rights, suppression and human approval *before* importing contacts. Videos do not create a CASL exemption.
+6. **Follow up and qualify:** Explee reply classification and restrained permitted follow-up; owner confirms need, timing and introduction permission before broker routing.
+7. **Measure and learn:** Record message/video versions, company evidence, sends, video starts/completions where lawfully measured, positive replies, verified financing conversations, appointments held, broker acceptance and actual finance outcomes.
+
+### 45–60 second sample script (illustrative; use only when signal is verified)
+“Hi [First name]. I saw [Company] announced [verified expansion/activity] in [source/date]. Businesses undertaking projects like this sometimes consider an operating line of credit for timing gaps, or asset-based lending where eligible receivables or inventory support financing. Neither option is automatically appropriate—it depends on your cash cycle and existing facilities. At commercialKonnect, we connect owners with commercial-finance brokers who can help assess the alternatives. Would a 15-minute conversation about your plans be useful?”
+
+### Cohort experiment and decision rules
+- Run a randomized A/B comparison on **eligible, approved recipients**: (A) tailored plain-text email and (B) same core angle with a personalized video link. Hold audience, sending identity, compliance screening and cadence comparable.
+- Start with no more than 25 fully reviewed BC contacts before scaling; proposed five-broker / 30-day founding cohort; up to US$1,500 **ceiling**, released in stages, not an automatic campaign spend.
+- Primary measure: **cost per broker-accepted, qualified financing meeting held**. Secondary: incremental positive-reply and meeting lift, video production cost/time, deliverability, complaints and unsubscribe rate.
+- Treat vendor claims like US$9 per hot lead as marketing benchmarks, **not** forecasts of qualified Canadian finance leads or meetings. No guaranteed appointment volume.
+- Stop/pause if sender compliance, source rights, unsubscribes, erroneous personalization or unauthorized financing claims fail review.
+
+### Architecture handoff
+LeadSniperAI research → `financing_angle` (signal URL/date, product hypothesis, confidence) → `video_asset` (provider, template, script version, URL, approval) → Explee approved `outreach_campaign` / `message_event` → `reply_classification` → `intent_verification` → `appointment` → commercialKonnect Mission Control. Supabase is authoritative; per-tenant isolation, spend limits, provenance and approval audit required.
+
+**Implementation status:** documentation only; no automated video creation, email sends or Explee/HeyGen provider connection activated.
