@@ -48,3 +48,45 @@ LeadSniperAI owns discovery/enrichment orchestration; Supabase holds authoritati
 - [KonstructionComOS repository](https://github.com/Ksdeng1559/KonstructionComOS)
 
 **Status:** Proposed operating specification; not a claim of implemented connectors or production-compliant data licenses.
+
+## Automated cold-email outreach and appointment workflow — planned extension (2026-10-22)
+
+### Objective and provider boundary
+Use Explee AutoGTM as a candidate campaign and inbox engine for **authorized, human-approved** B2B outreach to decision-makers discovered from Yelp, Google Business Profile/Places, and Yellow Pages, after identity resolution, enrichment and growth-signal research. LeadSniperAI orchestrates eligibility, personalized briefs, suppressions and attribution; Explee handles campaign delivery only when controls and contracts have been verified. Explee is not currently connected; no emails are sent by this document.
+
+### Explee documented API surfaces (verify schema before coding)
+- `GET /public/api/v1/autogtm/projects`: identify correct project and project-level settings.
+- `GET /public/api/v1/autogtm/campaigns` and `GET /public/api/v1/autogtm/campaigns/{campaign_id}`: inspect existing campaigns, targets, offer, email/follow-up instructions and schedule.
+- `POST /public/api/v1/autogtm/campaigns`: create discovery campaign, initially in `discovery` state; inspect and edit before `POST .../campaigns/{campaign_id}/start`.
+- `POST /public/api/v1/autogtm/campaigns/import`: import user-sourced leads (up to 30,000) and receive async task ID. **Warning: imported campaigns may automatically send once live. Treat import as an irreversible activation risk; do not call it until all checks, approvals and project-level controls are validated.** Poll the import task as documented.
+- Campaign controls: budget patch, start/stop, campaign inbox and analytics endpoints; `POST .../campaigns/{campaign_id}/inbox/{person_id}/reply` replies within an established lead thread. Reconcile API fields and lifecycle to the live OpenAPI JSON before implementation; avoid invented payloads.
+- Documentation: https://api.explee.com/public/api/docs and https://api.explee.com/public/api/openapi.json.
+
+### Pre-launch compliance gate — mandatory
+1. Confirm permitted collection, retention and outreach use for each source platform and enrichment vendor; maintain the source contract and deletion rules. Public listing is not blanket consent.
+2. For each Canadian recipient, record documented CASL express consent or an applicable, reviewed implied-consent/exemption basis; record the precise facts, source, time and relationship to the recipient's business role. Published business emails do **not** automatically create consent. Record sender identity, postal address, required contact information and functional unsubscribe procedure; honour opt-outs within statutory timelines and suppress immediately in local operations.
+3. Verify PIPEDA/applicable provincial privacy obligations, data-sharing permissions and any cross-border transfer/service-provider terms. Validate broker/licensing and data-sharing authority separately from sending permission.
+4. Suppression and do-not-contact checks occur before campaign creation/import, before each scheduled send where provider permits, and immediately on replies. Stop/pause campaigns if Explee cannot enforce timely global suppression, sender requirements or approval controls.
+5. Human approves campaign target set, material personalization assertions, initial template, follow-ups, sending identity, schedule, daily cap, budget, and compliance evidence. Authorization is scoped by tenant + campaign + version, expiring on a material campaign change. **Default campaign state is draft/disabled; never auto-import into a live project.**
+
+### Personalization process
+- Select business based on dated and cited growth evidence, verified owner/company match and financing relevance. Assign one research angle only: expansion site, equipment, working-capital cycle, commercial-property acquisition/refinance, new contracts or construction capex.
+- Generate a short first message: accurate business reference → factual observation (optional) → relevant financing-conversation value → one low-friction question or meeting CTA. Do not claim approval, lender offer, financial distress, funding need, prequalification, endorsement or inside knowledge.
+- Create 1–2 restrained follow-ups **only when legally permitted**, with new relevant value; no fabricated urgency, deceptive subjects or pressure. Reply and opt-out must stop follow-ups automatically; timeout/uncertain state triggers a safe stop.
+- Parameterize by `client.brain.md`, broker geography, permitted products, capacity and calendar. Log model/prompt version, citations, copy revision and approval identity.
+
+### Reply classification and booking
+Classify inbound replies: `interested`, `later`, `not_relevant`, `wrong_contact`, `opt_out`, `question`, `out_of_office`, `delivery_error`, `human_review`. Use a deterministic suppression rule for opt-out; do not treat AI sentiment as verified borrowing intent. Positive replies become **owner-interest-review** tasks requiring a person to confirm role, stated need, timing, financing type, location and permission for broker introduction.
+- Draft a human-approved response; offer broker calendar availability from connected calendar only when actually checked. Create or confirm an appointment only after recipient agreement. Record meeting ID, time zone, attendee consent/identity, owning broker, provenance and no-show or reschedule events.
+- Bookable statuses: `positive_reply` → `intent_verification_pending` → `interest_confirmed` → `intro_permission_received` → `broker_match_approved` → `appointment_proposed` → `appointment_confirmed` → `meeting_held` → `accepted_or_nurture`. A positive reply alone cannot be sold or routed as qualified borrower interest.
+- Forward the vetted intelligence card to commercialKonnect Mission Control; Chief of Staff surfaces approved next actions, not autonomous sends or unconsented broker transfers.
+
+### Campaign operating model and engineering contracts
+New Supabase entities (tenant-isolated): `outreach_campaign` (provider/project/campaign IDs, approved version, settings, budget, sending status); `campaign_membership` (contact, eligibility basis, source, import/sent status); `message_event` (provider message/thread IDs, direction, timestamps, reply label); `outreach_approval` (reviewer, checks, evidence, expiration); `suppression` (global scoped constraints, reason, timestamp); `appointment` (confirmed participants, broker, calendar reference, attendance); `outreach_outcome` (conversation/held meeting/accepted lead/revenue attribution). Use RLS, encryption/least privilege, retention limits, deterministic idempotency and audited webhooks/polling.
+Proposed adapters: `draftSequence`, `verifyComplianceBasis`, `approveCampaign`, `stageCampaign`, `activateCampaign`, `pauseCampaign`, `syncReplies`, `classifyReply`, `approveReply`, `confirmIntent`, `checkCalendarSlots`, `bookAppointment`, `recordOutcome`. Separate Explee protocol implementations from canonical data schema, to preserve future Mystrika fallback. Resolve campaign timeout by listing campaigns before retry to avoid duplicate creates.
+
+### Pilot, performance and release gates
+Start with at most 25 fully verified and individually approved BC prospect contacts in a controlled project; **do not bulk-import before proving safety**. Gate 1: provider API/lifecycle verified by sandbox/manual checks; Gate 2: legal and privacy review approved; Gate 3: suppression/unsubscribe/identity/reply-stop tests pass; Gate 4: zero unattended sends and budget cap verified; Gate 5: calendar-confirmed meetings and broker authorization traced end-to-end. Then scale to 200 business prospects using per-tenant spend limits and a kill switch.
+Track: eligible contacts, delivered emails, bounces, opt-outs, replies, meaningful positive replies, qualified owner conversations, held appointments, broker acceptance, contact-to-meeting rate, human review time, and cost per held qualified meeting. Maintain a manual/no-send control group where practical. **Success targets are proposed, not observed.**
+
+**Implementation status:** documented plan only. Campaigns, actual Explee keys, scheduling, automated replies and booking are **not activated**.
