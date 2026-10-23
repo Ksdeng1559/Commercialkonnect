@@ -1,7 +1,7 @@
 # Commercial & Business Financing Video Sales Workflow
 
 **Status:** GTM playbook and product requirements; not yet implemented in the application.  
-**Product:** KonstructionComOS / ClearConnect  
+**Product:** commercialKonnect (broker workflow) + LeadSniperAI (discovery); repository: KonstructionComOS  
 **Launch market:** British Columbia  
 **Audience:** Licensed commercial mortgage and business-financing brokers, financing advisors, borrowers/developers/business owners, and referral partners.
 
@@ -93,15 +93,63 @@ Normalize provider events and keep business logic in the application/CRM system 
 
 Store only what is needed. Never put account numbers, personal identifiers, credit documents, or confidential borrower details in scripts, tracking URLs, analytics payloads, or general-purpose event logs. Use tenant isolation, least-privilege access, retention controls, audit logging, consent/contact suppression, and secure document handling. Apply CASL and applicable privacy requirements before outbound communication; obtain appropriate legal/compliance review for regulated workflows.
 
-## Provider rollout
+## Hippo Video-first outbound GTM architecture (October 2026)
 
-- **Initial validation:** Use the current Dubb + Zapier + Convex + Slack pilot pattern for authentic one-to-one broker videos, recipient-specific tracking, and tested event capture. Keep opportunity and workflow logic in the CRM. Confirm provider event payloads before relying on them.
-- **Scale:** Consider Sendspark for API-driven personalization only after a specific audience, script, and offer show qualified-meeting value and the additional cost is justified.
-- **Embedded product:** Assess Hippo Video SDK/API for a native KonstructionComOS recorder, branded prospect page, CTA, and engagement webhooks after written confirmation of SaaS embedding, multi-tenant use, white-label/custom-domain rights, data processing, event analytics, security, support, and total cost.
-- **Provider portability:** Use a provider-neutral video/event model so a vendor change does not change qualification, consent, attribution, or pipeline rules.
+**Selected pilot video provider: [Hippo Video](https://www.hippovideo.io/products/video-sdk/how-video-api-works.html).** It replaces the previous Dubb/Sendspark-first rollout assumption for this pilot. Explee AutoGTM remains the candidate cold-email delivery, sequencing, and reply platform. The decision selects a provider for evaluation, not a production-integrated service.
 
-No provider is selected as the permanent platform by this playbook. Do not claim a conversion lift before measuring it.
+**LeadSniperAI discovery → source/license checks → business identity + contact enrichment → cited growth signal → financing-angle selection → human-approved script → Hippo Video template/personalization → unique hosted video and thumbnail URL → Explee approved campaign → reply or video/CTA signal → intent verification → broker-approved appointment → commercialKonnect Mission Control.** Supabase remains the authoritative audit and state store.
+
+### Confirmed documentation and technical implementation contract
+
+- [Hippo Video Video SDK/API overview](https://www.hippovideo.io/products/video-sdk/how-video-api-works.html) describes video SDK, capture/import and video sharing workflows.
+- [Personalized videos API documentation](https://help.hippovideo.io/support/solutions/articles/19000095986-generate-personalized-videos-through-api) describes `POST https://www.hippovideo.io/api/v1/me/video/personalize`, a master video ID, authentication and merge fields; personalized share, embed and thumbnail URLs are expected outputs. **Validate the current authenticated schema and response in a test account before coding.**
+- [Bulk personalization and tracking documentation](https://help.hippovideo.io/support/solutions/articles/19000099793-bulk-video-personalization-and-tracking-api) describes batch personalization and recipient tracking; confirm plan entitlements, quotas, batch behavior and costs.
+- Video analytics and CTA events are candidates for webhook/event ingestion; verify webhook authentication, exact event schema, replay protection, and delivery guarantees with a test payload.
+- Documented name/company merge fields do **not** prove Hippo can generate novel spoken financing commentary for every prospect. **Pilot approach:** record four master educational VSLs; add recipient/company personalization, verified signal text or landing-page overlay only where supported. Do not promise synthetic voice, lip-sync or full scene regeneration.
+- Explee integration is an explicit handoff of the Hippo share/thumbnail URL into an approved campaign template. There is no claimed native Hippo–Explee connector. Confirm links, click tracking and recipient attribution with an actual test send.
+
+### Master video library and financing hypothesis
+
+| Video template | Suitable verified trigger | Illustrative education angle |
+|---|---|---|
+| Asset-based lending / receivables | Publicly disclosed large contracts or growth requiring a working-capital conversation | Eligible AR/inventory may support revolving finance, subject to underwriting |
+| Operating line of credit | Verifiable hiring, new orders, seasonal expansion | A LOC may help bridge cash-cycle timing; suitability unverified |
+| Equipment financing | Verified facility/equipment investment | Loan or lease could spread capex over useful life |
+| Commercial property finance | Verified acquisition, expansion site or construction signal | Mortgage/bridge/construction finance may be worth assessing |
+
+A public event is not evidence of borrower interest, creditworthiness, available collateral or loan approval. Each video must distinguish factual observation, *hypothesis*, and information requiring owner confirmation.
+
+### Personalized 45–60 second video template
+
+> Hi [First name]. I saw that [Company] [verified event, dated source]. When companies undertake projects like this, it's sometimes useful to compare [financing product A] and [product B] depending on their cash flow, existing borrowing and plans. For instance, eligible receivables can sometimes support asset-based lending, while an operating line of credit may help manage shorter-term needs. Those options might not fit your situation. At commercialKonnect, we connect business owners with commercial-finance brokers to review the alternatives. Would a short conversation be useful?
+
+Use one or two products genuinely relevant to the cited event; do not assert financial distress or invent private information.
+
+### Engineering deliverables and data contracts
+
+1. **Template manager:** map `video_template_id` to financing topic, audience, duration, compliance-approved script version and Hippo master-video ID.
+2. **Personalization job:** generate validated merge-field payload from approved public business facts, issue an idempotent Hippo API request, persist personalized share/thumbnail/embed URLs, provider ID and costs; do not place private borrower details in the URL.
+3. **Campaign adapter:** expose `ready_for_outreach` only when verified lead identity, source rights, CASL basis, suppression, script approval and sender details pass; insert personalized video URL into Explee drafts. Block import/launch by default; importing leads may start sending in certain Explee workflows.
+4. **Event ingestion:** verify webhook signatures/authentication, deduplicate event IDs, link by tenant/campaign/contact/video, and record video_start, supported watch threshold, CTA click and reply separately. Views are engagement—not financing intent.
+5. **Appointment flow:** after a positive reply, a human confirms decision-maker authority, actual financing interest, intended product/use of funds, timeframe and explicit broker-introduction permission. Calendar booking is verified; owner data transferred to broker only under documented authority.
+6. **Administration:** server-only credentials, tenant isolation (RLS), budget ceilings, retry/backoff, API version tracking, provider feature flags, unsubscribe kill-switch, retention and incident logs.
+
+### Founding-broker beta experiment
+
+Proposed: **5 brokers, 30 days, up to US$1,500 outreach spend ceiling** (not committed or automatically spent). Start with **25 individually verified, CASL-reviewed recipients**. Run two matched arms: (A) personalized email without video; (B) same financing hypothesis plus Hippo personalized video link. Expand only after delivery, consent, suppression and webhook tests pass. Record video production/API costs separately from Explee email costs.
+
+**Primary KPI:** cost per *broker-accepted, qualified appointment held*. Also measure contact-to-positive-reply, verified finance interest, meeting attendance, compliance incidents, bounce/unsubscribe rates, Hippo CTA response, and incremental video conversion lift. Explee public hot-lead/meeting figures are vendor marketing benchmarks, **not projected Canadian commercial finance leads**.
+
+### Launch blockers and vendor questions
+
+- Confirm Hippo SDK/API feature access, personalization and batch rate limits, fee schedule, recording/storage/view charges, webhook payloads, and data-processing terms.
+- Confirm SaaS/multi-tenant redistribution, brand/custom domain, embedding, ownership and use of video-generated recipient data.
+- Confirm whether personalization beyond ordinary text merge fields is available under the contracted tier; manually sample 10 outputs to prevent erroneous company claims.
+- Confirm Explee sender domains/identification, unsubscribe handling, scheduling behavior, import activation semantics and compliance safeguards.
+- Conduct CASL/PIPEDA and provincial privacy review, plus review of regulated commercial finance communications, before any outbound emails.
+
+**Provider policy:** Hippo Video is the chosen beta candidate for video production, personalization, hosting and event tracking. Explee is the proposed email engine. Dubb/Sendspark/HeyGen are not dependencies for this pilot. Keep a provider-neutral interface if later migration is warranted.
 
 ## Implementation boundary
 
-This document defines a GTM workflow and product requirements. It does **not** mean video recording, tracking, CRM event ingestion, automated follow-up, broker compliance review, or Hippo Video integration is implemented. Any application work must follow AGENTS.md, docs/PRD.md, and docs/ARCHITECTURE.md; keep secrets server-side and do not introduce sensitive borrower data into synthetic/demo records.
+This document defines a GTM workflow and product requirements. It does **not** mean Hippo Video personalization, video-event webhooks, Explee email sending, CRM integration, appointment automation, or broker compliance review is implemented. Any application work must follow AGENTS.md, docs/PRD.md, and docs/ARCHITECTURE.md; keep secrets server-side and do not introduce sensitive borrower data into synthetic/demo records.
