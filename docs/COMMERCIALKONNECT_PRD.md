@@ -82,3 +82,49 @@ Organic traffic; attributed campaign visits; paid spend; cost per verified/quali
 ## 14. Explicit decisions and open validation
 **Decision:** Astra Free + Gutenberg for public SEO pages; React/shadcn custom Gutenberg blocks for interactive tools; Next.js/shadcn for broker app. This replaces Divi in the executive plan.
 **Validation:** Explee and Ryze external write APIs, multi-tenant account model, WP MCP Ultimate custom field/block support, Clerk identity integration, Atomic CRM sync contract, legal review of Canadian outreach/lead-sharing and advertising.
+
+
+## 15. Component PRD — Business Financing Rate Comparison Guide (P0)
+**Component ID:** CK-RATE-001. **Public label:** Compare Business Financing Rates & Options in Canada. **Owner:** Public acquisition/conversion. **Status:** Approved for implementation planning; no lender rates published until verified.
+
+### Problem and outcome
+Business owners search for rates but commercial finance pricing is not consistently comparable across term loans, LOCs, mortgages, equipment finance, ABL, factoring, construction finance, government-backed products and merchant cash advances. Provide transparent pricing education and a structured route to a suitable broker, without implying guaranteed lender quotes.
+
+**Success:** visitors understand available financing categories and costs, then start a qualified assessment. Track organic landings, guide engagement, product-filter usage, comparison-to-assessment CTR, completed assessments, broker-accepted conversations, and freshness of displayed rate data.
+
+### P0 user experience
+1. Indexable landing page `/business-loan-rates-canada/` with editorial explanations, publication/update dates, pricing caveats and methodology.
+2. React + shadcn/ui Gutenberg block `commercialkonnect/rate-comparison` with accessible controls: purpose, requested amount, province, business age, annual revenue band, collateral availability and optional property type.
+3. Show eligible **product categories**, not purported personalized lender approvals. Each result has product type, pricing basis (APR/annual interest, benchmark + spread, factor, discount fee or quote required), fees, repayment cadence, eligibility considerations, verified date and source. Do not sort unlike pricing types by a single nominal number.
+4. Contextual CTA **Check Eligibility / Request a Financing Comparison** launches the existing assessment wizard, carrying product selections and trusted campaign attribution.
+5. Where no current verified rate exists, display **Custom quote required**. No fabricated rate bands, guaranteed approvals, or lender logos without authorization.
+6. Mobile-first, keyboard navigable, screen-reader labels, useful empty/loading/error states; preserve usable content if JavaScript fails.
+
+### P0 data and editorial contract
+Supabase tables or equivalent: `lenders` (internal/public visibility controls), `financing_product_offers`, `rate_observations`, `rate_sources`, `rate_review_events`, `comparison_events`. Key fields: product category, jurisdiction, amount/term bounds, rate value/range **only when documented**, rate unit and structure, benchmark, spread, effective date, expiration/review due, fees, assumptions, eligibility, source URL/document reference, verification status, last verified, publication permission, reviewer and audit timestamps. A public offer must have source, reviewed status and applicable conditions. Hide stale or withdrawn observations pending re-verification. Keep non-public lender identity concealed unless authorized for publication; clearly mark sponsored listings.
+
+### P0 technical design
+- Implement in `commercialkonnect-components` using Gutenberg `block.json`, React and scoped shadcn/Tailwind styling.
+- Render indexable educational copy and comparison methodology in native WordPress/Gutenberg or server-rendered HTML; hydrate interactive filters progressively.
+- Read rate/product data from a **public, sanitized, cacheable API**; never expose Supabase privileged credentials, internal lender terms or broker-only data.
+- Apply product suitability filters with documented deterministic rules; do not claim credit underwriting or personalized approvals.
+- Use secure cross-component state handoff to the assessment wizard; server validates attribution and broker ownership.
+- Provide admin rate-entry/review process with explicit publish approval, source traceability and scheduled freshness checks. Automated scraping alone never authorizes publication.
+
+### P0 acceptance tests
+- With no verified rate, the UI displays “Custom quote required,” never an invented estimate.
+- Unlike pricing structures are labeled and not directly ranked as equivalent APR.
+- An expired/withdrawn rate is excluded from public results; updated rate shows source, assumptions and verified date.
+- A visitor can filter products and launch an assessment without losing financing context or validated campaign attribution.
+- The guide is usable on mobile, keyboard accessible and does not block indexation of core explanatory text.
+- Public API cannot disclose private lender records, service-role secrets or other brokers' data.
+- Editorial reviewer can approve, reject and audit an offer before publication.
+
+### P1 extensions
+Verified lender-specific comparison where contracts permit; total borrowing-cost/payment calculator with disclosed assumptions; product-specific SEO guides (`/commercial-mortgage-rates-canada/`, `/business-line-of-credit-rates/`, `/equipment-financing-rates/`, `/construction-financing-rates/`); rate change history; benchmark reference feeds; admin alerts; opt-in saved comparisons. Do not present fee/factor products as APR without a sound, disclosed calculation methodology.
+
+### Compliance and boundaries
+Canadian financial advertising, mortgage brokerage licensing, provincial requirements, privacy/CASL, consent for referral/marketing and sponsored placement disclosures require review. Display an educational-information disclaimer, not a promise of funding. Rate feeds are **not assumed available**: lender/API agreements, rate usage rights and update cadence are dependencies to validate.
+
+### Build order
+**Sprint 1:** Gutenberg page + static, source-reviewed category comparison and CTA (works before live rate feeds). **Sprint 2:** React filtering block, sanitized API, Supabase rate schema and reviewer workflow. **Sprint 3:** Assessment handoff, attribution analytics, QA and first validated rate observations. **Later:** calculators and lender-specific live comparisons.
