@@ -32,3 +32,6 @@ Implement **Clerk Organizations + verified server-side org mapping + complete Su
 - Run typecheck/lint/build/tests where available. Do not claim unexecuted checks pass.
 - Never log or commit secrets/PII. CASL/PIPEDA and lending/security obligations require explicit review.
 - End each task with changes, test evidence, limitations and exact next step.
+
+## Engineering standard
+Follow [`docs/ENGINEERING_STANDARD.md`](docs/ENGINEERING_STANDARD.md) for every change. Apply Ponytail-inspired reuse, simplicity, narrow PR scope and evidence-based verification without sacrificing security or complete functionality. Installing Ponytail is optional; do not assume its hooks or audits ran.
