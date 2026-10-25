@@ -365,3 +365,63 @@ Report anonymous-to-assessment, assessment completion, results-to-opt-in, speed-
 8. Dashboards distinguish organic/paid/AIO/outbound, assessed vs verified vs sold leads, money collected vs revenue recognized, and accepted-lead economics.
 
 **Build order:** P0 public information and anonymous assessment → S2 consent/contact & verification queue → buy-box match and internal delivery → wallet/billing tests → conditional extensions/second-use schedule → automation and scaling. Integrate into existing Section 17 homepage; do not create a second inconsistent form or funnel.
+
+## 19. Homepage Financing Amount Slider & Adaptive Inquiry Wizard — 2026-10-24
+**Component:** CK-INTAKE-003 | **Status:** Approved UI/requirements specification; not yet implemented. **Supersedes:** Section 17's amount-band-only hero control where inconsistent. **Extends:** Section 18's anonymous progressive data capture, five-step qualification and contact/consent gate.
+
+### 19.1 Objective
+Make the financing amount selector the primary interactive homepage conversion element, using an **accessible slider synchronized with an editable currency amount field** and convenient tap-to-select presets. The visitor can explore categories before disclosing identity. On Continue, open the existing conditional financing assessment with selected type/amount/province preserved. This is a single intake journey, not a separate lead form.
+
+### 19.2 Hero layout and user flow
+- Left: “Business Financing. More Options. Better Decisions.”, concise borrower value proposition, links to financing/product/rate information.
+- Right: “Find Your Financing Options” selector card: **financing type**, large formatted **requested financing amount**, slider, editable currency field, 3–5 product-specific preset buttons, province selector, primary **Continue** button.
+- On mobile: show clear amount and selectable presets near thumb; controls at least 44px touch targets, keyboard-accessible, readable at 320px.
+- Flow: `Homepage or SEO/rate guide → financing type + amount slider + province → Continue → anonymous conditional assessment → preliminary financing category results → optional personalized-comparison / broker-introduction contact + purpose-specific consent → prompt verification call → broker buy-box match → permitted delivery and CRM`.
+- Public guides, comparisons, and source-verified indicative rates remain ungated. Moving slider or viewing preliminary results does **not** itself create a saleable financing lead.
+
+### 19.3 Configurable initial slider bands (CAD; not lender eligibility criteria)
+| Financing product | Initial range | Example presets | Step design |
+|---|---|---|---|
+| Business loans / working capital | $25,000–$1,000,000 | $50K / $100K / $250K / $500K | $5K then $25K as magnitude rises |
+| Business lines of credit | $25,000–$2,000,000 | $50K / $100K / $250K / $1M | $5K–$25K by magnitude |
+| Equipment financing | $25,000–$5,000,000 | $50K / $250K / $500K / $1M | $5K–$50K by magnitude |
+| Commercial mortgages | $250,000–$25,000,000 | $500K / $1M / $5M / $10M | $25K–$250K by magnitude |
+| Construction & development | $500,000–$50,000,000 | $1M / $5M / $10M / $20M | $50K–$500K by magnitude |
+| Asset-based lending | $100,000–$20,000,000 | $250K / $500K / $1M / $5M | $25K–$250K by magnitude |
+
+**Product taxonomy:** Maintain stable product IDs distinct from labels; “Other / Not sure” shows a broad amount input and educational guidance rather than forcing an incorrect category. Ranges, preset values, currency format and validation messages are administrative configuration, not hardcoded lender rules. Slider range is for usability only: **if someone needs an amount outside the range, allow manual valid CAD entry and flag it for review instead of silently clamping or rejecting qualified demand.**
+
+### 19.4 Interaction and validation rules
+1. Keep slider, preset buttons, amount field and formatted display in two-way synchronization; updates never change another field unexpectedly.
+2. Store amounts as integer CAD or minor units, not floating-point currency; locale-format the display. Accept reasonable pasted formats (e.g. $1,250,000), reject non-numeric/negative/zero, clarify unusually large amounts, and preserve exact entered amounts.
+3. A slider may use a **piecewise/logarithmic mapped position** for large ranges; ensure direction, thresholds and announced value remain understandable. Add sensible increments, keyboard arrow/home/end handling and semantic labels; an ordinary native range with clear scale may be preferable for the MVP.
+4. Changing financing type updates allowed presets/ranges without erasing an intentionally entered out-of-range amount; show a transparent warning and permit the visitor to continue for manual review.
+5. Persist financing type, requested amount and province in a short-lived anonymous assessment session; server accepts only validated enums and normalized amount, uses opaque session ID/TTL and preserves trusted attribution. No PII in URL, analytics, ad pixels, search query or client logs.
+6. On Continue, route to assessment step 1 or prefilled next relevant step, avoiding asking financing type and amount a second time. Provide editable summary, back navigation, progress indicator, non-JS fallback and accessible errors.
+7. Explain that requested financing amount is exploratory and does not indicate borrowing eligibility, a rate quotation or lender approval.
+
+### 19.5 Adaptive assessment requirements
+Preserve Section 18's five-step borrower assessment, using conditional fields:
+- **Step 1:** purpose + exact requested amount (prefilled); project/property purpose only when relevant.
+- **Step 2:** industry, operating history/business type and province.
+- **Step 3:** revenue band, secured/unsecured preference and broad asset/property/equipment information as applicable; no SIN, precise bank records or upload in MVP.
+- **Step 4:** timeframe, readiness and optional current financing context.
+- **Step 5:** anonymous preliminary financing category comparison and trade-offs; no unsupported lender-specific personalized quote.
+**Optional contact gate:** “See options for my business” / “Have a financing professional contact me” → name, company, email, phone, callback preference + clearly disclosed sharing permission and separate marketing consent. Route only after contact and financing interest are verified, as required by the broker's buy-box and agreed quality definition.
+
+### 19.6 Engineering contract
+Implement as a reusable scoped **React/shadcn Gutenberg block** in `commercialkonnect-components`, compatible with **Astra Free + Gutenberg + WP MCP Ultimate** and the secure Supabase assessment endpoints. Keep public informational text indexable native/server-rendered HTML. Use product configuration from a versioned, auditable public-safe API or locally bundled validated config, not scraped live-rate values. Avoid third-party slider scripts unless approved. Respect tenant permissions, request idempotency, rate limiting, bot protection and audit trails. Atomic CRM receives verified permitted opportunities, not anonymous slider interactions.
+
+Analytics events: `financing_selector_viewed`, `financing_type_selected`, `amount_slider_changed` (aggregated/bucketed; avoid sensitive amounts), `amount_preset_selected`, `manual_amount_entered`, `selector_continue`, `assessment_started`, `preliminary_results_viewed`, `contact_submitted`, `verified_interest_confirmed`, `broker_accepted`. Avoid duplicate triggering and record content/campaign attribution separately.
+
+### 19.7 Acceptance tests / rollout gate
+- Slider, input, presets, currency display and product changes stay synchronized on desktop/mobile, keyboard and screen reader; no inadvertent loss of manual values.
+- A $12,000,000 commercial mortgage and a $75,000 business loan can both be entered precisely; out-of-range manual requests have a clear review state rather than silent truncation.
+- Selecting amount/province then continuing does not re-ask those fields, and attribution survives page transitions.
+- Anonymous visitor receives educational category results without surrendering contact details; only explicit opt-in creates an identifiable inquiry.
+- Contact/sharing and optional marketing permissions are independently captured, auditable and respected for routing, suppression and withdrawal.
+- Tests verify invalid numbers, browser back, reload/expiry, duplicate submissions, analytics privacy, edge-case financing types and display with JavaScript unavailable.
+- Cross-tenant isolation, secure server validation and broker-owner attribution remain enforced.
+- A lightweight A/B test can compare slider + presets versus simple amount input on **qualified completed inquiries**, not merely interaction rate.
+
+**Delivery:** P0 homepage reusable slider/control & secure prefill; P0 conditional assessment & free preliminary results; P0 optional consent/contact + prompt verification workflow; P1 advanced sliders and friction tests; P2 adaptive suggestions informed by actual accepted-lead quality. No claim of live implementation until coded, tested and deployed.
