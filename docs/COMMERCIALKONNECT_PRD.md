@@ -486,3 +486,78 @@ Acceptance tests:
 6. Responsive/accessible keyboard and mobile interaction; safe numeric formatting and no exposure of sensitive amounts to pixels or third-party tracking.
 
 **Delivery priority:** P1 after P0 slider/assessment/consent; first release uses user-entered hypothetical rates only. Verified lender rate feeds, comparison of complex variable-rate products, refinance penalties and more sophisticated net-present-value analysis are P2 subject to evidence and legal/product review.
+
+## 21. Canadian Financing Statistics & Consumer Education — 2026-10-24
+**Component:** CK-TRUST-001 | **Status:** approved content specification; not published. **Purpose:** frame the problem and why comparing financing options matters, without creating unsupported fear or broker-performance claims.
+
+### 21.1 Verified evidence and display rules
+**Source:** Innovation, Science and Economic Development Canada (ISED), *Credit Conditions Survey 2025*, survey of 1,812 Canadian small enterprises (1–99 employees), fielded January–March 2026 on 2025 activity: https://ised-isde.canada.ca/site/sme-research-statistics/en/survey-data-and-analysis/credit-conditions-survey/credit-conditions-survey-2025
+
+| Figure | Precise homepage claim | Population/denominator | Source table |
+|---|---|---|---|
+| **20%** | Small enterprises surveyed requested debt financing in 2025 | Surveyed small businesses | Table 1 |
+| **45%** | Working or operating capital was the primary intended use of debt financing | Businesses seeking debt financing; distribution of main intended uses | Table 5 |
+| **76%** | Collateral was required for debt financing in the 2025 survey | Overall debt-financing observations, as defined by ISED | Table 2 |
+
+**Caution:** A separate ISED longitudinal trends report rounds collateral prevalence to ~75%. Use **76%** only when explicitly citing the 2025 Credit Conditions Survey Table 2; do not mix sources as if the figures were identical. Survey samples, eligibility and intended use differ from commercial-mortgage-only borrowers. Do not imply these figures describe commercialKonnect customers, that a particular percentage was rejected, or that brokers reduce borrowing rates. The same survey reports a **97% full-or-partial approval rate for debt financing requests**, making an "80% rejected" message false.
+
+### 21.2 Homepage section and placement
+Immediately below borrower-first hero/slider, display compact 3-card block:
+- **Headline:** "Business Financing Isn't One-Size-Fits-All."
+- **20%** — "of surveyed Canadian small businesses requested debt financing in 2025."
+- **45%** — "of intended small-business debt financing was for working or operating capital."
+- **76%** — "of small-business debt financing involved collateral requirements."
+- **Transition:** "Different goals, security and repayment structures call for different financing approaches. Explore options based on what your business needs."
+- **CTA:** "Compare Financing Options" → existing financing comparison/assessment.
+
+Provide visible source attribution, survey year, accessible source link and a concise scope note ("Canadian small enterprises with 1–99 employees; figures use different denominators"). The number must be accurate but not dominate the hero or force visitors to read a statistical wall. On mobile use stacked cards.
+
+### 21.3 Supporting content and evidence lifecycle
+Create linked, human-reviewed articles on working capital, property-secured vs unsecured, lender fees/cost of borrowing, and why different specialist finance professionals matter. Maintain a verified claim record: claim_id, canonical source URL, table/line, survey population, denominator, period, last checked, legal/editor reviewer, allowed display surfaces and review_due. Re-review annual ISED updates and correct/remove stale or disputed statistics. Schema reflects visible page content; no invented performance case studies, unverifiable rankings or lender-specific savings.
+
+**Acceptance:** every statistic resolves to source methodology; tablet/mobile/accessibility checks; stats cannot be published without source and reviewer; click-through maintains legitimate campaign attribution; editorial tests block misinformation about rejection rates or broker-caused savings.
+
+## 22. Borrower-Facing Broker Discovery, Selection & Consented Matching — 2026-10-24
+**Component:** CK-MATCH-001 | **Status:** proposed P0/P1 matching and directory module; no verified broker inventory or production scheduling claimed. **Goal:** help business owners select an appropriately qualified professional rather than forcing a blind lead sale.
+
+### 22.1 Value proposition
+**Headline:** "Find the Right Financing Professional for Your Business."
+**Supporting copy:** "Explore verified professional profiles, compare financing specialties and request an introduction to someone whose experience matches your needs." Avoid "independent" unless independently confirmed for each provider, and avoid implying the highest-paying broker is best suited. Make clear that the directory includes participating professionals, not all providers in Canada.
+
+**Two expertise types:** commercial mortgage professionals for property-secured, land, construction, bridge and refinance transactions; business finance consultants for working capital, unsecured credit, equipment, receivables, leasing and acquisition funding. Specialists overlap; no universal licensing standard attaches to the term "business finance consultant." Verify actual regulated activities, provincial license/exemption, entity identities and permitted representations with competent review.
+
+### 22.2 Consumer journey
+`Homepage/product guide → slider + anonymous assessment → category guidance → preview 2–3 relevant professional profiles (if verified supply exists) → borrower selects preferred professional or requests assisted matching → explicit contact, introduction/lead-sharing scope & separate marketing consent → verification → broker notification and accepted referral → appointment → CRM outcome`.
+- Provide **Browse Professionals** and **Find a Financing Professional** navigation accessible without application or login. Filter by province, commercial/business product, property type/industry, transaction size eligibility and specialty.
+- Preview public, approved professional profiles without requiring personal details; avoid listing unverified participants or implying live availability. If matching candidates are not yet verified, present a clearly described manual matching request instead of fabricated cards.
+- Choice: borrower can **select a professional**, compare a small shortlist, or **request matching assistance**. Disclose when a lead may be shared with more than one recipient and ensure legal/consent review of timing and recipient categories.
+- A broker-attributed campaign retains contractual routing rights, but disclose when that limits provider choice; do not silently override borrower selection or transfer an exclusive lead without an authorized process.
+- Broker purchase/marketplace operations are internal and need not expose credits/pricing to borrowers. Sponsored placement is labeled and **is not** presented as a suitability score.
+
+### 22.3 Profile schema and evidence
+Public display (only with provider permission): professional and brokerage identity, verified licensing status in applicable province (and status last checked), product specialties, regions served, financing amount/transaction preferences if publishable, industries/property types handled, languages, consultation method, compensation/fees disclosure, firm website/contact method, verified claims and last-updated date. Never invent lender partnerships, completed deals, client savings, reviews or endorsements.
+
+**Matching rules:** deterministic filters for location, product expertise, permitted transaction size, broker buy-box, professional licensing status and buyer capacity → optional quality/relevance tie-breaker using verified evidence; show understandable matching rationale (“Works with BC commercial refinance enquiries”). Exclude stale/unverified profiles from "verified" results. Sponsored payments/credits never automatically trump eligibility. Record rule version, availability evidence, selection type (borrower_chosen / assisted / broker_originated), disclosure text, referral permission, buyer and matching audit.
+
+### 22.4 Required architecture and routing behavior
+- Reuse WordPress/Astra/Gutenberg directory/profile content and secure public-safe read API. Add verified professional search cards and filter UX; no private buy-box or lender contract terms in browser.
+- Supabase canonical entities (align existing actual schema): `professional_profiles`, `professional_credentials`, `professional_specialties`, `professional_availability`, `match_recommendations`, `borrower_preferences`, `introduction_requests`, `broker_assignment_events`, `consent_events`. Where possible map existing `broker_profiles` and `lead_assignments` rather than duplicating tables.
+- Connect opt-in introduction to Section 18's contact/verification funnel; unauthenticated profile browsing remains allowed; prevent user-side forgery of verified status, routing owner or selected recipient.
+- Leads delivered to Atomic CRM only after lawfully permitted sharing and interest verification, according to the order's defined qualification standard; product recommendation is not underwriting or credit approval.
+- Define manual administration / fallback route for no-match, license pending, paused buyer capacity, unknown applicant category and withdrawal of permission. Track SLA for live responses, with after-hours disclosure.
+
+### 22.5 Priority and acceptance
+**P0:** content section "Why Work With a Financing Professional?"; non-fictional broker/consultant benefits; verified profile schema and admin onboarding; optional manual matching CTA/consent, preserving existing application and broker attribution.
+**P1:** consumer browse/filter, verified professional profiles, shortlist and voluntary selection, deterministic eligibility match, explanation, appointment request and status.
+**P2:** availability scheduling, user feedback and trusted reviews with moderation, richer ranking, analytics-informed matching and opt-in follow-up.
+
+Acceptance:
+1. A visitor sees the difference between commercial mortgage broker and business finance consultant, associated competencies and appropriate fee/licensing disclosures.
+2. A visitor can browse only real, authorized profiles without surrendering contact data, compare professional specialties and see current credential-verification date.
+3. On selection, recipient/purpose disclosure and legal sharing consent are captured independently of marketing consent; consent withdrawal blocks further unpermitted distribution.
+4. Broker campaign ownership, borrower choice and exclusive/shared commercial terms reconcile through a transparent, audited routing policy (no silent resale).
+5. No verified candidate → honest assisted-matching fallback, never a fabricated profile or guaranteed callback.
+6. Backend rejects client-forged assignment/credentials; only intended approved recipients receive applicant data.
+7. Measure profile view → shortlist → contact request → verification → accepted meeting and borrower preference, plus post-referral complaints and compliance incidents.
+
+**North star:** qualified, borrower-consented professional introductions accepted by an eligible financial professional, with marketplace profitability measured separately.
