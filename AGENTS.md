@@ -37,3 +37,6 @@ Before claiming a feature is finished, run applicable `npm run typecheck`, `npm 
 
 ## Current baseline
 `src/app/page.tsx` is a demo dashboard using `src/lib/demo.ts`. Supabase schema is an initial outline only with RLS enabled but no tenant access policies. Clerk, live ingestion, billing, APIs and Lovable-to-SaaS navigation are not yet integrated.
+
+## Engineering simplicity and reuse (required)
+Before coding, follow [`docs/ENGINEERING_STANDARD.md`](docs/ENGINEERING_STANDARD.md): inspect existing implementations, reuse before adding dependencies or abstractions, deliver the smallest complete vertical slice, and report actual verification. Ponytail is an optional coding-agent tool; security, tenant isolation, auditability and compliance are never optional.
