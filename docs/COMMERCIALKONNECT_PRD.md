@@ -425,3 +425,64 @@ Analytics events: `financing_selector_viewed`, `financing_type_selected`, `amoun
 - A lightweight A/B test can compare slider + presets versus simple amount input on **qualified completed inquiries**, not merely interaction rate.
 
 **Delivery:** P0 homepage reusable slider/control & secure prefill; P0 conditional assessment & free preliminary results; P0 optional consent/contact + prompt verification workflow; P1 advanced sliders and friction tests; P2 adaptive suggestions informed by actual accepted-lead quality. No claim of live implementation until coded, tested and deployed.
+
+## 20. Interest Savings & Financing Professional Value Proposition — 2026-10-24
+**Module:** CK-SAVINGS-001 | **Status:** Approved requirements for planning; no calculator implementation or actual lender rate feed is asserted. **Extends:** Sections 15–19.
+
+### 20.1 Purpose and positioning
+Add an educational **potential interest savings** message to the borrower-first homepage and a transparent rate/total-financing-cost calculator. Position commercialKonnect as a way to **compare different financing structures and understand borrowing costs**, not as a service guaranteeing cheaper credit. A commercial mortgage broker may specialize in property-secured lending and lender/terms comparison; a business finance consultant may specialize in operating-company debt, working capital, equipment and ABL. Professional qualifications and applicable licenses must be verified by product and province. Do not claim one profession universally offers better terms or savings.
+
+**Suggested headline:** "Could You Be Paying More Interest Than Necessary?"
+**Suggested subheadline:** "Different financing options can involve different rates, fees, collateral requirements and repayment terms. Explore how those differences could affect your borrowing costs."
+**CTA:** "Calculate Potential Interest Savings" → savings calculator; secondary "Compare Financing Options" → existing financing slider/assessment.
+
+### 20.2 Homepage placement and conversion logic
+Keep financing slider as primary hero conversion. Add a concise source-backed **Financing by the Numbers** context block and **Why Work With a Financing Professional?** explainer below the hero, where supported by verified Canadian evidence. Position a compact savings calculator near the secured-vs-unsecured comparison and before the "How It Works" or financing categories as responsive layout permits. Avoid competing simultaneous forms: calculator and slider must hand off to **the same** progressive assessment in Section 18, prefilled with financing amount, category and any user-authorized comparison assumptions. No contact gate to view educational savings.
+
+**Professional benefits to explain:** broader access to options depending on each professional's network; specialization by product/property/industry; comparison of repayment costs, rates, fees, guarantees and collateral; help with assembling financing documentation. Claim actual comparative lender availability only when verified. Disclose broker/consultant fees, referral interests, and paid placements where relevant.
+
+### 20.3 Calculator inputs and outputs
+| Input | Requirement |
+|---|---|
+| Principal | CAD amount; sync from financing slider; precise typed amount allowed |
+| Current/proposed rate | User-supplied annual nominal rate (%) and clearly labelled illustrative status |
+| Comparison rate | User-supplied annual nominal rate (%); **not** a promised available rate |
+| Structure | Interest-only or amortizing installment loan; do not mix conventions |
+| Amortization | Years/months; for amortizing case, specify payment frequency and compounding convention |
+| Comparison period | 1/3/5 years or entered interval not exceeding modeled term, as applicable |
+| Fees | Origination/broker/appraisal/legal/discharge/penalty where known; user-entered and optional |
+
+Results:
+1. Current vs comparator periodic payment and difference.
+2. Total interest paid **over the selected period**, accounting for amortizing balance declines or constant principal for interest-only.
+3. Outstanding principal at period end for **each** scenario, and net financing cost comparison that does not portray smaller payments from lengthening amortization as overall savings.
+4. Itemized fees and indicative net cost difference; separate ongoing payment savings from total interest differences; disclosure that refinancing fees, credit/security risk, tax implications and rate changes may alter outcomes.
+5. A clearly identified illustrative estimate, not a personalized lending decision or verified current lender offer. Handle equal or higher comparator rates as $0 savings or a potential additional cost, never force a positive result.
+
+**Correctness example:** $1,000,000 outstanding at 8.0% vs 7.0%, interest-only, identical $1M outstanding for one year → $80,000 vs $70,000 interest, **$10,000 illustrative annual interest difference** before fees. For a 5-year constant-balance interest-only comparison, this becomes $50,000 before costs; never reuse that number for a normal amortizing loan.
+
+### 20.4 Rate-source and claims controls
+- Published indicative rate ranges must have documented lender/source, dated verification, pricing basis, conditions, geographic applicability, fee disclosures and publication permission. Missing/stale information displays **"Custom quote required"** per CK-RATE-001.
+- Do not use government survey changes in average rates across years to imply a **broker-caused savings** amount. Government statistics can establish financing-market context only after source/denominator/date checks.
+- Never advertise "save up to X%" or "broker clients save $Y" without defensible comparable outcome data, assumptions and compliance approval.
+- Regulatory and financial advertising review is required for claims of rates, savings, product suitability, licensing and compensation.
+- Calculator may not suggest a specific eligible lender or quote until authorized rate products, eligibility checks and appropriate human oversight exist.
+
+### 20.5 Technical implementation
+- Implement a reusable `commercialkonnect/interest-savings-calculator` React/shadcn Gutenberg block in `commercialkonnect-components`, compatible with Astra Free + Gutenberg; provide indexable narrative, comparison methodology and worked example in native/server-rendered HTML.
+- Shared validated configuration and typed calculation library (integer cents where appropriate; deterministic payment schedule with explicit periodic rate convention). Unit-test rounding, payment schedules, residual balances, zero interest, 100%-rate edge cases, zero/negative amount rejection, fee inclusion and periods shorter than amortization.
+- Keep calculations in-browser for anonymous educational visitors; do **not** transmit comparison amounts/rates, personal finances or calculated profile information to ad pixels, generic analytics or third-party AI APIs. Events capture only non-sensitive engagement and permitted attribution.
+- Existing financing slider/wizard can accept validated prefills from calculator without altering broker ownership or creating a marketplace lead. User must knowingly proceed to the contact and permission gate; broker routing follows Section 18.
+
+### 20.6 Measurement and definition of done
+Track `savings_calculator_viewed`, `savings_calculator_completed`, `savings_to_assessment`, assessment completion and **broker-accepted verified enquiries**, segmented by permissible channel/product. Do not optimize solely for big displayed savings.
+
+Acceptance tests:
+1. Calculator reproduces the $1M interest-only example and accurate amortizing examples across specified rate and term conventions.
+2. Changing rates, payment frequency, term or fees updates both payment and total-period comparison correctly; when new rate is higher, the UI indicates additional cost.
+3. Explanatory text clarifies hypothetical rates, fees, principal balances, interest-only vs amortizing methods, and that lower payments do not necessarily mean lower total borrowing costs.
+4. Calculator results render without contact details; visitor can then transfer validated principal/product into the **existing** progressive assessment without repeating entered fields.
+5. Rate/marketing copy cannot publish unsupported numerical savings claims; finance reviewer signs off before release.
+6. Responsive/accessible keyboard and mobile interaction; safe numeric formatting and no exposure of sensitive amounts to pixels or third-party tracking.
+
+**Delivery priority:** P1 after P0 slider/assessment/consent; first release uses user-entered hypothetical rates only. Verified lender rate feeds, comparison of complex variable-rate products, refinance penalties and more sophisticated net-present-value analysis are P2 subject to evidence and legal/product review.
