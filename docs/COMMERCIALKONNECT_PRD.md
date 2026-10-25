@@ -128,3 +128,96 @@ Canadian financial advertising, mortgage brokerage licensing, provincial require
 
 ### Build order
 **Sprint 1:** Gutenberg page + static, source-reviewed category comparison and CTA (works before live rate feeds). **Sprint 2:** React filtering block, sanitized API, Supabase rate schema and reviewer workflow. **Sprint 3:** Assessment handoff, attribution analytics, QA and first validated rate observations. **Later:** calculators and lender-specific live comparisons.
+
+## 16. Content Creation & Acquisition Engine PRD (SEO + AEO/AIO + Paid) — 2026-10-24
+**Module:** CK-CONTENT-001 | **Status:** Approved for staged implementation planning; no content automation, ad platform write integration, ranking or lead volumes are claimed as delivered.
+
+### 16.1 Objective and boundaries
+Build an editorially reviewed, measurable borrower-acquisition system that generates **qualified financing conversations** for participating professionals. Preserve the dual origination model:
+- **Inbound demand capture:** organic search, AI-answer discovery, paid search, paid social, and permissioned partner referrals → financing assessment → contact/intent verification → buy-box matching → broker-attributed routing or marketplace.
+- **Proactive opportunity discovery:** LeadSniperAI and licensed/public business and project signals → evidence-backed intelligence → human confirmation of any financing need → broker prospecting workflow. A public business signal is **not** a financing lead.
+Maintain separate acquisition attribution and unit economics for inbound, outbound, paid and referrals. The content module does not supersede existing construction-intelligence, rate-comparison, consent, lead-ownership, or CRM specifications.
+
+### 16.2 Audiences, conversions and content intent
+| Audience | Intent | Primary CTA | Handoff |
+|---|---|---|---|
+| Business owner | Working capital, term loan, LOC, asset-based or equipment finance | Compare financing / check options | Conditional borrower assessment |
+| Commercial property owner/investor | Acquisition, refinance, secured financing | Explore commercial mortgage options | Property-specific assessment |
+| Developer | Land, servicing, construction/development capital | Discuss development financing | Project-stage assessment |
+| Contractor/manufacturer/transport operator | Vertical financing constraints | Compare relevant financing options | Industry-specific assessment |
+| Broker/lender/financial professional | Qualified demand, outbound intelligence, GTM services | Book demo / join professionals | Verified broker onboarding |
+
+All external pages must distinguish informational content from firm offers, approval decisions, regulated advice and paid/sponsored placements.
+
+### 16.3 Content taxonomy and initial information architecture
+Six **topic clusters** with a canonical pillar, linked supporting guides, FAQs, comparisons, and relevant forms/tools:
+1. `/business-financing/`: business loans, business LOC, working capital, secured vs unsecured, bank vs alternative lending.
+2. `/commercial-mortgages/`: commercial refinancing, eligibility, property-secured business financing and rates education.
+3. `/construction-financing/`: development finance, LTC vs LTV, land acquisition, multifamily and servicing.
+4. `/equipment-financing/` and `/asset-based-lending/`: equipment loans/leasing, receivables, factoring and collateral.
+5. `/industries/`: construction, manufacturing, transportation, commercial real estate; hospitality and other sectors after observed demand.
+6. `/compare-financing/`: financing comparison methodology, calculators and the existing `/business-loan-rates-canada/` component (CK-RATE-001).
+
+Reuse the approved **50-page plan** as the long-term information architecture, not a mandatory immediate publishing quota. BC-first; expand Alberta/Ontario when verified service coverage, useful original content and keyword evidence exist. Avoid duplicate city/province doorway pages; do not mass-generate unreviewed content. Keep the professional-facing `/brokers/` journey separate from borrower paths.
+
+### 16.4 Editorial workflow and requirements
+**Pipeline:** opportunity/keyword backlog → search intent & SERP analysis → source research → structured brief → AI-assisted draft → qualified human financial review → compliance/legal check when applicable → staging & technical QA → publish → indexation/performance review → refresh/archive.
+
+Each content brief records: canonical topic/URL, intended reader, intent and conversion target, keyword cluster and evidence of demand, original angle, primary/secondary sources, content owner/reviewer, required disclosures, related pages, schema candidate, planned review date, and status. Each published page includes byline or accountable reviewer, date reviewed, verifiable financing claims, visible assumptions, internal links, accessible CTA and source references as appropriate. Never invent lender rates, approval probabilities, government program conditions, testimonials, provider affiliations or lender availability. Sponsored rankings and conflicts are identified clearly.
+
+**State machine:** `idea → researched → brief_approved → drafted → financial_review → compliance_review (if required) → ready_to_publish → published → monitoring → refresh_due/archived`. Publishing or a change to regulated financial claims requires designated human approval. Provider APIs may assist research and drafting but do not independently validate facts.
+
+### 16.5 SEO and AI answer visibility (AEO/AIO)
+- Render substantive pillar/FAQ/comparison copy as indexable semantic WordPress/Gutenberg HTML with descriptive headings, canonical URLs, relevant internal links, XML sitemaps, crawl/index diagnostics, responsive performance and accessible markup.
+- Use appropriate validated schema types (e.g., Organization, BreadcrumbList, Article when eligible); structured data must reflect visible content and is not a guarantee of rich results or AI citations.
+- Give concise direct answers, explain financing terminology and underwriting limitations, show worked examples/calculator assumptions, and cite authoritative Canadian sources. Verify dates/rates before publication.
+- Measure Google Search Console queries, impressions, CTR, indexed pages, landing-page organic sessions and qualified conversions; measure observable AI referrer traffic and a **repeatable, sampled citation/prompt audit** with prompts, locale, date and result capture. Do not claim AI citation counts are comprehensive or guaranteed.
+- Maintain an internal link graph and refresh queue for stale rates, expired programs, broken citations and shifting lender terms.
+
+### 16.6 Paid acquisition and landing pages
+- Google Search: segmented campaigns for business finance, LOC, equipment, commercial mortgages and construction finance; product/intent-specific landing pages, conversion event testing and negatives; use Keyword Planner to validate volumes and CPCs.
+- Meta: educational/problem-based vertical campaigns for contractors, manufacturers, transport and property owners; avoid misleading approvals and prohibited sensitive financial targeting.
+- Consent-appropriate retargeting only after legal/platform review. No financing data or application contents are passed to pixels or ad tools.
+- Each landing page supports matching headline/ad intent, financing CTA, trust/explanation, relevant disclosures, mobile speed, form friction tests, and safe attribution.
+- **P0:** manual ads and offline import of campaign results permitted. **P1:** Ryze adapter only after audited proof of permissions, budget caps, approval workflow, account separation and APIs. Never automatically launch or spend without broker/platform approval.
+- Separate broker-funded campaigns from platform-funded acquisition; broker-originated enquiries follow existing contractual assignment rules and consent constraints.
+
+### 16.7 WordPress/content technology contract
+**Authoritative current stack is Astra Free + Gutenberg + WP MCP Ultimate;** the earlier Divi executive plan is superseded by section 2 of this PRD. Publishing automation should use supported standard WordPress actions and validate custom types, SEO metadata and Gutenberg blocks in a test draft before scaling. React/shadcn Gutenberg blocks (under `commercialkonnect-components`) power assessment, interactive comparisons and calculators, while native/server-rendered semantic content remains readable without JS. Supabase is the lead and attribution system of record; WordPress holds editorial content, not canonical leads or sensitive borrower applications.
+
+Proposed editorial records (WP metadata/custom post types or Supabase editorial schema after spike): `content_briefs`, `content_sources`, `content_reviews`, `content_links`, `content_refresh_jobs`, `content_experiments`. Persist stable `content_id`, `landing_page_id`, `canonical_url`, `topic_cluster`, `review_status`, `reviewed_at`, `claim_source`, `form_version`, and `attribution_id`. Use restricted audit logs and role approvals, not client-provided attribution ownership.
+
+### 16.8 Conversion, attribution and broker marketplace contract
+Carry `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, initial/referring content page, click ID when authorized, and trusted landing page ID through the assessment. Preserve **first known** and **last touch** separately; classify organic search, AI referral, paid search, paid social, partner referral, broker outbound and direct without rebranding campaign traffic as organic. Consented lead data routes via secure APIs into Supabase, validated qualification, CRM and permitted marketplace. A purchase-credit transaction may occur only on a defined, appropriately consented marketplace-eligible record. Keep discovered prospects, verified contacts and intent-confirmed financing leads as distinct states.
+
+Funnel: `content/ad impression → landing session → comparison engagement → assessment start → completed assessment → verified inquiry → qualified lead → broker acceptance → booked/held conversation → application → funded outcome`. Pipeline and revenue metrics must not confuse prepaid credit purchases with recognized fulfilled lead revenue.
+
+### 16.9 90-day delivery and gates
+| Window | Scope | Gate/evidence |
+|---|---|---|
+| Days 1–30 | Technical indexation/analytics baseline; taxonomy and template; first 2 pillar pages; rate comparison/assessment CTA; content brief, financial review and draft-publish test | Source-backed pages published after approval; attribution & consent verified end-to-end |
+| Days 31–60 | Core commercial mortgage, construction, equipment and secured/unsecured guides; initial comparison page; Google Search pilot and limited Meta creative tests; weekly AIO sampling | Cost per verified/accepted lead by channel; no leaked personal data or unapproved spending |
+| Days 61–90 | Up to ~24 substantial assets total as warranted by quality and team capacity; internal links and refresh monitoring; vertical optimization; broker marketplace attribution and acceptance loop | Evidence of accepted conversations, lead quality, channel contribution margin and repeat broker purchasing |
+
+**Budget hypothesis:** CAD $3,000/month for paid acquisition/creative testing ($1,500 Google Search, $750 Meta, $250 retargeting, $500 creative/experiments) subject to approvals and real cost evidence. Not a performance forecast; content and engineering costs excluded. Start smaller or pause channels if economics/compliance gates fail.
+
+### 16.10 Analytics, optimization and OODA Chief of Staff
+**North star remains:** qualified financing conversations per active broker per month. Segment by source, product, industry, province, broker and content cluster.
+Supporting metrics: non-branded organic impressions/clicks, pages indexed, organic-to-assessment conversion, AI-referred visits and sampled citations, paid CPC/CPL, verification/acceptance rate, cost per broker-accepted lead, show rate, appointment-to-funded lag, realized revenue per delivered lead, broker repurchase/retention and channel contribution margin. Instrument Google Search Console, privacy-safe web analytics, tagged campaign conversion, CRM status changes and marketplace wallet fulfillment.
+
+Run a weekly **Observe → Orient → Decide → Act** review: identify pages/campaigns with quality demand; analyze sourced conversion/lead acceptance and cost; recommend top-three improvements; require human approval for publication or ad spend changes; audit executed actions and outcomes.
+
+### 16.11 Acceptance criteria
+1. Content manager can create, review, stage and publish one Gutenberg financing pillar with source and editorial audit trail using validated WordPress MCP actions.
+2. At least one borrower landing page and one product comparison page render indexable, accessible content and hand off to a secure conditional financing assessment.
+3. First/last source, content URL, UTM/campaign and broker attribution survive the assessment with correct consent and tenant isolation; server rejects spoofed broker ownership.
+4. Broker-owned versus platform-owned lead routing is tested; lead qualification does not equate mere expansion signals to interest-confirmed financing requests.
+5. Analytics show separate organic, AI referral, paid, broker outbound and referral conversions, with qualified/accepted leads and conversion cost.
+6. Expired financial claims/rates are hidden or flagged for editorial review, and unverified rates render “Custom quote required” where applicable.
+7. Unapproved content publishing, ad spend, external outreach, cross-tenant access and sensitive-data transmission to ad platforms are blocked in tests.
+8. Review a 30/60/90-day channel performance report and expand only where verified quality, compliance and economics justify investment.
+
+### 16.12 Dependencies and non-goals
+Dependencies: existing financing assessment and rate comparison components; approved WordPress integration; verified research/SEO tools (DataForSEO, Exa/Tavily, OpenSEO are candidates, not guaranteed configured); privacy/legal review; broker coverage; genuine account access to Google Search Console and paid media; secure Supabase/Atomic CRM handoff.
+
+Non-goals for this phase: publishing 50 AI-generated pages without review, guaranteed ranking or AI-answer placement, unverified “live” rates, automated underwriting/approval, unconsented mass outreach, direct lender offers without authorization, or automatic ad campaign launches based on unvalidated vendor capabilities.
