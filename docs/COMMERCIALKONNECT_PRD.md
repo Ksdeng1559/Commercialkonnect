@@ -221,3 +221,73 @@ Run a weekly **Observe → Orient → Decide → Act** review: identify pages/ca
 Dependencies: existing financing assessment and rate comparison components; approved WordPress integration; verified research/SEO tools (DataForSEO, Exa/Tavily, OpenSEO are candidates, not guaranteed configured); privacy/legal review; broker coverage; genuine account access to Google Search Console and paid media; secure Supabase/Atomic CRM handoff.
 
 Non-goals for this phase: publishing 50 AI-generated pages without review, guaranteed ranking or AI-answer placement, unverified “live” rates, automated underwriting/approval, unconsented mass outreach, direct lender offers without authorization, or automatic ad campaign launches based on unvalidated vendor capabilities.
+
+## 17. Borrower-facing Homepage PRD — 2026-10-24
+**Component:** CK-HOME-001 | **Status:** Approved content and UX specification; implementation and publication pending.
+
+### 17.1 Audience, positioning and conversion
+The commercialKonnect.ca homepage is **borrower-first**: Canadian business owners, commercial property owners/investors, contractors and developers exploring financing. Financial professionals have a visible secondary path to `/brokers/`. The site educates and enables informed financing comparisons and introductions; it does not guarantee approval, lowest rates, lender participation or personalized quotes.
+
+**Recommended hero:** “Business Financing. More Options. Better Decisions.”
+**Support copy:** “Explore business loans, commercial mortgages, construction and equipment financing across Canada. Understand your options and request an introduction to a participating financing professional.”
+**Primary CTA:** “Compare Financing Options” → conditional assessment selector.
+**Secondary CTA:** “Explore Financing Solutions” → product hub.
+**Professional nav/CTA:** “For Financial Professionals” → `/brokers/`.
+
+Trust requirement: claims about partner counts, lead volumes, savings, rates, turnaround or license status cannot appear without documented verification.
+
+### 17.2 Homepage information hierarchy (desktop and mobile)
+| Order | Section and recommended headline | Content/UI | Action |
+|---|---|---|---|
+| 1 | Hero — Business Financing. More Options. Better Decisions. | Plain-language promise; prominent 3-input financing selector (type, amount, province); product strip | Continue to assessment |
+| 2 | Find the Right Financing for Your Business | Six cards: Business Loans & Working Capital, Business LOC, Commercial Mortgages, Construction & Development, Equipment, Asset-Based Lending | Individual pillar pages |
+| 3 | Compare Your Options in Three Simple Steps | Tell us your needs → explore suitable product categories → request professional introduction | Get Started |
+| 4 | More Than One Way to Finance Your Business | Bank, alternative, property-secured, unsecured, equipment/asset-backed options; clarify trade-offs | Secured vs Unsecured |
+| 5 | Compare Business Financing Rates & Options | Source-reviewed educational comparison table; method, caveats; link CK-RATE-001 | Compare Business Financing Rates |
+| 6 | Financing Solutions for Your Industry | Construction, manufacturing, transportation, commercial real estate; later hospitality/professional services | Industry hub |
+| 7 | Commercial Real Estate & Development Financing | Acquisition, refinance, multifamily, industrial, retail/mixed-use, land, construction, bridge | Commercial mortgage and construction assessments |
+| 8 | Guides & Resources | Five helpful guides: commercial mortgage rates, secured vs unsecured, borrowing capacity, construction financing, LOC vs term loan | Resources |
+| 9 | For Financial Professionals | Qualified inbound leads + proactive opportunity intelligence + Atomic CRM/AI Chief of Staff + credit marketplace, marked planned until live | Broker landing page/demo |
+| 10 | Final CTA and disclosure | “Ready to Explore Your Financing Options?”; realistic privacy, matching, licensing and approval caveats | Compare Financing Options |
+
+Recommended header: logo; Financing Solutions; Industries; Commercial Properties; Compare Financing; Resources; For Professionals; primary Compare Financing CTA. Footer: About, Contact, Privacy, Terms, Disclosures and financing category links. Mobile navigation and sticky form CTA must not obscure disclosures.
+
+### 17.3 Hero Financing Selector — P0
+Three inputs above the fold:
+- **Financing type:** Business loan / Commercial mortgage / Construction & development / Equipment financing / Other.
+- **Amount:** Under $50K / $50K–$250K / $250K–$1M / $1M–$5M / $5M+ (amount ranges configurable, not underwriting decisions).
+- **Province:** BC / Alberta / Ontario / Other Canadian provinces.
+
+On “Continue”, pass allowed selection data and trusted landing/campaign attribution to the financing assessment wizard in the current PRD. Keep referral/broker identity server-verified. Selector itself does not collect personally identifying or sensitive financial information, perform credit assessment, advertise approval or imply a lender quote. Provide accessible labels, error handling, back navigation and no-JS fallback.
+
+### 17.4 Six financing cards — P0
+Each card includes product name, one plain-language benefit, a qualification caveat when needed, and a unique canonical pillar URL. No generic “best rate” promises. Pillar destinations:
+`/business-financing/`, `/business-line-of-credit/`, `/commercial-mortgages/`, `/construction-financing/`, `/equipment-financing/`, `/asset-based-lending/`.
+Preserve existing URLs via mapping/redirects if a published URL differs; avoid duplicate competing canonicals.
+
+### 17.5 Comparison, resources and AIO — P0/P1
+Homepage should link prominently to `/business-loan-rates-canada/` CK-RATE-001 and compare secured/unsecured financing using a **product-category** table (purpose, typical collateral structure, pricing basis, trade-offs), not unverified current rate figures. “Custom quote required” applies where a rate is not verified and publishable. Resource cards link to source-reviewed substantive guides and show real review dates. The homepage targets broad branded and business/commercial finance intent; deeper keyword queries belong on product pillars. Proposed SEO title: “Business Loans & Commercial Mortgage Financing Canada | commercialKonnect”; proposed meta description: “Explore Canadian business loans, commercial mortgages, lines of credit, equipment and construction financing. Compare options and connect with financing professionals.” Validate SERP fit and length before launch. Use Organization/BreadcrumbList markup only when applicable and consistent with visible content. No fabricated FAQs or AI search ranking guarantees.
+
+### 17.6 Financial professional secondary funnel — P0
+Keep a compact below-the-fold module: “More Opportunities. Better Intelligence. Stronger Relationships.” Route to broker-facing subscription, inbound qualified leads, proactive opportunity intelligence, and demo pages. Differentiate **confirmed borrower inquiry** from **unverified expansion signal** and label proposed marketplace/Chief-of-Staff features as upcoming until deployed. Do not promote $500/month or lead-credit inventory as live without checkout, terms and available supply. Broker CTA and acquisition tracking remain separate from borrower lead attribution.
+
+### 17.7 WordPress implementation and content model
+Use **Astra Free + native Gutenberg + WP MCP Ultimate** as specified in this PRD (not the superseded Divi plan). Prefer reusable Gutenberg patterns for hero, card grids, steps, comparison, guides, broker module and final CTA. The interactive selector is a scoped React/shadcn `commercialkonnect-components` block, with static accessibility fallback. Core page text and comparison methodology must be present in semantic HTML for indexing; do not rely on client-only JS. WordPress hosts public copy and page metadata; conditional assessment submissions and related consent/attribution belong in protected Supabase APIs and Atomic CRM handoff, not public WordPress forms. Ensure mobile responsive layout, performance budgets and WCAG 2.2 AA target.
+
+### 17.8 Measurement and experiments
+Measure first/last-touch channel, hero selector engagement, assessment starts/completions, verified and broker-accepted leads, appointments, per-product and per-province conversion, cost per accepted inquiry, professional CTA-to-demo, and content engagement. Track organic, AI referral, paid, referral and broker-led traffic distinctly. Prioritize A/B testing hero headline, CTA label, selector friction and placement of secured/unsecured comparison **after** instrumentation and enough sample volume. Reject unconsented pixel transmission of financial inputs.
+
+### 17.9 Priority and acceptance criteria
+**P0 launch:** hero + selector; six financing cards; three-step explanation; secured/unsecured education; clear comparison link; final assessment CTA; separate professional path; legal disclosures; attribution, consent and mobile QA.
+**P1:** richer industry cards, commercial real estate module, verified guide collection, comparison/calculator blocks.
+**P2:** personalized content routing only with permitted data; verified customer proof; deeper interactive tools.
+Acceptance:
+1. Borrower identifies financing purpose in the first viewport on mobile and desktop and reaches relevant assessment in two actions or fewer.
+2. Selector carries selections through assessment securely without allowing client-side broker-ownership spoofing; consent event is stored and tested.
+3. All six card destinations resolve or have intentional staged fallbacks, and links/canonicals are checked.
+4. Indexable semantic content and accessible nav/cards/selector work on mobile/desktop, keyboard and with JS unavailable.
+5. Financial claims, rate data, provider listings, testimonials and badges cannot publish without source/permission review.
+6. Distinct broker journey does not interfere with borrower conversion, lead routing or privacy.
+7. End-to-end test records content and acquisition source → assessment → verified lead → eligible broker routing, including error and duplicate cases.
+
+**Explicit non-goals:** auto-credit decisions, guaranteed rates/approvals, publishing fictional social proof, live lender pricing without verification, and claiming future SaaS/marketplace capabilities are already launched.
