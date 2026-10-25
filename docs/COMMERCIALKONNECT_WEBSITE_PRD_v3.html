@@ -1,0 +1,359 @@
+<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>commercialKonnect | Website PRD v3.0</title><style>
+:root{--ink:#15223a;--teal:#007d83;--gold:#c69440;--muted:#5c6b7a;--line:#dce4e9;--pale:#f4f8fa}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#f2f5f8;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial;line-height:1.62}.layout{max-width:1400px;margin:auto;display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}.toc{background:#17283c;color:white;padding:34px 22px;position:sticky;top:0;height:100vh;overflow:auto}.toc .brand{color:#fff;font-size:21px;font-weight:800;letter-spacing:-.5px}.toc .brand em{color:#70d2ce;font-style:normal}.toc p{font-size:12px;color:#a5b9c8}.toc a{display:block;text-decoration:none;color:#c8d6e2;font-size:13px;padding:7px 0;border-bottom:1px solid #263b50}.toc a:hover{color:#fff}.page{background:white;min-width:0;padding:58px min(6vw,80px) 90px}.tag{display:inline-block;letter-spacing:.12em;text-transform:uppercase;font-size:11px;font-weight:800;color:var(--teal);margin-bottom:10px}.page h1{font-size:clamp(30px,4vw,49px);line-height:1.13;letter-spacing:-1.6px;margin:0 0 22px}.page h2{font-size:25px;letter-spacing:-.6px;border-top:1px solid var(--line);padding-top:31px;margin-top:42px}.page h3{font-size:18px;margin-top:30px}.page p,.page li{font-size:15px}.page strong{color:#10273d}.page blockquote{border-left:5px solid var(--teal);margin:27px 0;padding:15px 24px;background:#eaf7f6}.page blockquote p{margin:0;font-size:17px}.page table{border-collapse:collapse;width:100%;font-size:13px;margin:19px 0 28px;line-height:1.45}.page th{background:#17283c;color:white;text-align:left}.page th,.page td{padding:11px 12px;border:1px solid var(--line);vertical-align:top}.page tbody tr:nth-child(even){background:var(--pale)}code{background:#e9f1f4;padding:2px 5px;border-radius:4px;font-size:12px;overflow-wrap:anywhere}h1+ p{color:var(--muted)}a{color:#08757c}.tablewrap{overflow-x:auto}.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 25px}.actions button{background:var(--teal);color:#fff;border:0;border-radius:6px;padding:10px 16px;font-weight:700;cursor:pointer}.actions span{font-size:13px;color:var(--muted)}@media(max-width:950px){.layout{display:block}.toc{position:relative;height:auto;padding:18px}.toc nav{columns:2}.page{padding:32px 23px}}@media(max-width:560px){.toc nav{columns:1}.page table{font-size:12px}.page th,.page td{padding:8px}}@media print{body{background:white}.layout{display:block}.toc,.actions{display:none}.page{padding:0 10mm}h2,h3{break-after:avoid}table{break-inside:avoid}a{text-decoration:none;color:inherit}}
+</style></head><body><div class="layout"><aside class="toc"><div class="brand">commercial<em>Konnect</em></div><p>WEBSITE PRODUCT REQUIREMENTS<br>v3.0 · 24 OCT 2026</p><nav><a href="#section-1">1. Product purpose and success definition</a><a href="#section-2">2. Audiences and journeys</a><a href="#section-3">3. Positioning and homepage copy hierarchy</a><a href="#section-4">4. Homepage slider component — CK-INTAKE-003 (P0)</a><a href="#section-5">5. Progressive financing enquiry — CK-INTAKE-002 (P0)</a><a href="#section-6">6. Public financing rates and gating policy</a><a href="#section-7">7. Organic SEO, AEO/AIO and content engine</a><a href="#section-8">8. Paid traffic and broker-led acquisition</a><a href="#section-9">9. Dual opportunity engines and lead classification</a><a href="#section-10">10. Buyer-first PPL marketplace, packages and credit wallets</a><a href="#section-11">11. Technical architecture</a><a href="#section-12">12. Data contracts, security and compliance</a><a href="#section-13">13. Lead routing and second-use governance</a><a href="#section-14">14. Analytics, OODA optimization and performance</a><a href="#section-15">15. Phased engineering roadmap</a><a href="#section-16">16. Definition of done — mandatory tests</a><a href="#section-17">17. Decisions, dependencies and explicit non-goals</a></nav></aside><main class="page"><div class="tag">Product specification / Canadian commercial finance</div><div class="actions"><button type="button" onclick="window.print()">Print / Save as PDF</button><span>Consolidated HTML · design and implementation reference</span></div><h1>commercialKonnect — Website &amp; Lead Origination Product Requirements Document</h1>
+<p><strong>Version:</strong> 3.0 — October 24, 2026<br />
+<strong>Status:</strong> Implementation specification; not a claim of completed deployment<br />
+<strong>Repository of record:</strong> <code>Ksdeng1559/KonstructionComOS</code> → <code>docs/COMMERCIALKONNECT_PRD.md</code><br />
+<strong>Scope:</strong> Borrower-facing WordPress website, organic/paid/AIO acquisition, progressive financing inquiry capture, lead qualification, broker marketplace handoff, and broker growth path.</p>
+<blockquote>
+<p><strong>Executive decision:</strong> The website must do <strong>both</strong>: capture financing demand from business owners actively seeking funding and support proactive financing opportunity discovery for professionals. Public education and verified indicative comparisons are ungated; contact and consent are requested only when the visitor wants personalized options or an introduction.</p>
+</blockquote>
+<h2 id="section-1">1. Product purpose and success definition</h2>
+<p>commercialKonnect.ca is a Canadian business and commercial financing information and opportunity marketplace. Business owners can understand financing choices and request contact with qualified professionals. Brokers and lenders can receive matched, permissioned enquiries and separately use intelligence and prospecting capabilities. <strong>North star:</strong> qualified financing conversations per active professional per month. Supporting measures include accepted leads, cost per accepted lead, completed applications, buyer repeat purchases, funded outcomes and contribution margin.</p>
+<p><strong>Initial coverage:</strong> British Columbia first; Alberta and Ontario expand as verified lender/broker service coverage and content quality permit. <strong>Primary borrower intents:</strong> business loans/working capital; business lines of credit; commercial mortgages/refinancing; construction/development; equipment; asset-based lending.</p>
+<h2 id="section-2">2. Audiences and journeys</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Persona</th>
+  <th>Primary problem</th>
+  <th>Conversion</th>
+  <th>Route</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Business owner</td>
+  <td>Evaluate working capital, growth or acquisition finance</td>
+  <td>Financing assessment / introduction</td>
+  <td>Public guides → comparison → enquiry</td>
+</tr>
+<tr>
+  <td>Commercial property owner</td>
+  <td>Explore purchase or refinance funding</td>
+  <td>Commercial mortgage consultation</td>
+  <td>Property guide → conditional intake</td>
+</tr>
+<tr>
+  <td>Developer</td>
+  <td>Source construction, land and development capital</td>
+  <td>Project funding discussion</td>
+  <td>Development guide → project-stage intake</td>
+</tr>
+<tr>
+  <td>Contractor / manufacturer / transportation operator</td>
+  <td>Compare industry-specific capital options</td>
+  <td>Vertical enquiry</td>
+  <td>Industry page → product-matched intake</td>
+</tr>
+<tr>
+  <td>Financial professional</td>
+  <td>Acquire verified leads and create new opportunities</td>
+  <td>Demo / verified registration</td>
+  <td><code>/brokers/</code> → SaaS / buy-box / marketplace</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-3">3. Positioning and homepage copy hierarchy</h2>
+<p><strong>Primary headline:</strong> <em>Business Financing. More Options. Better Decisions.</em><br />
+<strong>Support:</strong> Explore business loans, commercial mortgages, construction and equipment financing across Canada. Understand available options and request an introduction to a participating professional.<br />
+<strong>Primary CTA:</strong> <strong>Compare Financing Options</strong>. <strong>Secondary:</strong> Explore Financing Solutions. <strong>Professional route:</strong> For Financial Professionals.</p>
+<p>Homepage sections in priority order:</p>
+<ol>
+<li>Hero with financing type, <strong>amount slider</strong>, editable amount, presets and province; Continue to the assessment.</li>
+<li>Six financing-solution cards with dedicated pillar-page destinations.</li>
+<li>Three-step explanation: tell us your needs → explore relevant financing categories → request an introduction.</li>
+<li>Bank, alternative, secured and unsecured financing education.</li>
+<li>Sourced financing rate/product comparison; no made-up lender rates.</li>
+<li>Industry solutions for construction, manufacturing, transport and commercial property.</li>
+<li>Commercial real estate and development funding module.</li>
+<li>Expert-reviewed financing guides and resources.</li>
+<li>Distinct financial-professional CTA for qualified inbound leads and proactive intelligence.</li>
+<li>Final borrower CTA plus plain-language legal, privacy, advertising and eligibility caveats.</li>
+</ol>
+<h2 id="section-4">4. Homepage slider component — CK-INTAKE-003 (P0)</h2>
+<p><strong>Goal:</strong> A usable high-intent amount selector, not a lead-sale event. Every slider is paired with a synchronized exact-value CAD field; frequent amounts are one-tap presets. Product, amount and province carry into the wizard without being requested twice. Native keyboard, mobile and no-JavaScript fallbacks are required.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Financing category</th>
+  <th style="text-align:right">Initial display range CAD</th>
+  <th>Example presets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Business loans / working capital</td>
+  <td style="text-align:right">$25,000–$1,000,000</td>
+  <td>$50K · $100K · $250K · $500K</td>
+</tr>
+<tr>
+  <td>Business line of credit</td>
+  <td style="text-align:right">$25,000–$2,000,000</td>
+  <td>$50K · $100K · $250K · $1M</td>
+</tr>
+<tr>
+  <td>Equipment financing</td>
+  <td style="text-align:right">$25,000–$5,000,000</td>
+  <td>$50K · $250K · $500K · $1M</td>
+</tr>
+<tr>
+  <td>Commercial mortgages</td>
+  <td style="text-align:right">$250,000–$25,000,000</td>
+  <td>$500K · $1M · $5M · $10M</td>
+</tr>
+<tr>
+  <td>Construction/development</td>
+  <td style="text-align:right">$500,000–$50,000,000</td>
+  <td>$1M · $5M · $10M · $20M</td>
+</tr>
+<tr>
+  <td>Asset-based lending</td>
+  <td style="text-align:right">$100,000–$20,000,000</td>
+  <td>$250K · $500K · $1M · $5M</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Behaviour:</strong> Slider, presets, visible amount and manual input stay synchronized. Support exact typing/pasting (e.g. <code>$1,250,000</code>). Reject invalid/negative/zero values. Treat range boundaries as UX defaults, <strong>not lender criteria</strong>: valid out-of-range manual amounts continue into manual review with a notice and are never silently truncated. Use integer CAD/minor units. If financing type changes, reconfigure slider without discarding a manually entered valid number. Allow “Other / Not sure.” Provide labels, clear feedback, a progress state and 44px+ touch targets. Do not send precise financial inputs to ad pixels.</p>
+<h2 id="section-5">5. Progressive financing enquiry — CK-INTAKE-002 (P0)</h2>
+<p><strong>Golden path:</strong> Organic / PPC / AI referral / broker campaign → public guide or homepage → ungated comparison/calculator → interactive selector → anonymous conditional five-step assessment → preliminary financing category results → voluntary personalized-options/contact request with permissions → prompt verification → broker buy-box matching → permitted delivery / wallet sale → Atomic CRM / outcomes.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Stage</th>
+  <th>Visitor interaction</th>
+  <th>Data collected</th>
+  <th>Lead sale allowed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>S0 Public education</td>
+  <td>Rates methodology, product comparisons, guides, calculator</td>
+  <td>Privacy-respecting traffic events only</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>S1 Quick selector</td>
+  <td>Choose product, amount and province</td>
+  <td>Anonymous selection + trusted attribution</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>Assessment 1</td>
+  <td>Purpose and exact amount</td>
+  <td>Purpose, amount, optional project context</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>Assessment 2</td>
+  <td>Business profile</td>
+  <td>Industry, business type, operating history, province</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>Assessment 3</td>
+  <td>Financing context</td>
+  <td>Revenue band, broad security, property/equipment context as applicable</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>Assessment 4</td>
+  <td>Financing timing</td>
+  <td>Timeframe, readiness, optional existing arrangements</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>Assessment 5</td>
+  <td>Preliminary result</td>
+  <td>Relevant product categories and trade-offs; no promised quotes</td>
+  <td><strong>No</strong></td>
+</tr>
+<tr>
+  <td>S2 Contact / permissions</td>
+  <td>Request options or a conversation</td>
+  <td>Name, company, email, phone, callback preference; separate consents</td>
+  <td><strong>Not until verified</strong></td>
+</tr>
+<tr>
+  <td>S3 Qualification</td>
+  <td>Human-assisted or approved verification</td>
+  <td>Contactability, confirmed financing interest and fit</td>
+  <td>Only when buy-box qualified</td>
+</tr>
+<tr>
+  <td>S4 Broker distribution</td>
+  <td>Match, assign and deliver</td>
+  <td>Recipient allocation, exclusivity, ledger, acceptance</td>
+  <td>According to contract/permission</td>
+</tr>
+<tr>
+  <td>S5 Outcome / second use</td>
+  <td>Follow-up where lawful</td>
+  <td>Outcome, reasons, refreshed interest / consent</td>
+  <td>Only if freshly qualified</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Form design:</strong> Ask only necessary questions, show why they matter, allow editing and back-navigation. Keep non-binding results accessible before identity capture. Do not ask for SIN, full bank details or uploads in P0. A phone verification workflow should be queued promptly; target rapid response with an operating-hours SLA rather than guaranteeing contact.</p>
+<h3>Product-specific branches</h3>
+<ul>
+<li><strong>Business loans/LOC:</strong> trading history, revenue band, purpose, timeline, secured/unsecured interests.</li>
+<li><strong>Commercial mortgages:</strong> property type, value band, existing financing band, refinance/purchase intent and occupancy context.</li>
+<li><strong>Construction:</strong> project stage, approximate budget, land or site context, requested debt amount and timing.</li>
+<li><strong>Equipment/ABL:</strong> asset category and broad equipment, inventory or receivables context.</li>
+</ul>
+<h2 id="section-6">6. Public financing rates and gating policy</h2>
+<p>The rate comparison guide is indexable and available without registration. Public content may show <strong>verified, attributed, time-stamped indicative ranges</strong>, eligibility factors, calculations and rate methodologies. Where a current rate or eligibility basis cannot be substantiated, show <strong>“Custom quote required.”</strong> Do not compare a nominal rate, factor rate and APR as interchangeable measures. The interactive rate guide (<code>CK-RATE-001</code>) may filter product categories without claiming lender approval. Request contact and sharing permission only for actual broker introductions or personalized quotation requests.</p>
+<h2 id="section-7">7. Organic SEO, AEO/AIO and content engine</h2>
+<p>Six interlinked clusters: <code>/business-financing/</code>, <code>/commercial-mortgages/</code>, <code>/construction-financing/</code>, <code>/equipment-financing/</code> and <code>/asset-based-lending/</code>, <code>/industries/</code>, and <code>/compare-financing/</code> (including <code>/business-loan-rates-canada/</code>). Maintain separate broker content at <code>/brokers/</code>. The approved 50-page plan is a staged architecture, <strong>not</strong> a mandate for bulk thin content.</p>
+<p><strong>Editorial state:</strong> topic/keyword opportunity → sourced research → content brief → AI-assisted draft → licensed/qualified expert review → applicable compliance review → draft QA → publish → monitor → refresh/archive. Every financing claim has provenance, assumptions and review date. Include helpful direct answers, worked examples, original comparisons, internal links and visible methodology. Mark sponsored placements. Monitor Search Console, indexation, organic conversion and sampled AI-answer citations; <strong>no guaranteed AI search placement</strong>.</p>
+<h3>Initial 90-day editorial scope</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Period</th>
+  <th>Content work</th>
+  <th>Exit gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Days 1–30</td>
+  <td>Two core pillars, homepage, comparison CTA, content review process and analytics</td>
+  <td>Published reviewed pages and working source attribution</td>
+</tr>
+<tr>
+  <td>Days 31–60</td>
+  <td>Commercial mortgage, construction, equipment, secured/unsecured, comparison guides</td>
+  <td>Useful query coverage and measurable qualified enquiries</td>
+</tr>
+<tr>
+  <td>Days 61–90</td>
+  <td>Expand up to ~24 substantive assets as capacity warrants, internal link fixes and revisions</td>
+  <td>Accepted lead quality and channel contribution economics</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-8">8. Paid traffic and broker-led acquisition</h2>
+<p>Google Search captures high-intent product searches; Meta tests educational vertical-specific financing angles; retargeting is consent-dependent. Test messaging and landing pages separately by industry, product and province. Use verified keywords/CPC from planning tools and approval gates for budget changes. <strong>Illustrative</strong> monthly testing budget: Google Search $1,500, Meta $750, retargeting $250 and creative/testing $500 (CAD $3,000 total); exclude production/engineering costs. Neither CPL nor return is guaranteed.</p>
+<p>Broker-led campaigns select sector, territory, product, approval-ready creative and budget. Planned <strong>Explee</strong> and <strong>Ryze</strong> integrations require an API/permissions/account-separation proof before use. Broker-originated leads retain agreed originating-broker attribution subject to consent and contractual requirements; platform-acquired leads may enter a different marketplace allocation pool. Paid, organic, AI-referral, partner and outbound traffic remain separate in reporting.</p>
+<h2 id="section-9">9. Dual opportunity engines and lead classification</h2>
+<p><strong>Inbound engine:</strong> financing enquiries voluntarily submitted through content, paid, referral or broker-specific landing pages. <strong>Proactive engine:</strong> LeadSniperAI/business and construction signals, research and decision-maker enrichment; <strong>an observed expansion or permit is not evidence of borrowing intent</strong>. A prospect only becomes a financing-qualified lead after relevant financing need and interest are confirmed.</p>
+<p>States: <code>discovered_signal</code> → <code>unverified_inquiry</code> (inbound only) / researched prospect → <code>contact_verified</code> → <code>financing_interest_confirmed</code> → <code>buy_box_qualified</code> → <code>delivered</code> → <code>accepted | rejected | refunded</code> → downstream outcomes. Keep the provenance and permissions of each source independently.</p>
+<h2 id="section-10">10. Buyer-first PPL marketplace, packages and credit wallets</h2>
+<p>Before large-scale acquisition, identify 10–15 prospective lead buyers, compare 3–4 competitors, document buy-boxes and secure trial commitments. Buyer rules include province, specialty, product, deal size, business eligibility, monthly capacity, shared/exclusive preference, acceptance/refund rules and lead prices. The supplied Fuller SOP reports a five-step form, fast qualification and repeat-purchase model; its UK case-study economics are <strong>not Canadian performance guarantees</strong>.</p>
+<p><strong>Commercial model (proposed, unvalidated):</strong> SaaS Professional CAD $500/month; Team $1,500/month for up to five seats; Organization $3,000/month for up to 15; Enterprise negotiated. Prepaid lead-wallet packages CAD $1,500, $3,000, $5,000 and $10,000+ may be offered under clear terms. Separate subscription access/AI research credits from purchased lead credits. Deliver a qualified, appropriately permissioned product under specified shared/exclusive conditions before recognizing fulfilled lead revenue. Wallets support pooled organization usage, limits, immutable ledger, credits/reversals and no duplicate charges. Pricing tests—not guaranteed prices—should differentiate business financing leads, premium commercial financing leads and appointments.</p>
+<h2 id="section-11">11. Technical architecture</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Layer</th>
+  <th>Approved approach</th>
+  <th>Core responsibilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Public content</td>
+  <td><strong>WordPress + Astra Free + Gutenberg</strong></td>
+  <td>Indexable content, editorial templates, public comparison content</td>
+</tr>
+<tr>
+  <td>WordPress automation</td>
+  <td>Claude Code + <strong>WP MCP Ultimate</strong></td>
+  <td>Supported content operations, review workflows; verify metadata/block support</td>
+</tr>
+<tr>
+  <td>Interactive UI</td>
+  <td>React/shadcn in <code>commercialkonnect-components</code> Gutenberg block plugin</td>
+  <td>Slider, calculator, conditional wizard, comparison interaction</td>
+</tr>
+<tr>
+  <td>Data and permission system</td>
+  <td><strong>Supabase PostgreSQL</strong>, RLS</td>
+  <td>Anonymous assessments, identified applications, consent, attribution, buy-boxes, lead states, wallet ledger</td>
+</tr>
+<tr>
+  <td>Broker application</td>
+  <td>Next.js / shadcn, Vercel/Railway</td>
+  <td>Authenticated brokerage workspaces, marketplace, campaign approval, intelligence</td>
+</tr>
+<tr>
+  <td>Pipeline</td>
+  <td><strong>Atomic CRM</strong></td>
+  <td>Verified lead delivery, broker activity, outcomes, Chief of Staff features when implemented</td>
+</tr>
+<tr>
+  <td>Research/campaign integrations</td>
+  <td>LeadSniperAI, Exa/Tavily/DataForSEO, Explee/Ryze candidates</td>
+  <td>Governed sourcing/research and campaign tools, subject to capability and licensing tests</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Implementation reconciliation:</strong> Existing repository README describes a distinct KonstructionComOS scaffold and an Atomic CRM retrofit workstream; this document specifies interfaces and acceptance gates, <strong>not completed integration</strong>. Astra/Gutenberg is the latest website PRD decision; an earlier WordPress executive plan selected Divi and is superseded by the later PRD. Do not claim either option has been deployed based on documentation alone.</p>
+<h2 id="section-12">12. Data contracts, security and compliance</h2>
+<p>Proposed logical entities, reconcile with live schema first: <code>assessment_sessions</code>, <code>assessment_answers</code>, <code>assessment_result_snapshots</code>, <code>contact_submissions</code>, <code>consent_events</code>, <code>attribution_events</code>, <code>verification_events</code>, <code>broker_profiles</code>, <code>buyer_buy_boxes</code>, <code>lead_qualification_events</code>, <code>lead_assignments</code>, <code>lead_distributions</code>, <code>lead_purchase_events</code>, <code>billing_events</code>, <code>buyer_disputes</code>, <code>lead_requalification_schedules</code>, <code>appointments</code> and <code>audit_events</code>.</p>
+<p>Anonymous sessions need opaque identifiers, server ownership binding, short retention/TTL, idempotent secure submissions and no publicly accessible identity data. Identified enquiries require disclosure of sharing purposes and recipient scope; <strong>optional marketing consent is distinct from referral/application permissions</strong>. Enforce tenant isolation, RLS, rate-limits, suppression, data deletion/withdrawal processes, encryption and restricted API secrets. Respect CASL, applicable Canadian privacy obligations, provincial finance licensing/advertising and sponsorship transparency. Do not transmit PII or financing answers to third-party advertising pixels.</p>
+<h2 id="section-13">13. Lead routing and second-use governance</h2>
+<p>Buyer matching starts only after contact and intent verification, authorized sharing and product/geography/amount eligibility checks. Record assignment, number of recipients, exclusivity, quoted price, wallet transaction, broker response and dispute history. Lead replacements require evidence and must reverse the applicable charge without charging twice.</p>
+<p><strong>Requalification review cadence from supplied SOP:</strong> day 0 delivery; month 3 review; month 4 new-angle contact; month 6 alternative offer; month 9 final scheduled review. Dates are <strong>not permission to send marketing</strong>. Each contact requires a currently lawful basis, suppression check, original buyer rights review, and renewed needs/interest before resale to another buyer. Distinguish repeat financing needs from stale or duplicated prospects.</p>
+<h2 id="section-14">14. Analytics, OODA optimization and performance</h2>
+<p>Track <code>selector_viewed</code>, <code>financing_type_selected</code>, aggregated <code>slider_changed</code>, <code>preset_selected</code>, <code>assessment_started</code>, <code>step_completed</code>, <code>preliminary_results_viewed</code>, <code>contact_submitted</code>, <code>consent_recorded</code>, <code>contact_verified</code>, <code>interest_confirmed</code>, <code>buyer_matched</code>, <code>lead_delivered</code>, <code>buyer_accepted/rejected</code>, <code>wallet_redeemed</code>, <code>meeting_held</code> and <code>funded</code> with privacy-safe payloads. Persist first-known/last-touch attribution, page, campaign and broker ownership from trusted server rules. Weekly <strong>Observe → Orient → Decide → Act</strong> reporting recommends top three content/qualification/acquisition improvements with human approval for publishing, spending and external actions.</p>
+<p><strong>Scorecard:</strong> traffic and indexed pages, SEO/AIO referral, selector engagement, assessment completion, results-to-consent conversion, speed to verified contact, verified interest, accepted leads, cost per accepted lead, broker repeat buying, appointments, funded outcomes, wallet disputes, retention and contribution margin. Distinguish credits purchased from delivered/recognized revenue.</p>
+<h2 id="section-15">15. Phased engineering roadmap</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+  <th>Priority</th>
+  <th>Deliverable</th>
+  <th>Release gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>P0A</strong></td>
+  <td>WordPress theme/templates; verified WP MCP draft flow; public pillars and comparison methodology</td>
+  <td>Reviewable, indexable, accessible pages</td>
+</tr>
+<tr>
+  <td><strong>P0B</strong></td>
+  <td>Hero slider/presets/manual amount, financing category/province, conditional anonymous assessment and preliminary results</td>
+  <td>Accurate amounts, prefill, no PII gate for general results</td>
+</tr>
+<tr>
+  <td><strong>P0C</strong></td>
+  <td>Optional contact gate, consent logging, verification work queue, broker buy-box and protected routing</td>
+  <td>Verified need before sale; tenant and attribution tests</td>
+</tr>
+<tr>
+  <td><strong>P1</strong></td>
+  <td>Rate comparison filters/calculators, broker profiles, wallet/payments, paid campaign pilots, reporting</td>
+  <td>Pricing/quality checks, spend approvals, accepted leads</td>
+</tr>
+<tr>
+  <td><strong>P2</strong></td>
+  <td>Scaled content clusters, Chief of Staff, partner integrations and second-use rules</td>
+  <td>Proven consent, unit economics and repeat purchasing</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-16">16. Definition of done — mandatory tests</h2>
+<ol>
+<li>A visitor can learn financing options and view preliminary categories anonymously without giving contact details.</li>
+<li>Slider, numeric field and presets stay synchronized via keyboard, mouse/touch and mobile; $75,000 and $12,000,000 entries both work exactly; out-of-range input is <strong>not</strong> silently clipped.</li>
+<li>Product/amount/province and first/last trusted attribution are preserved through the wizard without duplicate prompts.</li>
+<li>Product-dependent questions display correctly; server validates, deduplicates and safely expires anonymous sessions.</li>
+<li>Contact request and separate marketing/referral permissions are auditable; privacy withdrawal prevents prohibited follow-up.</li>
+<li>No lead can be sold on a mere signal or unconfirmed application; only permitted matched/verified leads can be distributed.</li>
+<li>Brokerage users never access another organization’s applicant or wallet data; unauthorized changes and client-spoofed campaign ownership fail.</li>
+<li>Rates, ranking/sponsorship and case-study claims require review/verification, with stale claims flagged and “Custom quote required” fallback.</li>
+<li>No financing responses or identities leak to advertising/analytics; ad spend and publication changes require approval.</li>
+<li>End-to-end testing follows source → assessment → opt-in → qualification → buyer matching → acceptance/credit fulfillment → CRM/outcome, including refunds and error paths.</li>
+</ol>
+<h2 id="section-17">17. Decisions, dependencies and explicit non-goals</h2>
+<p><strong>Decisions:</strong> borrower-first homepage; visible broker secondary channel; single shared funnel; ungated factual rate education; slider-led progressive assessment; independent consent gates; verified-interest lead classification; buyer-first PPL model; WordPress/Astra/Gutenberg with secure Supabase/Atomic CRM boundaries. <strong>Dependencies:</strong> validated broker supply and buy-boxes, lender rate publication rights, WordPress MCP block support, legal review, identity/tenant integration, compliant analytics and live external-provider capability tests.</p>
+<p><strong>Not in scope:</strong> guaranteed funding, fictitious live rates, automatic credit adjudication, an unrestricted resale of personal information, automated mass cold outreach, guaranteed AI search ranking, unapproved automatic campaign spending or deployment claims without tests.</p>
+<hr />
+<p><em>Document based on commercialKonnect GitHub website PRD through Section 19 (October 24, 2026), the conversation’s pricing and dual-engine product decisions, and the supplied Pay-Per-Lead SOP. This HTML is a consolidated implementation-facing presentation; it does not modify the GitHub source or deploy code.</em></p>
+</main></div></body></html>
