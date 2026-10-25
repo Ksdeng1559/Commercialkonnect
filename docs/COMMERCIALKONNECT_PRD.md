@@ -291,3 +291,77 @@ Acceptance:
 7. End-to-end test records content and acquisition source → assessment → verified lead → eligible broker routing, including error and duplicate cases.
 
 **Explicit non-goals:** auto-credit decisions, guaranteed rates/approvals, publishing fictional social proof, live lender pricing without verification, and claiming future SaaS/marketplace capabilities are already launched.
+
+## 18. Progressive Data Capture, Buyer-First PPL and Rate-Gating Refactor — 2026-10-24
+**Component:** CK-INTAKE-002 | **Status:** PRD amendment; not implemented. **Source:** user-supplied "Pay-Per-Lead (PPL) SOP — According to Alex Fuller" (Pay Per Lead Secrets — 2026 Edition), plus user decision to run both inbound demand capture and proactive opportunity discovery.
+
+### 18.1 Change from the prior homepage and application flow
+**Replace the assumption that the homepage hero selector immediately leads to a long contact-gated application.** The three-input hero is an optional entry into an anonymous, useful comparison flow. Publish useful, source-reviewed product descriptions, indicative rate ranges where verified and licensed for display, unsecured/secured comparisons, and a basic calculator **without registration**. Capture business qualification data *progressively* during a short assessment; show truthful, non-binding category guidance before requesting personal identity. Request contact details and specific lead-sharing consent when the visitor opts to obtain a personalized financing comparison, pricing discussion or broker introduction. A consultation request is not a guaranteed quote or approval.
+
+**Core path:**
+`Organic/Paid/AIO/Referral → public rate/product guide or homepage → free comparison/calculator → anonymous 5-step business assessment → preliminary category results → request personalized financing options / broker contact → identity + separate consents → verify interest/contact promptly → qualify → eligible broker buy-box → reserved/delivered lead with wallet transaction → Atomic CRM → buyer outcome and consent-governed requalification`.
+
+Visitors can exit with general educational results; do not block access to public facts merely to obtain an email address. Do not display personalized lender offers when no lender-authorized, current eligibility/rate data exists; use **Custom quote required** and a request-to-connect.
+
+### 18.2 Capture exactly what is needed, when needed
+| Moment | Visitor sees | Data collected | Storage/consent condition |
+|---|---|---|---|
+| Public browse (S0) | SEO pillar, verified indicative ranges, financing explanations, basic calculator | Only privacy-respecting, allowed analytics/session data; no personal finance profile required | Consent rules apply to analytics/ads; no broker lead created |
+| Hero/guide quick selector (S1) | Choice of product, amount band, province, education links | `financing_type`, `amount_band`, `province`, optional `source_page` | Anonymous short-lived assessment session with trusted first/last attribution; no purchaser-visible lead |
+| Assessment step 1 | What financing is for / type and amount | `purpose`, `requested_amount`, property/project purpose if relevant | Anonymous draft server-side with TTL, minimize retention |
+| Assessment step 2 | Business profile | Industry, `operating_months`, business type, province | No contact details |
+| Assessment step 3 | Financial context | Annual revenue **band**, approximate available security, optionally property type/value and current debt only when relevant | No documents, credit report, SIN, exact bank details or sensitive files in P0 |
+| Assessment step 4 | Timing and needs | `timeframe`, current lender situation optionally, preferred category/secured-unsecured interest | Provisional category matching; **do not claim approval or verified demand at this stage** |
+| Assessment step 5 / preliminary results | Eligible financing **categories** and trade-offs using documented rules; rates only if sourced and suitable | Optional answers to clarify matching | Results available without name/email; no lender-specific individualized claim |
+| Contact & permission gate (S2) | "See options for my business" / "Have a financing professional contact me" | Name, business name, email, phone, preferred callback time; contact verification; separate transactional sharing and optional marketing consent, plus disclosures of recipients/exclusivity where applicable | Lead record created only following explicit submission; consent version/time/purpose, source, verified destination and security audit stored |
+| Verification/qualification (S3) | Confirmation and expected follow-up | Staff/approved call verifies business, contactability, financing interest/amount, readiness and eligible buyer constraints | Only **confirmed interested** records promoted to qualified marketplace leads; prefer immediate call, operational target under two hours during supported hours |
+| Purchase/hand-off (S4) | Relevant broker(s) receive permitted details | Buyer matched on product/region/amount/eligibility/capacity, exclusive/shared rights, price, assignment | Log allocation, delivery, wallet debit or invoice under order terms, buyer acceptance/rejection; no unconsented reselling |
+| Outcome/second use (S5) | Optional permissioned follow-up | Accepted/rejected, contacted, meeting, application, funded, unsuccessful reason, future intent | Consent/contractual restrictions and suppression enforced; requalify interest before re-offering |
+
+**Form ergonomics:** progress indication, back/edit answers, a clear save-and-resume policy only with permission, mobile validation, short field labels, branch by product; no arbitrary six-step burden when fewer questions suffice. Show *why* a requested field improves comparison quality. Allow an earlier contact request at any time.
+
+### 18.3 Conditional branching by financing product
+- **Business loans / unsecured LOC:** revenue band, months operating, amount, purpose, timing and broad credit/asset context only if necessary and lawful. Do not use reported credit score as approval.
+- **Commercial mortgages/refinance:** property type, province, value band, existing debt band, purchase vs refinance, occupancy/income context where relevant.
+- **Construction/development:** site/property type, approximate development budget, development stage, requested capital and timeline; optional collateral/equity band; financing status unknown until confirmed.
+- **Equipment / ABL:** equipment/asset category, amount, receivables/inventory/equipment context and timing.
+Route unsuitable or unready applicants to educational content or consented follow-up, not a fabricated qualified lead.
+
+### 18.4 Buyer-first supply and quality gate
+Before large ad spend, identify 10–15 potential lead buyers, study 3–4 competitors, collect lender/broker **buy-boxes** (province, financing product, min/max size, revenue/operating history criteria, capacity, exclusivity, acceptance rules), and obtain paid trial commitments. Proposed validation: recruit 5–10 brokers and secure 3–5 trial buyers; test 50 opportunities and report cost, verified intent, accept/reject and contribution margins. **Alex Fuller case study** in supplied source reports £12 CPL, £45 sale, six buyers, 400–500 monthly volume and ~73% margin before other costs; these are author-reported figures, not Canadian benchmarks or commercialKonnect forecasts.
+
+Marketplace offer classes:
+- `discovered_signal` (proactive research, no verified financing intent; intelligence product only);
+- `unverified_inquiry` (submitted contact data, unconfirmed intent; internal);
+- `contact_verified` (contactable; not necessarily interested);
+- `financing_interest_confirmed` (potential qualified lead);
+- `buy_box_qualified` (ready for allowed distribution);
+- `delivered/accepted/rejected/refunded` (sale and post-sale states).
+Never conflate a company expansion permit with a funding request. Distinguish intelligence credits from transactional lead-wallet debits and preserve broker-generated vs platform-generated attribution. Exclusive/shared allocation rules and number of recipients must be contractually defined and disclosed as necessary.
+
+### 18.5 Second-use lifecycle (permissioned)
+Source SOP proposes day 0 initial delivery, month 3 review, month 4 recontact, month 6 follow-up, month 9 final scheduled attempt. Treat these as **review triggers**, not an authorization to contact or resell. Before each attempt, check lawful outreach basis, consent purpose/duration, suppression, original buyer exclusivity, contract terms, prior outcomes and freshness. Record new interest and consent before routing to a Tier-2 buyer or financing alternative. Do not re-charge for duplicate or non-qualifying enquiries.
+
+### 18.6 Technical changes to implement
+- WordPress (Astra/Gutenberg) renders public guide/rate/comparison content and starts the React/shadcn `commercialkonnect-components` assessment; existing CK-RATE-001 is the educational comparison component.
+- Supabase canonical entities: `assessment_sessions` (anonymous ID, TTL and status), `assessment_answers` (minimal typed answers), `assessment_result_snapshots` (category logic/rule version), `contact_submissions`, `verification_events`, `buyer_buy_boxes`, `lead_qualification_events`, `lead_distributions`, `lead_purchase_events`, `buyer_disputes`, `lead_requalification_schedules`, `consent_events`, `attribution_events`, plus existing prospects/leads/organizations and audits. Align actual schema rather than blindly create duplicate tables.
+- Use a one-time opaque session token and server-enforced ownership binding when converting an anonymous assessment into an identified lead; separate PII from anonymous browsing analytics; encryption, TTL, server validation, rate limiting/bot controls, idempotent form submissions and tenant RLS.
+- **No PII, assessment answers or sensitive commercial-finance details passed to ad pixels or AI-search telemetry.** Store consent evidence with purpose, broker-sharing scope, timestamp and notice version. Separate marketing opt-in from operational referral/contact requests.
+- Match a lead only after confirmed intent and lawful sharing rights. The assigned broker sees the disclosed package; other tenants see neither buyer-specific records nor private applicant data. Atomic CRM receives acceptance-ready opportunities with attribution, provenance and audit history.
+- Preserve financial rate source, effective/review dates, fees, rate types, eligibility assumptions and "Custom quote required" for unverified personalized offers.
+
+### 18.7 UX tracking and acceptance tests
+Events: `guide_viewed`, `comparison_used`, `assessment_started`, `assessment_step_completed`, `preliminary_results_viewed`, `contact_gate_opened`, `contact_submitted`, `consent_recorded`, `contact_verified`, `interest_confirmed`, `buyer_matched`, `lead_delivered`, `buyer_accepted/rejected`, `wallet_redeemed`, `meeting_held`, `funded`, `recontact_due/blocked/completed`.
+Report anonymous-to-assessment, assessment completion, results-to-opt-in, speed-to-contact, qualified lead percentage, buyer accept/reject, contact and meeting rate, CAC per **accepted** lead, sale price, contribution margin, refunds and repeat buying by channel.
+
+**Definition of done (incremental):**
+1. Anonymous visitor can view rate guide, comparison and educational results without name/email; unattributed and no-contact sessions cannot be sold.
+2. Hero selector prefills assessment without losing initial/source/page UTM; optional questions branch correctly for commercial, business, construction, equipment and ABL.
+3. Contact permission gate explicitly identifies requested handoff purpose, preserves separate marketing consent, and logs audit events; server rejects spoofed ownership and duplicate submissions.
+4. A timely verification task is queued, with follow-up SLA clock; broker matching blocked until confirmed qualification and lawful sharing.
+5. Admin can verify a buyer buy-box, accept paid trial commitments, route eligible exclusive/shared opportunities and apply refunds without double-billing.
+6. Contact details remain private across organizations; ad tracking excludes PII and financing answers; tests cover consent withdrawal and blocked recontact.
+7. Older leads cannot be recycled based on date alone; second use requires fresh purpose/interest check and permitted contact/distribution.
+8. Dashboards distinguish organic/paid/AIO/outbound, assessed vs verified vs sold leads, money collected vs revenue recognized, and accepted-lead economics.
+
+**Build order:** P0 public information and anonymous assessment → S2 consent/contact & verification queue → buy-box match and internal delivery → wallet/billing tests → conditional extensions/second-use schedule → automation and scaling. Integrate into existing Section 17 homepage; do not create a second inconsistent form or funnel.
