@@ -561,3 +561,11 @@ Acceptance:
 7. Measure profile view → shortlist → contact request → verification → accepted meeting and borrower preference, plus post-referral complaints and compliance incidents.
 
 **North star:** qualified, borrower-consented professional introductions accepted by an eligible financial professional, with marketplace profitability measured separately.
+
+## 23. Planned Feature — Financing Mix Optimization Engine (CK-MIX-001)
+
+**Status:** Planned, not implemented. **Detailed feature specification:** [Financing Mix Optimizer](planned-features/financing-mix-optimizer.md).
+
+After the anonymous progressive assessment (Sections 18–19), an explainable rules-first financing mix engine will evaluate whether single-product or multi-facility structures might address borrower requirements. It will capture financing uses and allocations, assess mandatory product/cash-flow/security constraints, construct feasible candidate structures, compare cost/fees/payment burden/collateral/flexibility/timeline and show up to three labeled educational scenarios. Outputs feed borrower-consented matching to verified commercial mortgage brokers and business finance specialists under Section 22.
+
+**Delivery:** P0 enhanced purpose/amount/asset capture; P1 deterministic scenario engine, what-if UX and specialty matching; P2 sourced/authorized lender criteria and rate feeds; P3 verified outcomes and feedback-informed rankings. Initial weighted priorities (cost 30%, cash-flow 25%, collateral 20%, flexibility 15%, timeline 10%) are *hypotheses*; disqualifying hard constraints always apply first. No underwriting, guaranteed eligibility, invented lender rates, or automated broker sharing. See detailed planned-feature file for schema, security controls, intercreditor/collateral-conflict detection, mathematics and acceptance tests.
