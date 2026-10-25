@@ -572,3 +572,40 @@ After the anonymous progressive assessment (Sections 18–19), an explainable ru
 
 ### 23.1 Clarification — multiple products selected during the financing assessment (2026-10-25)
 Borrowers must be able to select **multiple financing products** **inside the assessment wizard**, independently of the already-supported multi-select **uses/purposes**. These are distinct sets: e.g., purposes = [equipment purchase, working capital]; requested products = [equipment financing, business line of credit, commercial mortgage]. Preselect the financing product initially chosen on the homepage, then allow it to be added to, edited or removed during the first assessment step. Require at least one selected product and at least one stated purpose before advancing; display all choices on the preliminary-results summary. Do not represent exploratory selections as separate binding applications or imply that product suitability/eligibility has been determined. The P1 mix engine may subsequently assess feasibility, create multiple facility scenarios and optionally assign indicative amounts by product with borrower control and no duplicate count of total requested amount. Preserve each product selection and purpose independently in the assessment session and eventual consented CRM payload; broker matching must accommodate multiple specialty types without unsolicited multi-recipient sharing. Product selection in the frontend prototype is interactive; production persistence and underwriting remain unimplemented.
+
+## 24. Residential Self-Employed Mortgage Options — 2026-10-25
+
+**Status:** Consumer-facing prototype capability and planned underwriting/lender directory feature. **Audience:** Canadian self-employed homeowners, contractors, sole proprietors, shareholders and business owners seeking **residential** mortgage financing. This is a separate lending track from commercial real estate and business-purpose credit, while permitting multi-product exploratory assessment.
+
+### Borrower proposition and discovery
+- Add a **Self-Employed Residential Mortgages** solution card and product option to the homepage, with borrower-friendly copy: "Explore home purchase, renewal and refinancing options when you are self-employed. Income verification and lender requirements vary."
+- Include home purchase, mortgage renewal, refinance, home-equity access and rental-property inquiry routes; classify property use and occupancy *before* eligibility or quote matching.
+- Distinguish traditional documented-income mortgages, insurer-supported business-for-self programs, and lender-specific alternative-documentation products (e.g., bank statements, financial statements). **Do not** advertise no-document loans, universal eligibility, guaranteed rates or approval.
+
+### Public reference categories (examples, not partner relationships or live rates)
+- **CMHC Self-Employed** — documentation flexibility based on borrower circumstances, including tax returns/NOAs, business statements and other documents; https://www.cmhc-schl.gc.ca/professionals/project-funding-and-mortgage-financing/mortgage-loan-insurance/mortgage-loan-insurance-homeownership-programs/self-employed
+- **Sagen Business for Self (Alt. A)** — insurer product for eligible self-employed purchasers who may not have conventional income documentation; https://www.sagen.ca/products-and-services/business-for-self/
+- **Canada Guaranty Low Doc Advantage** — insured self-employed purchase category with defined limits and conditions; https://www.canadaguaranty.ca/low-doc-advantage/
+- **B2B Bank Business for Self** — lender examples of bank-statement, conventional and alternative mortgage products; https://b2bbank.com/en/mortgages/business-for-self
+- **Equitable Bank Business-for-self** — lender alternative underwriting examples including purchases/refinances; https://www.equitablebank.ca/resources/broker-resources/alternative-mortgages-resources/product-specs/bfs
+
+Sources are educational program examples, not endorsements, integrated lender APIs, partner access, confirmed rate quotes or real-time program eligibility. Annual maintenance must verify program terms and geographic/product restrictions. Availability varies by lender, province, occupancy and underwriting, and insurers are not direct retail lenders.
+
+### Adaptive assessment
+- Preserve **multiple products** within Step 1 of assessment; selecting residential additionally triggers a context-aware path:
+  - Step 2 self-employment tenure (including under 2 years).
+  - Step 3 residential mortgage purpose + documentation route (T1/NOA, financial statements, bank statements, combination/unsure).
+  - Future enhancement: property location/type, owner-occupied vs rental, purchase price/current value, down payment/equity, existing mortgage balance, credit/arrears self-report and broad personal income/cash-flow bands with appropriate privacy protections.
+- A mixed residential+commercial product exploration may need a separated assessment subflow in production, rather than treating household debt service as equivalent to business revenue. MVP prototype prioritizes residential questions if a residential product is selected; document that limitation.
+- No upload of sensitive tax returns or bank statements in unprotected public/demo forms.
+
+### Routing and compliance
+- Route residential enquiries to **appropriately licensed mortgage professionals**, distinct from business financing consultants. Use validated province, license status, specialty, appointment capacity and borrower preference.
+- Maintain separate consent, verified interest, introduction audit trail and broker attribution consistent with Sections 18 and 22.
+- Do not automatically route residential inquiries to business lending buyers or assume that the mortgage quote provider mentioned in the footer is the only available provider.
+- Disclose mortgage default insurance, lender/broker fees, stress-test/qualification assumptions and property risk where relevant. No claims that a self-employed mortgage necessarily costs more, that home equity is suitable for business needs, or that tax write-offs imply qualifying income.
+
+### Delivery and acceptance
+**P0:** Homepage entry/category, adaptive residential assessment choices, educational disclaimers and transparent quote-contact route. **P1:** Dedicated self-employed residential SEO landing page, data model and licensed professional matching, secure CRM intake. **P2:** Program-by-program rules, verified lender access/pricing, dynamic qualification assistance and document intake under privacy/legal review.
+
+Acceptance: category appears in both homepage and multi-select wizard; purpose/income documents persist through wizard and preliminary results; non-residential assessment remains functional; no invented current rates or insurer approvals; accessible mobile controls; no sensitive form submission from the HTML prototype.
