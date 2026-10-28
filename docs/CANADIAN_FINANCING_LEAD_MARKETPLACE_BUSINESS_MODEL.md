@@ -83,3 +83,7 @@ Before selling any lead, obtain qualified Canadian counsel/regulatory review and
 ## Decision
 
 Approve **documentation and a compliance-gated pilot plan**, not an immediate national lead-resale launch. Sequence cash-generating creative/managed-service customers first; prove accepted lead supply, economics and repeated broker purchase in BC; then scale to AB/ON and Canada.
+
+## Planned fulfillment — weighted round-robin subscriptions
+
+See [subscription round-robin routing feature specification](PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md). Proposed founding/growth/regional tiers of $999/$1,995/$3,495 monthly test up to 3/6/12 accepted qualified introductions respectively with weights 1:2:4, subject to actual inventory, eligibility, consent and jurisdiction-specific approval. One pending exclusive broker offer at a time; accept/decline/timeout, credit, capacity limits and audit. Dennis co-brokering candidates require separate human/brokerage authorization and cannot also be sold as leads. **Planned only; no compensated routing until cleared.**
