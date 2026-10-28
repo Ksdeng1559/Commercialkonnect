@@ -40,6 +40,11 @@ export async function sendEmail(input: SendEmailInput) {
   const from = process.env.EMAIL_FROM;
   if (!from) throw new Error("EMAIL_FROM is not set");
 
+  // Default Reply-To to a monitored mailbox (e.g. an IONOS inbox) so
+  // replies to campaigns land somewhere a human reads. A per-call
+  // replyTo still wins.
+  const replyTo = data.replyTo ?? process.env.EMAIL_REPLY_TO;
+
   // zod guarantees html or text is present; omit undefined keys so the
   // SDK's discriminated-union type resolves to the html/text branch.
   const payload = {
@@ -48,7 +53,7 @@ export async function sendEmail(input: SendEmailInput) {
     subject: data.subject,
     ...(data.html ? { html: data.html } : {}),
     ...(data.text ? { text: data.text } : {}),
-    ...(data.replyTo ? { replyTo: data.replyTo } : {}),
+    ...(replyTo ? { replyTo } : {}),
     ...(data.attachments ? { attachments: data.attachments } : {}),
   } as CreateEmailOptions;
 
