@@ -10,6 +10,10 @@ const sendEmailSchema = z
     html: z.string().min(1).optional(),
     text: z.string().min(1).optional(),
     replyTo: z.string().email().optional(),
+    // content is base64-encoded file data; Resend accepts a base64 string.
+    attachments: z
+      .array(z.object({ filename: z.string().min(1), content: z.string().min(1) }))
+      .optional(),
   })
   .refine((d) => d.html || d.text, {
     message: "Provide at least one of `html` or `text`.",
@@ -45,6 +49,7 @@ export async function sendEmail(input: SendEmailInput) {
     ...(data.html ? { html: data.html } : {}),
     ...(data.text ? { text: data.text } : {}),
     ...(data.replyTo ? { replyTo: data.replyTo } : {}),
+    ...(data.attachments ? { attachments: data.attachments } : {}),
   } as CreateEmailOptions;
 
   const { data: result, error } = await getClient().emails.send(payload);
