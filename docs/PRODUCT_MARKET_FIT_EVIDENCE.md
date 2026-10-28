@@ -110,3 +110,76 @@ The external statistics establish **problem context**, while the above pilot mea
 4. [Statistics Canada — Survey on Financing and Growth of Small and Medium Enterprises, 2023](https://www150.statcan.gc.ca/n1/daily-quotidien/250220/dq250220e-eng.htm)
 5. [KommercialConnect Features & Benefits page](FEATURES_AND_BENEFITS.md)
 6. [Product Requirements Document](PRD.md)
+
+
+---
+
+## CommercialKonnect 2026 commercialization update — broker-driven growth flywheel
+
+**Source:** CommercialKonnect.ca Product–Market Fit & Monetization Strategy v1.0, October 27, 2026, including its proposed Section 14. **Status:** strategy hypotheses and proposed experiments; not validated traction or established PMF. This supplements the construction-intelligence evidence above rather than replacing it.
+
+### Commercial proposition and target segments
+
+CommercialKonnect is an **education-led commercial finance directory, broker marketplace, and growth-services platform**. Business owners discover financing by their problem (owner-occupied industrial acquisition, refinance, working capital, bridge or development finance), then request contact with a suitable verified specialist. Paying sides are commercial mortgage professionals, potentially commercial real estate specialists, and finance providers subject to applicable licensing and advertising rules. Do not conflate directory discovery with confirmed loan demand or an approved/funded loan.
+
+Two complementary engines:
+
+1. **Immediate cash engine:** scoped HeyGen commercial-finance videos, developer launch videos, landing pages, managed campaigns and CRM follow-up. Collect deposits before production; ad spend separately funded.
+2. **Recurring distribution engine:** basic verified directory profiles, specialty search, educational guides, disclosed sponsored placements, consented inquiry routing and broker outcome reporting.
+
+### Four linked flywheel loops — design hypotheses
+
+1. **Broker participation → distribution.** Verify brokerage identity, jurisdiction, specialties and intake capacity. Brokers distribute compliance-reviewed co-branded explainers, videos and their directory profile through permitted channels, creating trackable visits.
+2. **Education → consented inquiry.** Publish six high-intent financing guides and comparison/consultation experiences. Collect purpose, geography, stage, timeframe, recipient disclosure and the necessary consent; avoid excessive sensitive financial intake.
+3. **Inquiry → qualified conversation.** Match by jurisdiction, verified expertise, financing fit and broker capacity. Record consent provenance, inquiry acceptance/rejection, response speed, completed conversation and disposition in the CRM. A public signal does **not** establish borrowing intent.
+4. **Outcome feedback → improvements and renewals.** Aggregate de-identified inquiry and disposition trends to improve guides and routing. Report attributable outcomes to paying members. Renewals and managed-campaign revenue may fund further distribution; the resulting network effect is unproven.
+
+### LeadSniperAI, CRM and Chief of Staff roles
+
+- **LeadSniperAI:** research/source-attributed signals such as business expansion, premises acquisition, and construction/development milestones; tag confidence and timestamp, verify identity and financing interest before qualification. No unpermissioned sharing or unsupported credit inference.
+- **CRM / Atomic CRM:** record company, opportunity origin, campaign UTM, borrower consent, specialist routing, contact SLA, disposition and follow-up. Segment tenant data and restrict visibility.
+- **Chief of Staff / OODA:** Observe source and pipeline changes; Orient by specialty fit, freshness, permission and confidence; Decide next action with human approval where needed; Act through permitted outreach/follow-up; evaluate outcome and costs. These are planned workflows, not asserted deployed functionality.
+
+### Proposed test pricing (CAD; not validated)
+
+| Offer | Price | Accounting boundary |
+|---|---:|---|
+| Foundational verified listing | Free | No lead guarantee |
+| Professional listing | $149/month | Enhanced specialty profile and analytics |
+| Growth listing | $399/month | Disclosed feature placement, intake routing, templated video |
+| Managed acquisition | $1,495+/month | Service revenue; client ad spend extra; not software MRR |
+| Individual AI creative | $595/video | One-off production |
+| Creative kit | $1,495/kit | One-off production |
+| Developer launch package | $2,995+/project | Project video, cuts, copy, inquiry page |
+| Future commercial qualified inquiry | $200–$350 (hypothesis) | **Do not offer before legal/compliance review, documented acceptance standards and permission** |
+
+Illustrative combined gross monthly revenue scenarios (memberships plus managed campaigns, **not forecasts**): low **$3,038**, base **$11,455**, expansion **$29,385**. Exclude lead resale, one-off creative work, taxes, labour, churn, refunds and paid media from these examples. Track directory MRR, agency/service revenue, and one-offs separately.
+
+### Minimum viable pilot workflow
+
+1. Onboard and verify three BC founding brokers with a disclosed specialty and intake capacity; secure **three paid pilot receipts** rather than relying on expressed interest.
+2. Choose one financing problem, initially owner-occupied industrial purchase or commercial refinance. Publish two co-branded guide/video campaigns and a shared educational consultation page, within a six-guide site launch plan.
+3. Distribute via owned/partner channels, local SEO, permissioned outreach and explicitly budgeted ads. Preserve UTM/source attribution and distinguish organic, broker-assisted and paid traffic.
+4. Capture consult request, privacy notice, specific recipient/consent evidence; manually review match and route to broker.
+5. Use CRM to measure time to first contact, accepted qualified conversations, appointments, source, invalid/duplicate inquiries and complaints. Report monthly and record fulfillment hours and costs.
+6. Review paid pilot renewals and unit economics before automating marketplace bidding, underwriting or pay-per-lead.
+
+### 30-/60-/90-day decision gates and scorecard
+
+| Window | Deliverable | Evidence gate |
+|---|---|---|
+| Days 1–14 | Ten broker and five owner interviews; three paid founding memberships | Receipts, clear unmet need, defined service scope |
+| Days 15–30 | Six problem guides, 10–20 verified profiles, consultation/consent and manual routing | End-to-end tracking, first attributable conversations |
+| Days 31–60 | Test $149/$399 subscription conversion and two managed campaigns | Qualified appointments, contribution margin, response speed |
+| Days 61–90 | Review renewal, CAC, source attribution and time-to-first-contact | Repeatable qualified demand, paid retention, acceptable cash contribution |
+
+**North-star:** broker-accepted, borrower-consented, qualified financing conversations per month. **Pay-side proof:** paid member renewal. Guardrails: consent evidence, complaint rate, duplicates, acceptance, broker response speed, client churn, cost per qualified conversation and actual collection of invoices. Separate partner-assisted from net-new conversions and separate broker cohort performance from contractor or realtor pilots.
+
+### Regulatory and financing safeguards
+
+- Apply relevant BC Mortgage Services Act/BCFSA advertising, registered-brokerage identification, mortgage referral, privacy and consent requirements; check Alberta/Ontario independently before expanding.
+- Disclose sponsorship and paid placement; do not promise rates, approval, financing availability, or lead volumes without substantiation.
+- REALTOR leads, referral benefits, and transaction-/lead-contingent payments must not launch without explicit appropriate legal, regulatory and brokerage review. Fixed-fee advertising is not automatically exempt from all requirements.
+- Preserve lead-source provenance, verification dates, model/inference status, consent and access audit trails. Keep broker-specific relationship records isolated.
+
+**Commercialization decision:** prioritize paid creative/developer projects and three founding broker pilots before major platform spending; keep the initial geography in BC. Expand only after first cash receipts, qualified conversations, renewal evidence and sustainable unit economics. The current prototype and positive creative feedback are early directional evidence, **not established PMF**.
