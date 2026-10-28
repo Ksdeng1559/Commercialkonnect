@@ -183,3 +183,7 @@ Illustrative combined gross monthly revenue scenarios (memberships plus managed 
 - Preserve lead-source provenance, verification dates, model/inference status, consent and access audit trails. Keep broker-specific relationship records isolated.
 
 **Commercialization decision:** prioritize paid creative/developer projects and three founding broker pilots before major platform spending; keep the initial geography in BC. Expand only after first cash receipts, qualified conversations, renewal evidence and sustainable unit economics. The current prototype and positive creative feedback are early directional evidence, **not established PMF**.
+
+### National qualified-inquiry marketplace extension (October 27, 2026)
+
+The proposed Canadian lead-sales business model, with transparent national demand proxies, 1%–10% serviceability sensitivity, pricing experiments, $50,000/month variable lead-sales scenario, cost controls, province expansion gates and explicit regulatory holds, is documented in [Canadian Financing Lead Marketplace Business Model](CANADIAN_FINANCING_LEAD_MARKETPLACE_BUSINESS_MODEL.md). Its demand estimates are **not** measured lead-market TAM or validated conversion. LeadSniperAI signals remain non-saleable intelligence until borrower financing intent and lawful sharing are confirmed. Keep inquiry transaction revenue separate from subscription MRR and managed-service retainers.
