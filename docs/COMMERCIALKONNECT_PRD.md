@@ -625,3 +625,7 @@ Acceptance: category appears in both homepage and multi-select wizard; purpose/i
 **Acceptance:** homepage card and product options visible; borrower can select investment, holding company and other financing products together; conditional ownership/property questions required in investment pathway; preliminary summary retains answers; no fabricated rates or lender approval; anonymous educational journey remains functional.
 
 **Delivery:** P0 prototype information capture, P1 full subtype-specific intake and consented routing, P2 verified lender product criteria and scenario optimization.
+
+## Planned feature — Subscription weighted round-robin qualified-inquiry routing (P0–P2)
+
+**Not implemented.** See [full implementation specification](PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md) for the consented soft application, phone verification, eligibility-first broker pool, weighted 1:2:4 allocation by proposed $999/$1,995/$3,495 tiers, monthly caps, exclusive time-limited offers, accept/decline/expire/reassign, atomic ledger and audit trail, exceptions and separate Dennis co-broker review queue. Subscriptions/paid referrals must pass province-specific legal and brokerage review before activation. Administrative automation target ≥90% is unvalidated; regulated underwriting/advice remains with authorized professionals.
