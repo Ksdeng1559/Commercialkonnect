@@ -1,4 +1,5 @@
-import "dotenv/config";
+import { config } from "dotenv";
+config({ path: ".env.local" });
 import { createServiceRoleClient } from "../src/lib/supabase/server";
 import { buildDataFetch } from "../src/lib/builddata/client";
 import { refreshCoverage, isMunicipalityCovered } from "../src/lib/builddata/coverage";

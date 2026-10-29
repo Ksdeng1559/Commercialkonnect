@@ -45,6 +45,10 @@ services:
       # in mu-plugins/ck-local-dev.php (wp-config.php runs before add_filter() exists).
       WORDPRESS_CONFIG_EXTRA: |
         define( 'WP_ENVIRONMENT_TYPE', 'local' );
+      # CommercialKonnect Components Supabase proxy config (from wp/.env). Server-side only.
+      CK_SUPABASE_URL: ${CK_SUPABASE_URL:-}
+      CK_SUPABASE_ANON_KEY: ${CK_SUPABASE_ANON_KEY:-}
+      CK_SUPABASE_SERVICE_ROLE_KEY: ${CK_SUPABASE_SERVICE_ROLE_KEY:-}
     volumes:
       # WP core + uploads persist in a named volume so restarts keep state.
       - ck_wp_core:/var/www/html
@@ -52,6 +56,8 @@ services:
       - ./mu-plugins:/var/www/html/wp-content/mu-plugins
       # Vendored third-party MCP plugin — cloned by you, gitignored. See wp/README.md.
       - ./plugins/wp-mcp-ultimate:/var/www/html/wp-content/plugins/wp-mcp-ultimate
+      # Our interactive blocks plugin (Assessment Wizard + Rate Comparison Guide). Build output is in build/.
+      - ./plugins/commercialkonnect-components:/var/www/html/wp-content/plugins/commercialkonnect-components
 
 volumes:
   ck_wp_db:

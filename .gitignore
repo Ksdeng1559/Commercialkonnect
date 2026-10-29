@@ -9,3 +9,14 @@ node_modules/
 /wp/plugins/*
 !/wp/plugins/.gitkeep
 /wp/.env
+# Claude Code MCP config holds a Basic-auth secret for the local WP MCP server.
+/.mcp.json
+# Vendored Claude Code skill/agent trees — local tooling, not project source.
+/.claude/
+/.agents/
+# Large media binaries — keep out of git history (use external storage / LFS).
+/Videos/
+# Scraped third-party site data — provenance/licensing review required before committing.
+/data/
+# Editor workspace files.
+*.code-workspace

@@ -1,4 +1,5 @@
-import "dotenv/config";
+import { config } from "dotenv";
+config({ path: ".env.local" });
 import { writeFileSync, mkdirSync } from "node:fs";
 import { buildDataFetch } from "../src/lib/builddata/client";
 import type { BuildDataCoverageResponse, BuildDataListResponse } from "../src/lib/builddata/types";
