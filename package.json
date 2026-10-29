@@ -14,7 +14,8 @@
     "ingest:builddata": "tsx scripts/ingest-builddata.ts",
     "scrape:sites": "tsx scripts/scrape-sites.ts",
     "scrape:extract": "tsx scripts/extract-lenders.ts",
-    "email:test": "tsx scripts/send-test-email.ts"
+    "email:test": "tsx scripts/send-test-email.ts",
+    "sms:test": "tsx scripts/send-test-sms.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.0",
@@ -24,6 +25,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "resend": "^6.35.0",
+    "twilio": "^6.2.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
