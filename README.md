@@ -64,6 +64,14 @@ Register it in your MCP client config (token redacted — supply your own):
 
 The bearer token is provisioned on the Mortgagesbydenniseng app (Vercel env `MCP_BEARER_TOKEN`). Do not paste it into this repo, chat, or any committed file.
 
+## Planned integration — Chatwoot (customer engagement)
+
+[Chatwoot](https://github.com/chatwoot/chatwoot) is an open-source customer engagement platform (shared team inbox, website live chat, and omnichannel routing for email, SMS, and WhatsApp). The intent is to unify inbound borrower and broker conversations — the marketing-site chat widget plus the existing Resend email and Twilio SMS slices — into one agent inbox with conversation history, rather than scattering replies across channels. **Planning only; not installed or integrated.**
+
+- **Deployment options:** self-hosted (`chatwoot/chatwoot` — Rails + PostgreSQL + Redis, Docker) or Chatwoot Cloud. Self-host chosen only if data residency requires it.
+- **Likely touch points:** a web-widget script on the public/marketing frontend; Twilio and email channels wired to the existing send-only slices; optional API/webhook link to CRM data.
+- **Open questions / gates before any build:** PIPEDA data residency (Canadian-hosted vs cloud region), CASL consent capture inside chat, tenant isolation (no isolation exists in this repo yet — see P0 workstream), PII retention/audit, and where Chatwoot sits relative to the Atomic CRM read path above. No conversation data should be collected from real users until these are resolved.
+
 ## Current workstream
 Refactoring Mortgage Mix (`mix_*` tables in the live `amgknqnhiscryvcfeoyj` Supabase project) into the commercial-financing opportunity engine, fed by BC construction-project data as a new lead source — design approved, implementation **not yet started**. See `docs/superpowers/specs/2026-10-14-mortgage-mix-commercial-financing-design.md` for the tenancy unification, FK-convention decisions, and local-test harness (Vitest against the Supabase CLI's local stack). This supersedes the earlier `2026-10-14-clerk-orgs-rls-crud-design.md` schema-isolation plan, kept for history only.
 
