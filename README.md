@@ -2,7 +2,7 @@
 
 **Commercial & Business Financing, Connected.** KommercialConnect is the proposed borrower-facing brand for a Canadian B2B platform that connects businesses and commercial property owners with finance brokers. The platform is supported by a construction intelligence and capital origination system that discovers early project opportunities, identifies stakeholders, and manages financing workflows.
 
-> **Repository/product status:** The GitHub repository is still named `KonstructionComOS`. KommercialConnect is the proposed public brand; domain availability and trademark clearance are not confirmed. The application remains an MVP scaffold, and public-facing brand changes have not yet been implemented in the app.
+> **Repository/product status:** The GitHub repository has been renamed to `Commercialkonnect` (formerly `KonstructionComOS`). KommercialConnect is the proposed public brand; domain availability and trademark clearance are not confirmed. The application remains an MVP scaffold, and public-facing brand changes have not yet been implemented in the app.
 
 ## MVP: British Columbia
 - Project intelligence registry with construction stage, estimated budget, source provenance, and confidence
@@ -29,6 +29,48 @@
 6. Configure Clerk organizations. Keep the database service-role key **server-only**.
 
 The dashboard and demo dataset work without connected credentials. Production persistence requires authenticated API endpoints, JWT validation and RLS policies described in `docs/ARCHITECTURE.md`.
+
+## Outbound messaging
+
+Two server-side, send-only comms slices are implemented and committed. Both validate inputs at the trust boundary (zod), read credentials from `process.env` server-side only, and are **not** wired to tenant isolation — treat them as infrastructure, not production lead workflows.
+
+- **Email (Resend)** — `src/lib/email.ts` `sendEmail()`; test via `npm run email:test -- you@example.com`. Env: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_REPLY_TO`.
+- **SMS (Twilio)** — `src/lib/sms.ts` `sendSms()` with E.164 validation; test via `npm run sms:test -- +16045551234`. Env: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE_NUMBER`. Verified end-to-end (outbound delivered, inbound received) on a BC number.
+
+**Not implemented:** inbound webhooks/routing, Twilio A2P 10DLC registration, message persistence/audit, retry/queueing, consent/suppression enforcement. Any lead-facing use must pass CASL/PIPEDA review first.
+
+## Connected data — Atomic CRM MCP (read-only)
+
+A read-only Model Context Protocol server exposes live CRM data (Mortgage Mix + Atomic CRM) from the separate Mortgagesbydenniseng app to MCP clients such as Claude Code. It is a **read path only** — it cannot write or mutate CRM records — and is **not** tenant-isolated within this repo, so treat it as a reference/lookup source, not a production lead workflow.
+
+- **Transport:** HTTP, JSON-RPC 2.0
+- **Endpoint:** `https://mortgagesbydenniseng.vercel.app/api/mcp`
+- **Auth:** `Authorization: Bearer <token>`. The token is kept server-side in the MCP client config and is **never committed** — this repo's `.mcp.json` is gitignored.
+- **Tools (5, read-only):** `list_funding_leads`, `list_mix_leads`, `list_opportunities`, `list_tasks`, `search_contacts`
+
+Register it in your MCP client config (token redacted — supply your own):
+
+```json
+{
+  "mcpServers": {
+    "atomic-crm": {
+      "type": "http",
+      "url": "https://mortgagesbydenniseng.vercel.app/api/mcp",
+      "headers": { "Authorization": "Bearer <MCP_BEARER_TOKEN>" }
+    }
+  }
+}
+```
+
+The bearer token is provisioned on the Mortgagesbydenniseng app (Vercel env `MCP_BEARER_TOKEN`). Do not paste it into this repo, chat, or any committed file.
+
+## Planned integration — Chatwoot (customer engagement)
+
+[Chatwoot](https://github.com/chatwoot/chatwoot) is an open-source customer engagement platform (shared team inbox, website live chat, and omnichannel routing for email, SMS, and WhatsApp). The intent is to unify inbound borrower and broker conversations — the marketing-site chat widget plus the existing Resend email and Twilio SMS slices — into one agent inbox with conversation history, rather than scattering replies across channels. **Planning only; not installed or integrated.**
+
+- **Deployment options:** self-hosted (`chatwoot/chatwoot` — Rails + PostgreSQL + Redis, Docker) or Chatwoot Cloud. Self-host chosen only if data residency requires it.
+- **Likely touch points:** a web-widget script on the public/marketing frontend; Twilio and email channels wired to the existing send-only slices; optional API/webhook link to CRM data.
+- **Open questions / gates before any build:** PIPEDA data residency (Canadian-hosted vs cloud region), CASL consent capture inside chat, tenant isolation (no isolation exists in this repo yet — see P0 workstream), PII retention/audit, and where Chatwoot sits relative to the Atomic CRM read path above. No conversation data should be collected from real users until these are resolved.
 
 ## Current workstream
 Refactoring Mortgage Mix (`mix_*` tables in the live `amgknqnhiscryvcfeoyj` Supabase project) into the commercial-financing opportunity engine, fed by BC construction-project data as a new lead source — design approved, implementation **not yet started**. See `docs/superpowers/specs/2026-10-14-mortgage-mix-commercial-financing-design.md` for the tenancy unification, FK-convention decisions, and local-test harness (Vitest against the Supabase CLI's local stack). This supersedes the earlier `2026-10-14-clerk-orgs-rls-crud-design.md` schema-isolation plan, kept for history only.
@@ -95,9 +137,9 @@ The current ClearConnect/Klick2Client frontend below is an existing prototype an
 
 The vendor-neutral GTM provider adapter **has been scaffolded on a separate feature branch**, not merged into `main` or deployed. It is intended to give Chief of Staff and GTM agents a consistent interface while comparing enrichment providers without lock-in.
 
-- **Implementation branch:** [`feature/gtm-provider-adapter`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter)
-- **Source:** [`src/lib/gtm/providers/`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter/src/lib/gtm/providers)
-- **Handoff:** [GTM provider adapter implementation](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md)
+- **Implementation branch:** [`feature/gtm-provider-adapter`](https://github.com/Ksdeng1559/Commercialkonnect/tree/feature/gtm-provider-adapter)
+- **Source:** [`src/lib/gtm/providers/`](https://github.com/Ksdeng1559/Commercialkonnect/tree/feature/gtm-provider-adapter/src/lib/gtm/providers)
+- **Handoff:** [GTM provider adapter implementation](https://github.com/Ksdeng1559/Commercialkonnect/blob/feature/gtm-provider-adapter/docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md)
 - **Provider candidates:** Treg (tool gateway), Deepline (GTM enrichment workflows), Exa, Tavily, Parallel and manual baseline.
 - **Implemented in branch:** TypeScript contract, provider registry, capability validation, explicit feature flags (off by default), basic response validation, per-request spend-cap checks and mandatory review flags.
 - **Not implemented:** Vendor API calls, runtime tenant authorization, verified vendor pricing, persistence/audit ledger, automated tests, routing/approval UI or production integration. The scaffold's spend cap does not replace pre-call billing authorization.
@@ -107,12 +149,4 @@ The vendor-neutral GTM provider adapter **has been scaffolded on a separate feat
 
 ## Claude Code handoff — OODA Chief of Staff implementation
 
-The detailed phased engineering plan is maintained in the [feature/gtm-provider-adapter README](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/README.md#claude-code-execution-plan--gtm-enrichment--ooda-chief-of-staff). **Claude Code should check out that feature branch and read its execution plan**, together with `AGENTS.md`, `CLAUDE.md`, `docs/OODA_CHIEF_OF_STAFF.md`, and the provider/OODA pipeline documents on that branch. The plan sequences tenancy and real-data gates, provider evaluation, persistent OODA decisioning, approval-controlled agent actions, dashboard work and regression testing. The branch contains **prototypes only**, not a production integration; do not merge before review and verified tests. First deliver an authorized, sourced BC prospect → Signal → Orientation → needs-review proposal → approved internal-only action → audited outcome vertical slice.
-
-### Planned — subscription weighted round-robin lead distribution
-
-CommercialKonnect's future broker marketplace will use eligibility-first, subscription-weighted round-robin matching with caps, time-limited exclusive offers, broker accept/decline, reassignment, consent/audit logs and a distinct human-approved co-broker review queue. See [`docs/PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md`](docs/PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md). **Documentation only: not built or deployed; paid lead allocation requires province/product-specific compliance and brokerage approval.**
-
-### Client acquisition and video sample library (planning)
-
-See [`docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md`](docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md) for the CommercialKonnect borrower-acquisition framework: financing-problem campaigns, video-to-consultation landing-page funnels, broker routing, attribution/KPIs and publication gates. It indexes six HeyGen Video Agent sessions and two ChatGPT-origin sample source projects (HyperFrames bank-decline and Remotion BC business-funding). **These are example/session references, not verified published video masters or deployed acquisition automations.**
+The detailed phased engineering plan is maintained in the [feature/gtm-provider-adapter README](https://github.com/Ksdeng1559/Commercialkonnect/blob/feature/gtm-provider-adapter/README.md#claude-code-execution-plan--gtm-enrichment--ooda-chief-of-staff). **Claude Code should check out that feature branch and read its execution plan**, together with `AGENTS.md`, `CLAUDE.md`, `docs/OODA_CHIEF_OF_STAFF.md`, and the provider/OODA pipeline documents on that branch. The plan sequences tenancy and real-data gates, provider evaluation, persistent OODA decisioning, approval-controlled agent actions, dashboard work and regression testing. The branch contains **prototypes only**, not a production integration; do not merge before review and verified tests. First deliver an authorized, sourced BC prospect → Signal → Orientation → needs-review proposal → approved internal-only action → audited outcome vertical slice.
