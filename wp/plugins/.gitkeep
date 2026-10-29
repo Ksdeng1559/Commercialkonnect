@@ -1,0 +1,2 @@
+# Vendored third-party WordPress plugins mount here (bind-mounted by docker-compose.yml).
+# wp-mcp-ultimate is cloned into ./wp-mcp-ultimate and is gitignored. See ../README.md.

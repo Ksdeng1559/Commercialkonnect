@@ -7,24 +7,40 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "builddata:sample": "tsx scripts/builddata-sample.ts",
+    "ingest:builddata": "tsx scripts/ingest-builddata.ts",
+    "scrape:sites": "tsx scripts/scrape-sites.ts",
+    "scrape:extract": "tsx scripts/extract-lenders.ts",
+    "email:test": "tsx scripts/send-test-email.ts",
+    "sms:test": "tsx scripts/send-test-sms.ts"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.31.0",
+    "@supabase/supabase-js": "^2.57.0",
+    "lucide-react": "^0.468.0",
     "next": "^15.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "lucide-react": "^0.468.0",
-    "@clerk/nextjs": "^6.31.0",
-    "@supabase/supabase-js": "^2.57.0"
+    "resend": "^6.35.0",
+    "twilio": "^6.2.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "typescript": "^5.9.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.18.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.0",
-    "@tailwindcss/postcss": "^4.1.0",
+    "dotenv": "^18.0.8",
     "eslint": "^9.35.0",
-    "eslint-config-next": "^15.5.0"
+    "eslint-config-next": "^15.5.0",
+    "jsonwebtoken": "^9.0.3",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.4"
   }
 }

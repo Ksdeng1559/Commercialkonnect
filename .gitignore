@@ -4,3 +4,8 @@ node_modules/
 !.env.example
 *.tsbuildinfo
 .DS_Store
+/scripts/.builddata-samples/
+# Local WordPress dev stack (wp/): vendored third-party plugin + local state only.
+/wp/plugins/*
+!/wp/plugins/.gitkeep
+/wp/.env

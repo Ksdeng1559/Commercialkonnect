@@ -1,0 +1,58 @@
+# CommercialKonnect — local WordPress dev stack.
+# Local-only. Not for production. Replaces the Lovable public site LATER, after the
+# compliance publication gate (docs/SEO_PLAN.md §1) clears. Nothing here is public.
+#
+# Up:    cd wp && docker compose up -d
+# Admin: http://localhost:8090/wp-admin  (first run: finish the WP install wizard)
+# Down:  docker compose down            (add -v to also wipe db + core volumes)
+# Port:  override with WP_PORT in wp/.env if 8090 is taken.
+#
+# Ports chosen to avoid the already-running Supabase / open-seo / honcho stacks.
+
+services:
+  db:
+    image: mariadb:11
+    container_name: ck_wp_db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${WORDPRESS_DB_NAME:-ck_wp}
+      MARIADB_USER: ${WORDPRESS_DB_USER:-ck_wp}
+      MARIADB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-ck_wp_dev_pw}
+      MARIADB_ROOT_PASSWORD: ${WORDPRESS_DB_ROOT_PASSWORD:-ck_wp_root_dev_pw}
+    volumes:
+      - ck_wp_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    container_name: ck_wp
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8090}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-ck_wp}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-ck_wp}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-ck_wp_dev_pw}
+      # Marks this as a local env. The Application-Passwords-over-http override is applied
+      # in mu-plugins/ck-local-dev.php (wp-config.php runs before add_filter() exists).
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_ENVIRONMENT_TYPE', 'local' );
+    volumes:
+      # WP core + uploads persist in a named volume so restarts keep state.
+      - ck_wp_core:/var/www/html
+      # Version-controlled: our must-use plugin (the lender CPT + verification gate).
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins
+      # Vendored third-party MCP plugin — cloned by you, gitignored. See wp/README.md.
+      - ./plugins/wp-mcp-ultimate:/var/www/html/wp-content/plugins/wp-mcp-ultimate
+
+volumes:
+  ck_wp_db:
+  ck_wp_core:
