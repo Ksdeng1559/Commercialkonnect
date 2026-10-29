@@ -172,3 +172,65 @@ Time to confirmation; delivery success by channel; percentage of enquirers with 
 ## 9. Ownership and rollout
 
 This file is the **SOP/source specification**, not implementation. The separate Atomic CRM deployment should implement the event handlers and persistence; CommercialKonnect web forms emit the events. Launch in phases: internal test data → controlled customer confirmation → internal broker alert and escalation → consent-eligible nurture. Keep outbound sends disabled until all release gates pass.
+
+
+## 10. Cal.com calendar integration and appointment automation
+
+**Decision:** Use Cal.com as the initial appointment booking engine, with Google Calendar connected by each broker and Atomic CRM remaining the lead/opportunity and communications system of record. Cal.com owns slot availability and booking lifecycle, not financing qualification or customer consent. This is an implementation specification, not a deployed integration.
+
+### 10.1 Initial event types
+
+| Event type | Duration | Audience | Routing |
+|---|---:|---|---|
+| Commercial Financing Consultation | 30 minutes | Business owners / commercial property owners | Assigned qualified broker |
+| Construction Financing Consultation | 30 minutes | Developers / builders | Development finance specialist |
+| Broker Platform Demo | 20 minutes | Commercial finance professionals | CommercialKonnect platform team |
+
+Configure 10-minute buffer as default, business hours per calendar, Pacific timezone for internal display, visitor-local time for booking, and connected-calendar conflict checks. Do not publish time slots without live availability checks.
+
+### 10.2 Booking flow
+
+1. An enquiry or financing-guide request creates/updates a contact and opportunity in Atomic CRM.
+2. Confirmation email provides booking URL or embedded Cal.com widget. Pass only non-sensitive attribution data (CRM enquiry reference, source and campaign); do not expose personal financial data in URL/query params.
+3. Broker routing: use the assigned broker when available. If unassigned, choose an eligible opted-in broker by financing specialty, province/territory licence coverage, capacity and current availability; do not promise a particular broker before assignment is confirmed. For MVP, allow manual assignment or one platform-managed booking calendar.
+4. Cal.com creates the booking and its connected Google Calendar event; capture booking UID, organizer, UTC start/end, IANA timezone, event type and status.
+5. Verified Cal.com webhook is processed idempotently to upsert an appointment and activity in Atomic CRM and update opportunity stage to **Meeting Booked** only after confirmation.
+6. Resend sends branded booking confirmation; Twilio sends an SMS confirmation/reminder only where service-SMS consent is affirmatively recorded. Prevent duplicate provider-native and custom reminders by assigning a single owner per message.
+7. On cancellation/reschedule, update the same CRM appointment linkage, invalidate old reminder jobs and create new ones, rather than adding duplicate opportunities.
+8. On meeting completion or no-show, prompt staff to record outcome and next action. Do not automatically mark attended based solely on event end time.
+
+### 10.3 Event and message matrix
+
+| Source event | CRM action | Outbound action |
+|---|---|---|
+| Cal.com booking.created | Store appointment + UID; move to Meeting Booked | E05 Resend confirmation; optional consented Twilio confirmation |
+| Cal.com booking.rescheduled | Update linked appointment and timing | Resend changed-time notice; replace scheduled reminders |
+| Cal.com booking.cancelled | Mark cancelled; record reason if available | Resend cancellation notice; cancel reminders |
+| 24 hours before appointment | No stage change | Resend service reminder |
+| 2 hours before appointment | No stage change | Twilio reminder only with documented SMS consent |
+| Consultation finished | Create outcome/next-step CRM task | No automatic nurture until outcome recorded |
+| No-show confirmed by staff | Set no-show, assign follow-up | Permitted rescheduling invitation |
+
+Map exact Cal.com webhook names and payload versions to the installed Cal.com API documentation at implementation time; do not rely on informal labels in this SOP as literal provider event names.
+
+### 10.4 Integration records
+
+Add to Atomic CRM, or map onto existing schema:
+`appointment_id, tenant_id, enquiry_id, contact_id, broker_id, cal_booking_uid UNIQUE, cal_event_type_id, google_calendar_event_id?, status, start_utc, end_utc, timezone, meeting_url?, reschedule_url?, cancellation_url?, last_provider_update, source_campaign_id, last_notification_state`.
+
+Keep webhook signing secrets, OAuth tokens and Cal.com API keys server-side in the correct tenant scope. Verify signatures and event freshness, enforce unique booking UID, and reconcile missed webhook events periodically. For multi-broker marketplace, confirm Cal.com platform/managed-user licensing, OAuth model, and account boundaries before offering independent broker self-service connections.
+
+### 10.5 Go-live acceptance
+
+- [ ] Cal.com account/plan and connected Google Calendar verified.
+- [ ] Event types, availability, buffers and timezone tested (including daylight-saving transitions).
+- [ ] Confirmation creates exactly one CRM appointment with matching booking UID.
+- [ ] Rescheduling/cancellation modifies the same appointment and cancels stale reminders.
+- [ ] Double-book prevention and multi-user authorization tested.
+- [ ] Webhook signature validation, replay deduplication, retries, and reconciliation tested.
+- [ ] Consent check enforced on SMS reminders; STOP overrides queued messages.
+- [ ] Customer reminders have exactly one configured sender (Cal.com-native **or** Resend/Twilio).
+- [ ] Broker-specific access is tenant-isolated and licensed appropriately.
+- [ ] Live booking and notifications remain disabled until controlled end-to-end verification.
+
+**Recommended MVP:** one platform booking calendar and the three event types first; defer independent broker round-robin and embedded marketplace-managed booking until tenant boundaries, licensing and assignment logic are validated.
