@@ -36,6 +36,10 @@ Paths are **proposed IA**, not verified live pages. Three priority launch campai
 - **Measurement:** event_id and UTM: video_view, 3s_hold, video_50, video_complete, CTA_click, guide_requested, form_started, form_submitted, qualified, booked, held, broker_accepted, application_started, funded, disqualified, suppressed. Avoid counting video views/clicks as finance opportunities.
 - **Iteration:** weekly scorecards by `creative_id × hook_id × segment × channel × landing_page`; scale qualified consultations held and broker-accepted results, not raw reach.
 
+## Viral Content Engine campaign workflow — October 29, 2026
+
+Use the [command-to-funnel operating specification](VIRAL_CONTENT_ENGINE_ACQUISITION_FUNNEL.md) for /trendmine through /analytics and /clone, including the master /workflow. The first focused test is BC contractors: payroll before customer payment, three hook variants, one readiness checklist and an optional financing review. Atomic CRM is the intended handoff, subject to verified configuration. Preserve broker Client Brain matching, consent and publication gates above. Commands generate briefs and assets; they do not establish a live plugin/API integration or authorize publishing.
+
 ## Video reference gallery (HeyGen Video Agent sessions)
 **Important:** These are HeyGen production-session links from the creative process, *not verified MP4s, published ad URLs or quality-approved masters.* Session output/completion, narration continuity, rights and exact copy must be checked in HeyGen before publishing.
 

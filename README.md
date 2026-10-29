@@ -116,3 +116,7 @@ CommercialKonnect's future broker marketplace will use eligibility-first, subscr
 ### Client acquisition and video sample library (planning)
 
 See [`docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md`](docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md) for the CommercialKonnect borrower-acquisition framework: financing-problem campaigns, video-to-consultation landing-page funnels, broker routing, attribution/KPIs and publication gates. It indexes six HeyGen Video Agent sessions and two ChatGPT-origin sample source projects (HyperFrames bank-decline and Remotion BC business-funding). **These are example/session references, not verified published video masters or deployed acquisition automations.**
+
+### Customer acquisition funnel — Custom Viral Content Engine
+
+The [Viral Content Engine acquisition funnel](docs/VIRAL_CONTENT_ENGINE_ACQUISITION_FUNNEL.md) maps the supplied 16-command menu and `/workflow` to research, scripts, platform adaptation, PDF lead magnets, optional assessment, Atomic CRM handoff, broker review and revenue attribution. First pilot: BC contractor cash flow with three hooks and a CASHFLOW readiness checklist. It extends the existing acquisition SOP and video playbook while keeping broker-client acquisition distinct from borrower lead generation. **Documentation/manual-first specification only; plugin API, publishing, DM automation and CRM connection are not implemented by this update.**

@@ -31,6 +31,12 @@ CommercialKonnect is both a broker-facing origination/marketing system and a bor
 
 **Borrower states:** Visitor → PDF requested → Delivered → Assessment started → Submitted → Consent verified → Fit reviewed → Broker offered → Broker accepted/declined → Booked → Attended → Outcome.
 
+## Viral Content Engine extension — October 29, 2026
+
+Track B now includes the [Custom Viral Content Engine workflow](VIRAL_CONTENT_ENGINE_ACQUISITION_FUNNEL.md): research → problem definition → platform-native video → checklist → optional assessment → Atomic CRM → human-reviewed broker introduction → consultation → outcome. Start with BC contractor cash flow and the CASHFLOW checklist CTA. The specification maps all 16 commands and /workflow, campaign attribution, consent, CRM deduplication, failure handling and validation.
+
+Track A uses the sample campaign in broker demos and activates it against an approved Client Brain. Borrower inquiries remain distinct from paying-client acquisition. This is a documented manual-first process; plugin/API, publishing, DM and CRM automations remain unconnected until verified.
+
 ## Client Brain contract and separation
 
 | Brain | Contains | Can affect |
