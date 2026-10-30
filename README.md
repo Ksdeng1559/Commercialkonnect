@@ -122,3 +122,11 @@ See [`docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md`](docs/COMMERC
 ### Customer acquisition funnel — Custom Viral Content Engine
 
 The [Viral Content Engine acquisition funnel](docs/VIRAL_CONTENT_ENGINE_ACQUISITION_FUNNEL.md) maps the supplied 16-command menu and `/workflow` to research, scripts, platform adaptation, PDF lead magnets, optional assessment, Atomic CRM handoff, broker review and revenue attribution. First pilot: BC contractor cash flow with three hooks and a CASHFLOW readiness checklist. It extends the existing acquisition SOP and video playbook while keeping broker-client acquisition distinct from borrower lead generation. **Documentation/manual-first specification only; plugin API, publishing, DM automation and CRM connection are not implemented by this update.**
+
+
+## CommercialKonnect Mission Control — first implementation slice
+
+CommercialKonnect is the operator hub for lead and opportunity generation; LeadSniper 3.0 supplies the GMB-derived business research pool. The `/mission-control` workspace adds CSV/JSON business import, source review, optional organization-scoped LeadSniper feed/enrichment, Tavily research, an opportunity board, OmniRoute draft generation and exports. See [implementation, configuration and limits](docs/COMMERCIALKONNECT_MISSION_CONTROL.md).
+
+**Status:** implemented on this branch for review, not a verified production connection. Clerk/provider settings and the actual durable LeadSniper feed still need configuration. State is browser-memory only; export before closing. No Supabase persistence, automatic publishing, CRM sync or live-source verification is claimed.
+
