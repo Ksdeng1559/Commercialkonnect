@@ -7,24 +7,40 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.mjs tests/*.test.ts",
+    "worker:windows": "node scripts/worker/run.mjs",
+    "api:spec": "node --import tsx scripts/generate-openapi.ts",
+    "test:smoke": "node tests/production-smoke.mjs"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.31.0",
+    "@supabase/supabase-js": "2.118.0",
+    "lucide-react": "^0.468.0",
     "next": "^15.5.0",
+    "pg": "8.16.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "lucide-react": "^0.468.0",
-    "@clerk/nextjs": "^6.31.0",
-    "@supabase/supabase-js": "^2.57.0"
+    "zod": "3.25.76"
   },
   "devDependencies": {
-    "typescript": "^5.9.0",
+    "@apidevtools/swagger-parser": "10.1.1",
+    "@electric-sql/pglite": "0.3.14",
+    "@eslint/eslintrc": "3.3.1",
+    "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^22.18.0",
+    "@types/pg": "8.15.5",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.0",
-    "@tailwindcss/postcss": "^4.1.0",
     "eslint": "^9.35.0",
-    "eslint-config-next": "^15.5.0"
+    "eslint-config-next": "^15.5.0",
+    "tailwindcss": "^4.1.0",
+    "tsx": "4.21.0",
+    "typescript": "^5.9.0",
+    "zod-to-json-schema": "3.25.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
   }
 }

@@ -17,5 +17,5 @@ export default function middleware(
   return clerk(request, event);
 }
 export const config = {
-  matcher: ["/mission-control(.*)", "/api/mission-control(.*)"],
+  matcher: ["/mission-control(.*)", "/api/mission-control(.*)", "/api/v1(.*)"],
 };

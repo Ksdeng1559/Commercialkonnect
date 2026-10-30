@@ -130,3 +130,9 @@ CommercialKonnect is the operator hub for lead and opportunity generation; LeadS
 
 **Status:** implemented on this branch for review, not a verified production connection. Clerk/provider settings and the actual durable LeadSniper feed still need configuration. State is browser-memory only; export before closing. No Supabase persistence, automatic publishing, CRM sync or live-source verification is claimed.
 
+
+## API v1 — ConnectionOS discovery and inbound funding enquiries
+
+CommercialKonnect's versioned API now has an implementation slice for discovery/enrichment jobs pulled by a scoped Windows worker, persistent company records, public/operator funding intake, human qualification, opportunity review, audit events and an OpenAPI contract. ConnectionOS is the business-discovery path; LeadSniper 3.0 is the user's local CLI/GMB research source.
+
+See [API v1 setup, endpoints and limits](docs/API_V1.md) and [OpenAPI](openapi.json). The SQL proposal is isolated under `db/api-v1.sql`, uses the existing canonical workspace IDs, and has not been applied to the live database. Windows CLI commands/output still require verification and a wrapper. The previous dashboard is not yet wired to these durable endpoints. No live provider connection, public form migration or production deployment is claimed.
