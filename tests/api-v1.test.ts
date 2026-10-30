@@ -707,3 +707,67 @@ test("SQL records survive closing and reopening the local PostgreSQL engine", as
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("company search combines literal filters before pagination and stays workspace scoped", async () => {
+  const { db, handler } = await setup();
+  try {
+    const api = handler(actor("org_a")), w = handler(worker("org_a"));
+    const job = await result(await api(req("discovery-jobs", {
+      industry: "manufacturing", location: "BC", limit: 3,
+    })));
+    const claim = await result(await w(req("worker/jobs/claim", {})));
+    await w(req(`worker/jobs/${job.data.id}/complete`, {
+      runId: claim.data.run_id, status: "succeeded", companies: [candidate, {
+        ...candidate, sourceKey: "source-2", businessName: "Synthetic Builder",
+        industry: "construction", location: "Surrey, BC",
+      }, {
+        ...candidate, sourceKey: "source-3", businessName: "100%_Works",
+        industry: "construction", location: "Burnaby, BC",
+      }],
+    }));
+    const search = async (query: string) => result(await api(req("companies?" + query)));
+    assert.equal((await search("industry=MANU&location=burnaby&financingNeed=unknown")).data.length, 1);
+    assert.equal((await search("q=surrey")).data[0].business_name, "Synthetic Builder");
+    assert.equal((await search("industry=construction&limit=1&offset=1")).data.length, 1);
+    assert.equal((await search("q=" + encodeURIComponent("%_"))).data[0].business_name, "100%_Works");
+    assert.equal((await search("q=" + encodeURIComponent("' OR 1=1 --"))).data.length, 0);
+    assert.equal((await search("financingNeed=owner_confirmed")).data.length, 0);
+    assert.equal((await search("financingNeed=approved")).status, 400);
+    assert.equal((await search("q=" + "a".repeat(201))).status, 400);
+    assert.equal((await search("q=")).status, 400);
+    assert.equal((await result(await handler(actor("org_b"))(req("companies?q=Synthetic")))).data.length, 0);
+    const restricted = { ...actor("org_a"), scopes: [] };
+    assert.equal((await result(await handler(restricted)(req("companies?q=Synthetic")))).status, 403);
+  } finally { await db.close(); }
+});
+
+test("content attribution survives intake and is private, replay-safe and strictly validated", async () => {
+  const { db, handler } = await setup();
+  try {
+    const api = handler(actor("org_a"));
+    const attribution = {
+      source: "instagram", medium: "paid_social", campaign: "BC contractor cash flow",
+      content: "cashflow-hook-a", campaignId: "campaign-1", creativeId: "creative-1",
+      hookId: "hook-a", assetId: "pdf-cashflow", variantId: "variant-a",
+      clientBrainVersion: "v1", landingPage: "https://example.com/cashflow",
+    };
+    const body = { ...enquiry, attribution };
+    const saved = await result(await api(req("funding-enquiries", body)));
+    assert.equal(saved.status, 201);
+    assert.deepEqual(Object.keys(saved.data).sort(), ["createdAt", "id", "replayed"]);
+    assert.equal((await result(await api(req("funding-enquiries", body)))).status, 200);
+    assert.equal((await result(await api(req("funding-enquiries", {
+      ...body, attribution: { ...attribution, hookId: "hook-b" },
+    })))).status, 409);
+    const detail = await result(await api(req(`funding-enquiries/${saved.data.id}`)));
+    assert.deepEqual(detail.data.attribution, attribution);
+    assert.deepEqual((await result(await api(req("funding-enquiries")))).data[0].attribution, attribution);
+    assert.equal((await result(await handler(actor("org_b"))(req(`funding-enquiries/${saved.data.id}`)))).status, 404);
+    assert.equal((await result(await api(req("funding-enquiries", {
+      ...body, attribution: { ...attribution, campaignId: "x".repeat(201) },
+    }, "attribution-invalid-1")))).status, 400);
+    assert.equal((await result(await api(req("funding-enquiries", {
+      ...body, attribution: { ...attribution, tenantId: bId },
+    }, "attribution-invalid-2")))).status, 400);
+  } finally { await db.close(); }
+});

@@ -9,6 +9,7 @@ import {
   qualificationInput,
   opportunityInput,
   completionInput,
+  companyFiltersInput,
 } from "../src/lib/api-v1/model";
 const requestSchemas = {
   DiscoveryInput: discoveryInput,
@@ -19,6 +20,7 @@ const requestSchemas = {
   QualificationInput: qualificationInput,
   OpportunityInput: opportunityInput,
   CompletionInput: completionInput,
+  CompanyFilters: companyFiltersInput,
 };
 const schemas = Object.fromEntries(
   Object.entries(requestSchemas).map(([name, schema]) => [
@@ -147,6 +149,13 @@ const list = (item: unknown) => ({
   },
 });
 const generic = { type: "object", additionalProperties: true };
+const enquiry = {
+  ...generic,
+  properties: {
+    id: { type: "string", format: "uuid" },
+    attribution: (schemas.EnquiryInput as { properties: Record<string, unknown> }).properties.attribution,
+  },
+};
 const doc = {
   openapi: "3.0.3",
   info: {
@@ -196,8 +205,8 @@ const doc = {
         },
       },
       CompanyList: list(company),
-      EnquiryList: list(generic),
-      EnquiryEnvelope: base,
+      EnquiryList: list(enquiry),
+      EnquiryEnvelope: { ...base, properties: { data: enquiry } },
       OpportunityList: list(generic),
       CompletionEnvelope: base,
       ClaimEnvelope: {
@@ -258,7 +267,14 @@ const doc = {
         "200",
         "CompanyList",
         undefined,
-        pagination,
+        [...pagination, ...Object.entries(
+          (schemas.CompanyFilters as { properties: Record<string, unknown> }).properties,
+        ).map(([name, schema]) => ({
+          name, in: "query", schema,
+          description: name === "financingNeed"
+            ? "Exact recorded financing-need state; this is not a credit decision."
+            : "Case-insensitive literal substring. q searches business name, industry and location.",
+        }))],
       ),
     },
     "/api/v1/discovery-jobs": {

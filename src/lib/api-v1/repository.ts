@@ -4,6 +4,7 @@ import {
   hash,
   type Actor,
   type CompletionInput,
+  type CompanyFilters,
   type EnquiryInput,
 } from "./model";
 export type Row = Record<string, unknown>;
@@ -36,14 +37,22 @@ export class Repository {
       [w, a.id, action, id],
     );
   }
-  async companies(a: Actor, limit: number, offset: number) {
+  async companies(a: Actor, limit: number, offset: number, filters: CompanyFilters = {}) {
+    // strpos treats %, _ and backslashes as literal text, never SQL wildcards.
+    const values = [filters.q, filters.industry, filters.location, filters.financingNeed]
+      .map((value) => value ?? null);
     return this.tx(
       a,
       async (sql, w) =>
         (
           await sql.query(
-            "select id,business_name,industry,location,website,business_phone,business_email,summary,provenance,source,verification_status,financing_need_status,updated_at from ck_api.companies where workspace_id=$1 order by updated_at desc,id limit $2 offset $3",
-            [w, limit, offset],
+            `select id,business_name,industry,location,website,business_phone,business_email,summary,provenance,source,verification_status,financing_need_status,updated_at from ck_api.companies where workspace_id=$1
+              and ($4::text is null or strpos(lower(business_name || ' ' || industry || ' ' || location),lower($4))>0)
+              and ($5::text is null or strpos(lower(industry),lower($5))>0)
+              and ($6::text is null or strpos(lower(location),lower($6))>0)
+              and ($7::text is null or financing_need_status=$7)
+              order by updated_at desc,id limit $2 offset $3`,
+            [w, limit, offset, ...values],
           )
         ).rows,
     );
@@ -274,7 +283,7 @@ export class Repository {
   async enquiries(a: Actor, limit: number, offset: number, id?: string) {
     return this.tx(a, async (sql, w) => {
       const result = await sql.query(
-        "select id,business_name,contact_name,email,phone,province,purpose,amount_cad,timeline,consent_to_contact,consent_to_refer,consent_at,privacy_version,source,status,reviewer_note,reviewed_by,reviewed_at,created_at from ck_api.funding_enquiries where workspace_id=$1" +
+        "select id,business_name,contact_name,email,phone,province,purpose,amount_cad,timeline,consent_to_contact,consent_to_refer,consent_at,privacy_version,attribution,source,status,reviewer_note,reviewed_by,reviewed_at,created_at from ck_api.funding_enquiries where workspace_id=$1" +
           (id
             ? " and id=$2"
             : " order by created_at desc,id limit $2 offset $3"),

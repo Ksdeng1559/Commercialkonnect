@@ -158,6 +158,41 @@
                 "type": "string",
                 "maxLength": 200
               },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "campaignId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "creativeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "hookId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "assetId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "variantId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "clientBrainVersion": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
               "landingPage": {
                 "type": "string",
                 "maxLength": 2048,
@@ -302,6 +337,41 @@
               },
               "campaign": {
                 "type": "string",
+                "maxLength": 200
+              },
+              "content": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "campaignId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "creativeId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "hookId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "assetId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "variantId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "clientBrainVersion": {
+                "type": "string",
+                "minLength": 1,
                 "maxLength": 200
               },
               "landingPage": {
@@ -540,6 +610,34 @@
           }
         ]
       },
+      "CompanyFilters": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "industry": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "financingNeed": {
+            "type": "string",
+            "enum": [
+              "unknown",
+              "owner_confirmed"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
       "ReceiptEnvelope": {
         "type": "object",
         "required": [
@@ -739,7 +837,72 @@
             "type": "array",
             "items": {
               "type": "object",
-              "additionalProperties": true
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "attribution": {
+                  "type": "object",
+                  "properties": {
+                    "source": {
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    "medium": {
+                      "type": "string",
+                      "maxLength": 100
+                    },
+                    "campaign": {
+                      "type": "string",
+                      "maxLength": 200
+                    },
+                    "content": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "campaignId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "creativeId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "hookId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "assetId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "variantId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "clientBrainVersion": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    "landingPage": {
+                      "type": "string",
+                      "maxLength": 2048,
+                      "format": "uri"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "default": {}
+                }
+              }
             }
           },
           "pagination": {
@@ -762,7 +925,73 @@
         ],
         "properties": {
           "data": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "attribution": {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "maxLength": 100
+                  },
+                  "medium": {
+                    "type": "string",
+                    "maxLength": 100
+                  },
+                  "campaign": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "content": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "campaignId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "creativeId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "hookId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "assetId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "variantId": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "clientBrainVersion": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "landingPage": {
+                    "type": "string",
+                    "maxLength": 2048,
+                    "format": "uri"
+                  }
+                },
+                "additionalProperties": false,
+                "default": {}
+              }
+            }
           }
         }
       },
@@ -935,6 +1164,48 @@
               "maximum": 100000,
               "default": 0
             }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "Case-insensitive literal substring. q searches business name, industry and location."
+          },
+          {
+            "name": "industry",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "Case-insensitive literal substring. q searches business name, industry and location."
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "Case-insensitive literal substring. q searches business name, industry and location."
+          },
+          {
+            "name": "financingNeed",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "unknown",
+                "owner_confirmed"
+              ]
+            },
+            "description": "Exact recorded financing-need state; this is not a credit decision."
           }
         ],
         "responses": {

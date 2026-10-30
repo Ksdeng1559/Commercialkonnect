@@ -1,6 +1,7 @@
 import {
   ApiError,
   completionInput,
+  companyFiltersInput,
   discoveryInput,
   enquiryDetailsInput,
   enquiryInput,
@@ -142,8 +143,13 @@ export function createHandler(deps: Dependencies) {
       if (path === "/api/v1/companies" && method === "GET") {
         permit("companies:read");
         const p = paging(url);
+        const filters = parse(companyFiltersInput, Object.fromEntries(
+          Object.entries(companyFiltersInput.shape).flatMap(([key]) =>
+            url.searchParams.has(key) ? [[key, url.searchParams.get(key)]] : [],
+          ),
+        ));
         return respond({
-          data: await deps.repository.companies(a, p.limit, p.offset),
+          data: await deps.repository.companies(a, p.limit, p.offset, filters),
           pagination: p,
         });
       }

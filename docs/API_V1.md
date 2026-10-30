@@ -30,6 +30,20 @@ The two entry paths remain distinct: discovered companies start as unverified pr
 
 List endpoints accept `limit` (1–100) and `offset`. Creation endpoints require a random `Idempotency-Key` (16–128 letters, digits, underscores or hyphens). Repeat the same key/body after a network failure; changed bodies return 409. Worker completion is guarded by the lease/run ID; a second completion after success returns 409 without repeating writes. The worker may rerun a provider request after a crash or expired lease; processing is not exactly once and provider charges may repeat.
 
+### Business research search
+
+`GET /api/v1/companies?q=fabricator&industry=manufacturing&location=Burnaby&financingNeed=unknown&limit=25`
+
+Optional `q`, `industry` and `location` use case-insensitive literal substring matching. `q` searches business name, industry and location. Filters combine with AND and apply before pagination, within the authenticated workspace. `%` and `_` are literal characters, not wildcards. Text filters must have 1–200 characters. `financingNeed` accepts only `unknown` or `owner_confirmed`; it is a recorded state, never a prediction or credit approval. This searches saved businesses, not a live directory/provider.
+
+### Content-to-enquiry attribution
+
+The existing `attribution` object now also accepts optional `content` (UTM content), `campaignId`, `creativeId`, `hookId`, `assetId`, `variantId`, and `clientBrainVersion` (1–200 characters each). Existing source, medium, campaign and HTTPS landingPage inputs remain compatible. Attribution persists in the existing JSONB column and is included in authenticated enquiry list/detail responses. Public intake responses remain receipts only.
+
+Use opaque campaign/asset identifiers, never borrower details. These fields are caller-reported tracking labels: they do not authorize access to a broker/client, prove campaign ownership, or establish referral consent. No new schema, content publishing or analytics aggregation is introduced. Replaying an idempotency key with changed attribution returns 409.
+
+See [project-folder requirements review](API_PROJECT_REVIEW.md) for the source mapping and remaining integration priorities.
+
 Responses use `{ "data": ... }` or `{ "error": { "code", "message", "requestId" } }`. Internal reads require authentication and return no-store responses. SQL/provider errors and CLI stderr are not sent to clients. Public submission returns only a receipt, never contact details.
 
 ## Storage and isolation

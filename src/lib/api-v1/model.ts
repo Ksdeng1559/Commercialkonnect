@@ -29,6 +29,13 @@ export interface Actor {
   scopes: readonly Scope[];
 }
 const short = z.string().trim().min(1).max(200);
+export const companyFiltersInput = z.object({
+  q: short.optional(),
+  industry: short.optional(),
+  location: short.optional(),
+  financingNeed: z.enum(["unknown", "owner_confirmed"]).optional(),
+}).strict();
+export type CompanyFilters = z.infer<typeof companyFiltersInput>;
 const httpsUrl = z
   .string()
   .max(2048)
@@ -94,6 +101,13 @@ export const enquiryInput = z
         source: z.string().max(100).optional(),
         medium: z.string().max(100).optional(),
         campaign: z.string().max(200).optional(),
+        content: z.string().trim().min(1).max(200).optional(),
+        campaignId: short.optional(),
+        creativeId: short.optional(),
+        hookId: short.optional(),
+        assetId: short.optional(),
+        variantId: short.optional(),
+        clientBrainVersion: short.optional(),
         landingPage: httpsUrl.optional(),
       })
       .strict()
