@@ -20,3 +20,7 @@ node_modules/
 /data/
 # Editor workspace files.
 *.code-workspace
+# Marketing working files (plans, lead magnets). Canonical copy lives in the
+# private Ksdeng1559/openseo-project research repo; public repo must not hold
+# client compliance / lending material.
+/marketing/
