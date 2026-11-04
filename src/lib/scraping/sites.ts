@@ -127,6 +127,55 @@ export const TARGET_SITES: TargetSite[] = [
     ],
     exclude: [...NOISE],
   },
+  {
+    // Two publisher sites for one lender: the .com carries the US offer and
+    // the .ca the Canadian one. They are crawled as separate domains so each
+    // capture keeps its own provenance and licence statement.
+    publisher: "Bizcap",
+    domain: "bizcapfunding.com",
+    maxPages: 13,
+    seedUrls: [
+      "https://www.bizcapfunding.com/",
+      "https://www.bizcapfunding.com/revenue-based-financing",
+      "https://www.bizcapfunding.com/line-of-capital",
+      "https://www.bizcapfunding.com/line-of-capital-ultra",
+      "https://www.bizcapfunding.com/about-us",
+      "https://www.bizcapfunding.com/all-industries",
+      "https://www.bizcapfunding.com/contact",
+      "https://www.bizcapfunding.com/authorizations-and-disclosures",
+      // Linked from the site navigation but absent from sitemap.xml.
+      "https://www.bizcapfunding.com/bridging-finance",
+    ],
+    include: [
+      /^\/$/,
+      /^\/(revenue-based-financing|line-of-capital|line-of-capital-ultra|apply-now|partners|about-us|contact|all-industries|success-stories|authorizations-and-disclosures|bridging-finance|small-business-funding)(\/|$)/i,
+    ],
+    exclude: [...NOISE, /^\/download-mobile-app/i, /^\/sms-terms/i],
+  },
+  {
+    publisher: "Bizcap",
+    domain: "bizcapfunding.ca",
+    maxPages: 20,
+    seedUrls: [
+      "https://www.bizcapfunding.ca/",
+      "https://www.bizcapfunding.ca/revenue-based-financing",
+      "https://www.bizcapfunding.ca/line-of-capital",
+      "https://www.bizcapfunding.ca/apply-for-business-funding",
+      "https://www.bizcapfunding.ca/about-us",
+      "https://www.bizcapfunding.ca/why-bizcap",
+      "https://www.bizcapfunding.ca/awards-and-recognition",
+      "https://www.bizcapfunding.ca/faqs",
+      "https://www.bizcapfunding.ca/contact-us",
+      // Linked from the site navigation but absent from sitemap.xml.
+      "https://www.bizcapfunding.ca/small-business-funding",
+      "https://www.bizcapfunding.ca/bridging-finance",
+    ],
+    include: [
+      /^\/$/,
+      /^\/(revenue-based-financing|line-of-capital|apply-for-business-funding|partner-up|about-us|why-bizcap|awards-and-recognition|faqs|contact-us|success-stories|small-business-funding|bridging-finance)(\/|$)/i,
+    ],
+    exclude: [...NOISE, /^\/sms-mobile-messaging-terms/i],
+  },
 ];
 
 /**
