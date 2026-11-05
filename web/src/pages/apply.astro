@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { PURPOSES, PRODUCT_OPTIONS, AMOUNTS, TIMINGS } from "../lib/enquiry";
+import { PURPOSES, PRODUCT_OPTIONS, PRODUCT_AMOUNT_BANDS, TIMINGS } from "../lib/enquiry";
 const params = Astro.url.searchParams;
 const selectedProduct = params.get("product") || "";
 const selectedAmount = params.get("amount") || "";
@@ -42,7 +42,7 @@ const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-
         <div class="mt-8 hidden space-y-5" data-step="3">
           <h2 class="text-xl font-semibold">How much financing are you considering?</h2>
           <label for="amount" class="block text-sm font-medium">Approximate amount (CAD)</label>
-          <select id="amount" name="amount" required class={field}><option value="">Choose a range</option>{AMOUNTS.map(a => <option value={a} selected={selectedAmount === a}>{a}</option>)}</select>
+          <select id="amount" name="amount" required class={field}><option value="">Choose a range</option>{PRODUCT_AMOUNT_BANDS["not-sure"].map(a => <option value={a} selected={selectedAmount === a}>{a}</option>)}</select>
           <p class="text-sm text-ink-700">An estimate is fine. Select “Not sure” if you're still planning.</p>
         </div>
         <div class="mt-8 hidden space-y-5" data-step="4">
@@ -86,7 +86,7 @@ const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-
       </form>
     </div>
   </main>
-  <script>
+  <script define:vars={{ amountBands: PRODUCT_AMOUNT_BANDS, initialAmount: selectedAmount }}>
     const form = document.querySelector<HTMLFormElement>("#ck-wizard");
     if (form) {
       const panels = Array.from(form.querySelectorAll<HTMLElement>("[data-step]"));
@@ -99,6 +99,17 @@ const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-
       const label = form.querySelector<HTMLElement>("#ck-step-label")!;
       const title = form.querySelector<HTMLElement>("#ck-step-title")!;
       const titles = ["Financing purpose", "Use of funds", "Operating history", "Amount", "Documentation", "Timing", "Repayment", "Contact and consent"];
+      const product = form.querySelector("#product");
+      const amount = form.querySelector("#amount");
+      const syncAmounts = (preferred = "") => {
+        const options = amountBands[product.value] || amountBands["not-sure"];
+        const prior = preferred || amount.value;
+        amount.replaceChildren(new Option("Choose a range", ""));
+        options.forEach(value => amount.add(new Option(value, value)));
+        amount.value = options.includes(prior) ? prior : "";
+      };
+      product.addEventListener("change", () => syncAmounts());
+      syncAmounts(initialAmount);
       let step = 0;
       const show = (n: number) => {
         step = Math.max(0, Math.min(n, panels.length - 1));
