@@ -1,130 +1,142 @@
 ---
 import Base from "../layouts/Base.astro";
 import { PURPOSES, PRODUCT_OPTIONS, AMOUNTS, TIMINGS } from "../lib/enquiry";
-
-const error = Astro.url.searchParams.get("error");
-const selectedProduct = Astro.url.searchParams.get("product");
-const selectedAmount = Astro.url.searchParams.get("amount");
-const selectedProvince = Astro.url.searchParams.get("province");
-const errorMessage =
-  error === "2"
-    ? "Something went wrong saving your enquiry. Please try again in a moment."
-    : error
-      ? "Please check the required fields and try again."
-      : null;
-
-const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-2.5 text-ink-900 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/20";
-const label = "block text-sm font-medium text-ink-900";
+const params = Astro.url.searchParams;
+const selectedProduct = params.get("product") || "";
+const selectedAmount = params.get("amount") || "";
+const selectedProvince = params.get("province") || "BC";
+const error = params.get("error");
+const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-3 text-ink-900 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/20";
 ---
-
-<Base
-  title="Start your financing enquiry | CommercialKonnect"
-  description="Tell us what you need. A short enquiry, no document uploads. We'll review it and, with your permission, connect you with a relevant financing professional in BC."
->
-  <main class="bg-sand-50">
-    <div class="mx-auto max-w-2xl px-5 py-16">
-      <h1 class="text-3xl font-semibold text-ink-900">Start your enquiry</h1>
-      <p class="mt-3 text-base leading-7 text-ink-700">
-        A few quick questions. No financial document uploads. Please don't include your SIN, account
-        numbers or confidential financial details.
-      </p>
-
-      {errorMessage && (
-        <div class="mt-6 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
-          {errorMessage}
-        </div>
-      )}
-
-      <form method="POST" action="/api/apply" class="mt-8 space-y-6">
+<Base title="Financing assessment | CommercialKonnect" description="Explore financing options with a short, guided business enquiry.">
+  <main class="min-h-[70vh] bg-sand-50">
+    <div class="mx-auto max-w-3xl px-5 py-12 md:py-20">
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand-700">Business financing enquiry</p>
+      <h1 class="mt-3 text-3xl font-semibold text-ink-900 md:text-4xl">Tell us about your financing needs</h1>
+      <p class="mt-3 text-ink-700">A guided assessment, not a credit application. No SIN, account numbers, financial documents or credit checks.</p>
+      {error && <p role="alert" class="mt-5 rounded-lg border border-red-300 bg-red-50 p-4 text-red-800">{error === "2" ? "We could not save your enquiry. Please try again later." : "Please review the required answers and try again."}</p>}
+      <form id="ck-wizard" method="POST" action="/api/apply" class="mt-8 rounded-2xl border border-ink-900/10 bg-white p-5 shadow-sm md:p-9">
         <input type="hidden" name="source_page" value="/apply" />
-        {selectedProvince && <p class="rounded-lg bg-white p-3 text-sm text-ink-700">Selected province: {selectedProvince === "BC" ? "British Columbia" : selectedProvince === "AB" ? "Alberta" : selectedProvince === "ON" ? "Ontario" : "Other Canadian province"}. We will confirm your location during follow-up.</p>}
-        <!-- Honeypot: hidden from users, must stay empty -->
-        <div class="hidden" aria-hidden="true">
-          <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+        <div class="hidden" aria-hidden="true"><label>Website <input name="company_website" tabindex="-1" autocomplete="off" /></label></div>
+        <div class="flex items-center justify-between gap-4 text-sm text-ink-700"><span id="ck-step-label">Step 1 of 8</span><span id="ck-step-title">Financing purpose</span></div>
+        <div class="mt-3 h-2 overflow-hidden rounded-full bg-sand-50" role="progressbar" aria-label="Assessment progress" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1" id="ck-progress"><div id="ck-progress-bar" class="h-full rounded-full bg-brand-600 transition-all" style="width:12.5%"></div></div>
+        <div class="mt-8 space-y-5" data-step="0">
+          <h2 class="text-xl font-semibold">What are you planning to finance?</h2>
+          <label for="purpose" class="block text-sm font-medium">Select the primary purpose</label>
+          <select id="purpose" name="purpose" required class={field}><option value="">Choose a purpose</option>{PURPOSES.map(p => <option value={p}>{p}</option>)}</select>
+          <label for="product" class="block text-sm font-medium">Financing product</label>
+          <select id="product" name="product" required class={field}><option value="">Choose a product</option>{PRODUCT_OPTIONS.map(p => <option value={p.value} selected={selectedProduct === p.value}>{p.label}</option>)}</select>
         </div>
-
-        <div>
-          <label class={label} for="purpose">What are you financing?</label>
-          <select id="purpose" name="purpose" required class={field}>
-            <option value="" disabled selected>Select one…</option>
-            {PURPOSES.map((p) => <option value={p}>{p}</option>)}
-          </select>
+        <div class="mt-8 hidden space-y-5" data-step="1">
+          <h2 class="text-xl font-semibold">How will the funds be used?</h2>
+          <label for="fund_use" class="block text-sm font-medium">Choose the closest description</label>
+          <select id="fund_use" name="fund_use" required class={field}><option value="">Choose one</option><option>Cover payroll or supplier payments</option><option>Purchase property or refinance</option><option>Purchase equipment or vehicles</option><option>Fund construction or development</option><option>Purchase inventory or expand operations</option><option>Acquire a business or buy out a partner</option><option>Other / still deciding</option></select>
         </div>
-
-        <div>
-          <label class={label} for="product">Financing product</label>
-          <select id="product" name="product" required class={field}>
-            <option value="" disabled selected>Select one…</option>
-            {PRODUCT_OPTIONS.map((p) => <option value={p.value} selected={selectedProduct === p.value}>{p.label}</option>)}
-          </select>
+        <div class="mt-8 hidden space-y-5" data-step="2">
+          <h2 class="text-xl font-semibold">How long has the business been operating?</h2>
+          <label for="operating_history" class="block text-sm font-medium">Operating history</label>
+          <select id="operating_history" name="operating_history" required class={field}><option value="">Select a range</option><option>Not yet operating</option><option>Less than 1 year</option><option>1–2 years</option><option>3–5 years</option><option>More than 5 years</option></select>
+          <label for="province" class="block text-sm font-medium">Business province</label>
+          <select id="province" name="province" required class={field}><option value="BC" selected={selectedProvince === "BC"}>British Columbia</option><option value="AB" selected={selectedProvince === "AB"}>Alberta</option><option value="ON" selected={selectedProvince === "ON"}>Ontario</option><option value="other" selected={selectedProvince === "other"}>Other Canadian province</option></select>
         </div>
-
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label class={label} for="amount">Approximate amount (CAD)</label>
-            <select id="amount" name="amount" required class={field}>
-              <option value="" disabled selected>Select one…</option>
-              {AMOUNTS.map((a) => <option value={a} selected={selectedAmount === a}>{a}</option>)}
-            </select>
-          </div>
-          <div>
-            <label class={label} for="timing">Desired timing</label>
-            <select id="timing" name="timing" required class={field}>
-              <option value="" disabled selected>Select one…</option>
-              {TIMINGS.map((t) => <option value={t}>{t}</option>)}
-            </select>
-          </div>
+        <div class="mt-8 hidden space-y-5" data-step="3">
+          <h2 class="text-xl font-semibold">How much financing are you considering?</h2>
+          <label for="amount" class="block text-sm font-medium">Approximate amount (CAD)</label>
+          <select id="amount" name="amount" required class={field}><option value="">Choose a range</option>{AMOUNTS.map(a => <option value={a} selected={selectedAmount === a}>{a}</option>)}</select>
+          <p class="text-sm text-ink-700">An estimate is fine. Select “Not sure” if you're still planning.</p>
         </div>
-
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label class={label} for="name">Your name</label>
-            <input id="name" name="name" type="text" required maxlength="120" class={field} />
-          </div>
-          <div>
-            <label class={label} for="business">Business name <span class="text-ink-700/60">(optional)</span></label>
-            <input id="business" name="business" type="text" maxlength="160" class={field} />
-          </div>
+        <div class="mt-8 hidden space-y-5" data-step="4">
+          <h2 class="text-xl font-semibold">What documentation is available?</h2>
+          <label for="documents" class="block text-sm font-medium">Current documentation status</label>
+          <select id="documents" name="documents" required class={field}><option value="">Choose one</option><option>Recent business financial statements</option><option>Business bank statements</option><option>Both financial statements and bank statements</option><option>Documents are being prepared</option><option>Not sure what is required</option></select>
+          <p class="text-sm text-ink-700">Do not upload or paste financial information here.</p>
         </div>
-
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label class={label} for="email">Email</label>
-            <input id="email" name="email" type="email" required maxlength="160" class={field} />
-          </div>
-          <div>
-            <label class={label} for="phone">Phone <span class="text-ink-700/60">(optional)</span></label>
-            <input id="phone" name="phone" type="tel" maxlength="40" class={field} />
-          </div>
+        <div class="mt-8 hidden space-y-5" data-step="5">
+          <h2 class="text-xl font-semibold">When do you need financing?</h2>
+          <label for="timing" class="block text-sm font-medium">Desired timing</label>
+          <select id="timing" name="timing" required class={field}><option value="">Choose a timeline</option>{TIMINGS.map(t => <option value={t}>{t}</option>)}</select>
         </div>
-
-        <fieldset class="space-y-3 rounded-lg border border-ink-900/15 p-4">
-          <label class="flex items-start gap-3 text-sm text-ink-700">
-            <input type="checkbox" name="consent" required class="mt-1" />
-            <span>
-              I consent to CommercialKonnect reviewing my enquiry and, with my permission, connecting
-              me with a relevant financing professional. I understand this is not an approval or an
-              offer of financing. <span class="text-red-600">*</span>
-            </span>
-          </label>
-          <label class="flex items-start gap-3 text-sm text-ink-700">
-            <input type="checkbox" name="sms_consent" class="mt-1" />
-            <span>Optional: you may text me at the number above. Reply STOP anytime to opt out.</span>
-          </label>
-        </fieldset>
-
-        <button
-          type="submit"
-          class="w-full rounded-full bg-brand-600 px-8 py-3 text-base font-semibold text-white transition hover:bg-brand-700"
-        >
-          Submit Enquiry
-        </button>
-
-        <p class="text-xs leading-6 text-ink-700/70">
-          CommercialKonnect provides general education and connections, not financial advice. We do
-          not lend money, approve applications or guarantee financing.
-        </p>
+        <div class="mt-8 hidden space-y-5" data-step="6">
+          <h2 class="text-xl font-semibold">How do you expect to repay the financing?</h2>
+          <label for="repayment" class="block text-sm font-medium">Expected repayment source</label>
+          <select id="repayment" name="repayment" required class={field}><option value="">Choose one</option><option>Ongoing business cash flow</option><option>Customer invoices or receivables</option><option>Property rental income or sale</option><option>Project completion or asset sale</option><option>Other / need advice</option></select>
+          <p class="text-sm text-ink-700">This helps us understand the type of financing conversation you may need. It is not an eligibility decision.</p>
+        </div>
+        <div class="mt-8 hidden space-y-5" data-step="7">
+          <h2 class="text-xl font-semibold">Where can we reach you?</h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div><label for="name" class="block text-sm font-medium">Full name *</label><input id="name" name="name" required maxlength="120" autocomplete="name" class={field} /></div>
+            <div><label for="business" class="block text-sm font-medium">Business name (optional)</label><input id="business" name="business" maxlength="160" autocomplete="organization" class={field} /></div>
+            <div><label for="email" class="block text-sm font-medium">Email *</label><input id="email" name="email" type="email" required maxlength="160" autocomplete="email" class={field} /></div>
+            <div><label for="phone" class="block text-sm font-medium">Phone (optional)</label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" class={field} /></div>
+          </div>
+          <fieldset class="space-y-4 rounded-xl border border-ink-900/15 p-4">
+            <legend class="px-1 text-sm font-semibold">Permissions</legend>
+            <label class="flex items-start gap-3 text-sm"><input type="checkbox" name="consent" required class="mt-1" /><span>I consent to CommercialKonnect collecting and reviewing my enquiry and contacting me about it. I understand any sharing with a financing professional requires my permission. *</span></label>
+            <label class="flex items-start gap-3 text-sm"><input type="checkbox" name="sms_consent" class="mt-1" /><span>Optional: I agree to receive SMS messages about my enquiry at the number provided. Reply STOP to opt out.</span></label>
+          </fieldset>
+          <p class="text-xs leading-6 text-ink-700">CommercialKonnect does not lend, approve applications or guarantee financing. Submission does not authorize sharing your information with third parties.</p>
+        </div>
+        <p id="ck-validation" role="alert" aria-live="polite" class="mt-5 hidden text-sm font-medium text-red-700"></p>
+        <div class="mt-8 flex items-center justify-between gap-4">
+          <button id="ck-back" type="button" class="rounded-full border border-ink-900/20 px-6 py-3 font-semibold text-ink-900 disabled:opacity-40" disabled>Back</button>
+          <button id="ck-next" type="button" class="rounded-full bg-brand-600 px-7 py-3 font-semibold text-white hover:bg-brand-700">Continue</button>
+          <button id="ck-submit" type="submit" class="hidden rounded-full bg-brand-600 px-7 py-3 font-semibold text-white hover:bg-brand-700">Submit enquiry</button>
+        </div>
       </form>
     </div>
   </main>
+  <script>
+    const form = document.querySelector<HTMLFormElement>("#ck-wizard");
+    if (form) {
+      const panels = Array.from(form.querySelectorAll<HTMLElement>("[data-step]"));
+      const back = form.querySelector<HTMLButtonElement>("#ck-back")!;
+      const next = form.querySelector<HTMLButtonElement>("#ck-next")!;
+      const submit = form.querySelector<HTMLButtonElement>("#ck-submit")!;
+      const validation = form.querySelector<HTMLElement>("#ck-validation")!;
+      const progress = form.querySelector<HTMLElement>("#ck-progress")!;
+      const bar = form.querySelector<HTMLElement>("#ck-progress-bar")!;
+      const label = form.querySelector<HTMLElement>("#ck-step-label")!;
+      const title = form.querySelector<HTMLElement>("#ck-step-title")!;
+      const titles = ["Financing purpose", "Use of funds", "Operating history", "Amount", "Documentation", "Timing", "Repayment", "Contact and consent"];
+      let step = 0;
+      const show = (n: number) => {
+        step = Math.max(0, Math.min(n, panels.length - 1));
+        panels.forEach((panel, i) => {
+          panel.classList.toggle("hidden", i !== step);
+          panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>("input,select").forEach(el => { el.disabled = i !== step; });
+        });
+        back.disabled = step === 0;
+        next.classList.toggle("hidden", step === panels.length - 1);
+        submit.classList.toggle("hidden", step !== panels.length - 1);
+        label.textContent = `Step ${step + 1} of ${panels.length}`;
+        title.textContent = titles[step];
+        progress.setAttribute("aria-valuenow", String(step + 1));
+        bar.style.width = `${((step + 1) / panels.length) * 100}%`;
+        validation.classList.add("hidden");
+      };
+      const valid = () => {
+        const fields = panels[step].querySelectorAll<HTMLInputElement | HTMLSelectElement>("input,select");
+        for (const el of fields) {
+          if (!el.checkValidity()) {
+            validation.textContent = "Please complete the required fields before continuing.";
+            validation.classList.remove("hidden");
+            el.reportValidity();
+            return false;
+          }
+        }
+        return true;
+      };
+      next.addEventListener("click", () => { if (valid()) show(step + 1); });
+      back.addEventListener("click", () => show(step - 1));
+      form.addEventListener("submit", event => {
+        if (!valid()) { event.preventDefault(); return; }
+        // Enable all completed fields before native form submission.
+        panels.forEach(panel => panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>("input,select").forEach(el => { el.disabled = false; }));
+        submit.disabled = true;
+        submit.textContent = "Submitting…";
+      });
+      show(0);
+    }
+  </script>
 </Base>
