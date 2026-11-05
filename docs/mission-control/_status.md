@@ -25,7 +25,7 @@ Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — 
 | MC-00 reconcile main + PRs #1–#6 | done | docs/branch inspection | main merged into this branch (merge `30e67db`, brings current app/src + `src/lib/supabase/server.ts`); intake typechecks (`tsc --noEmit`: 0 errors in `src/lib/intake`). PR #1–#6 actual-vs-planned map in [RECONCILE.md](RECONCILE.md); decisions in [adr/](adr/) 0001–0003 |
 | MC-01 port app shell + Mission Control view | ref | MC-00 | prototype only; no live claims |
 | MC-02 typed Client Brain matching/qualification engine | spec | MC-00 | categorical match/out_of_mandate/needs_review |
-| MC-03 workspace security + RLS foundation | scaffold | MC-00, Mortgage Mix spec | `20261105_intake_rls_policies.sql`: `current_org_id()` + tenant policies on the 5 intake tables. NOT applied to a live DB; two-tenant denial test written (commented in the migration), not run — no DB in CI |
+| MC-03 workspace security + RLS foundation | scaffold | MC-00, Mortgage Mix spec | `20261105_intake_rls_policies.sql`: `current_org_id()` + tenant policies on the 5 intake tables. Policy LOGIC verified 2026-11-05 on a throwaway schema (rolled-back txn, real `authenticated` role + `auth.jwt()`): own-insert ok, cross-tenant insert blocked, read isolation 0, no-claim fail-closed 0. NOT deployed — no connected Supabase project hosts the CK base schema (`organizations.clerk_org_id`) yet; migrations unapplied to any live CK DB |
 | MC-04 persist draft/reviewed/active Brain | todo | MC-02, MC-03 | |
 | MC-05 bounded real ingestion + evidence | todo | MC-03, BuildData plan | no fixture leakage |
 | MC-06 real priorities/briefs/qualification | todo | MC-01,02,04,05 | |
