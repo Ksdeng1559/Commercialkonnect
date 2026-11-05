@@ -50,7 +50,8 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     }
     leadId = data?.id ?? null;
   } else {
-    console.warn("[apply] Supabase not configured; enquiry not persisted.");
+    console.error("[apply] Supabase not configured; refusing unpersisted enquiry.");
+    return redirect("/apply?error=2", 303);
   }
 
   // Autoresponses are best-effort and never block the redirect.
