@@ -3,6 +3,9 @@
 
 > This PRD covers CommercialKonnect's financing directory, broker GTM growth application and shared acquisition/lead infrastructure. The legacy construction-intelligence product requirements remain in `docs/PRD.md` and are not superseded for that product. Executive context: `docs/COMMERCIALKONNECT_WORDPRESS_EXECUTIVE_PLAN.md` (its earlier Divi selection is superseded here).
 
+## Child specification — Astro 7 + Programmatic SEO (proposed)
+See [Astro 7 + Programmatic SEO Child PRD](./ASTRO7_PROGRAMMATIC_SEO_PRD.md) for the proposed one-domain city × niche × financing-product organic acquisition engine, OpenSEO keyword-cluster agent, Harvey research, Sanity editorial workflow, technical SEO, AI-search discovery, and lead attribution. **Decision pending:** this proposes superseding WordPress/Astra/Gutenberg for the public marketing site; the existing Next.js broker application is retained. Nothing is migrated or deployed by this documentation update.
+
 ## 1. Product objective
 CommercialKonnect.ca connects Canadian business owners and commercial property investors with verified financing professionals, while enabling brokers to acquire prospects through three engines: (1) organic financing-directory SEO, (2) broker-led vertical outbound GTM using supported Explee capabilities, and (3) platform- or broker-funded paid acquisition using supported Ryze capabilities. Broker promotion drives attributable site traffic and may indirectly inform SEO; campaign visits must never be counted as organic traffic.
 
