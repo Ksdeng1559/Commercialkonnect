@@ -4,7 +4,9 @@ Ground truth for what exists. ICM invariant 9: status lives on disk. Hand-mainta
 
 **Overall:** spec + static UX reference only. No Next.js build, backend, auth, ingestion, calendar, billing or external action is implemented or verified. Reference checks are DOM-stub behavior checks, not browser/E2E/production evidence.
 
-Legend: `spec` = contract written, not built · `ref` = demonstrated in the static prototype only · `todo` = not started · `blocked` = waiting on a dependency.
+Legend: `spec` = contract written, not built · `scaffold` = typed code/schema landed, not wired to a provider/live DB, checks not run · `ref` = demonstrated in the static prototype only · `todo` = not started · `blocked` = waiting on a dependency.
+
+Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — funding_verticals, funding_applications, clarification_calls, intake_classification, client_briefs; RLS on, no permissive policies (MC-03).
 
 ## Intake pipeline (feeds Layer 1) — [INTAKE.md](INTAKE.md)
 
@@ -12,8 +14,8 @@ Legend: `spec` = contract written, not built · `ref` = demonstrated in the stat
 |---|---|---|
 | 01 application capture (varied applicant types + consent) | spec | funding_applications |
 | 02 clarification call (optional transcribed Google Meet) | spec | consent evidence before transcript storage |
-| 03 classification into silos (app + transcript, provenance) | spec | agent extraction; unknown stays unknown |
-| 04 client brief synthesis (source-linked, draft) | spec | broker reviews; no approval language |
+| 03 classification into silos (app + transcript, provenance) | scaffold | `src/lib/intake/transcript-adapter.ts` — merge real, classifier provider stubbed |
+| 04 client brief synthesis (source-linked, draft) | scaffold | `summarizeToBrief` real; no approval language; broker reviews |
 | 05 handoff → QUALIFICATION | spec | feeds the verdict + HITL gate |
 
 ## Deal-qualification backlog (Layer 1)
