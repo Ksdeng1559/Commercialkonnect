@@ -1,0 +1,161 @@
+---
+import Base from "../layouts/Base.astro";
+import { niches } from "../data/niches";
+
+const trustSignals = [
+  "BC first",
+  "Your permission before sharing",
+  "A conversation, not a commitment",
+];
+
+const steps = [
+  {
+    n: "1",
+    title: "Tell us about your plans",
+    body: "A short enquiry about what you're financing, roughly how much, and your timing. No document uploads.",
+  },
+  {
+    n: "2",
+    title: "We review your enquiry for a relevant connection",
+    body: "We look at what you've shared and identify a financing professional whose focus fits your situation.",
+  },
+  {
+    n: "3",
+    title: "With your permission, a financing professional contacts you",
+    body: "Nothing is shared without your say-so. You stay in control of the conversation from the first step.",
+  },
+];
+---
+
+<Base>
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-ink-950 to-ink-900 text-white">
+      <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">
+          Commercial financing · British Columbia
+        </p>
+        <h1 class="mt-4 max-w-3xl text-4xl font-semibold leading-tight md:text-5xl">
+          Your next business move starts with understanding your financing options.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          Buying commercial property, managing cash flow or planning your next project? Tell us what
+          you need and request a connection with a relevant financing professional.
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a
+            href="#enquiry"
+            class="rounded-full bg-brand-600 px-7 py-3 text-base font-semibold text-white transition hover:bg-brand-500"
+          >
+            Explore My Financing Options
+          </a>
+          <a
+            href="#how-it-works"
+            class="rounded-full border border-white/25 px-7 py-3 text-base font-semibold text-white transition hover:border-white/60"
+          >
+            See How It Works
+          </a>
+        </div>
+
+        <p class="mt-5 text-sm text-slate-400">
+          Start with a short enquiry. No financial document uploads required.
+        </p>
+
+        <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-300">
+          {trustSignals.map((s) => (
+            <li class="flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Featured funding -->
+    <section class="border-y border-ink-900/10 bg-sand-50">
+      <div class="mx-auto flex max-w-6xl flex-col items-start gap-4 px-5 py-8 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">Featured funding</p>
+          <p class="mt-1 text-lg font-medium text-ink-900">
+            Fast business funding and lines of credit for BC businesses
+          </p>
+        </div>
+        <a
+          href="/business-funding/"
+          class="shrink-0 rounded-full bg-brand-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700"
+        >
+          See business funding
+        </a>
+      </div>
+    </section>
+
+    <!-- Financing Options -->
+    <section id="financing-options" class="scroll-mt-20 bg-white">
+      <div class="mx-auto max-w-6xl px-5 py-20">
+        <h2 class="text-3xl font-semibold text-ink-900">Financing options</h2>
+        <p class="mt-3 max-w-2xl text-lg text-ink-700">
+          Your financing needs don't always fit a standard bank application.
+        </p>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {niches.map((n) => (
+            <a
+              href={`/${n.slug}/`}
+              class="group rounded-2xl border border-ink-900/10 bg-sand-50 p-7 transition hover:border-brand-500/60 hover:shadow-sm"
+            >
+              <h3 class="text-lg font-semibold text-ink-900 group-hover:text-brand-700">{n.name}</h3>
+              <p class="mt-3 text-sm leading-7 text-ink-700">{n.cardSummary}</p>
+              <span class="mt-4 inline-block text-sm font-medium text-brand-600">Learn more &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="scroll-mt-20 bg-ink-900 text-white">
+      <div class="mx-auto max-w-6xl px-5 py-20">
+        <h2 class="text-3xl font-semibold">How it works</h2>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          {steps.map((step) => (
+            <div>
+              <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white">
+                {step.n}
+              </div>
+              <h3 class="mt-5 text-lg font-semibold">{step.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-slate-300">{step.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-10 text-sm text-slate-400">
+          An introduction does not constitute approval or an offer of financing.
+        </p>
+      </div>
+    </section>
+
+    <!-- Enquiry CTA -->
+    <section id="enquiry" class="scroll-mt-20 bg-brand-600 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-20 text-center">
+        <h2 class="text-3xl font-semibold">Ready to explore your options?</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-brand-50">
+          Start with a short enquiry about what you need. We'll review it and, with your permission,
+          connect you with a relevant financing professional.
+        </p>
+        <a
+          href="/apply"
+          class="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-brand-700 transition hover:bg-sand-50"
+        >
+          Start My Enquiry
+        </a>
+        <p class="mx-auto mt-6 max-w-xl text-sm text-brand-50/90">
+          No financial document uploads. Please don't include your SIN, account numbers or
+          confidential financial details.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import { niches, type Niche } from "../data/niches";
+
+export function getStaticPaths() {
+  return niches.map((niche) => ({
+    params: { slug: niche.slug },
+    props: { niche },
+  }));
+}
+
+interface Props {
+  niche: Niche;
+}
+
+const { niche } = Astro.props;
+const related = niches.filter((n) => n.slug !== niche.slug);
+
+const steps = [
+  "Tell us about your plans in a short enquiry.",
+  "We review it and identify a relevant financing professional.",
+  "With your permission, they contact you. Nothing is shared without your say-so.",
+];
+
+// FAQPage schema for this page's questions — strong SEO signal for money pages.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: niche.faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Base title={niche.title} description={niche.description}>
+  <set:html
+    slot="head"
+    set:html={`<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}
+  />
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-ink-950 to-ink-900 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-16 md:py-20">
+        <nav class="text-sm text-slate-400">
+          <a href="/" class="hover:text-brand-500">Home</a>
+          <span class="px-2">/</span>
+          <span class="text-slate-300">{niche.name}</span>
+        </nav>
+        <h1 class="mt-5 text-4xl font-semibold leading-tight md:text-5xl">{niche.h1}</h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{niche.intro}</p>
+        <a
+          href="#enquiry"
+          class="mt-8 inline-block rounded-full bg-brand-600 px-7 py-3 text-base font-semibold text-white transition hover:bg-brand-500"
+        >
+          Explore My Options
+        </a>
+      </div>
+    </section>
+
+    <!-- What it is + common uses -->
+    <section class="bg-white">
+      <div class="mx-auto grid max-w-4xl gap-12 px-5 py-16 md:grid-cols-2">
+        <div>
+          <h2 class="text-2xl font-semibold text-ink-900">What it is</h2>
+          <p class="mt-4 text-base leading-8 text-ink-700">{niche.whatItIs}</p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold text-ink-900">Common uses</h2>
+          <ul class="mt-4 space-y-3">
+            {niche.uses.map((use) => (
+              <li class="flex gap-3 text-base leading-7 text-ink-700">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" aria-hidden="true"></span>
+                {use}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="bg-sand-50">
+      <div class="mx-auto max-w-4xl px-5 py-16">
+        <h2 class="text-2xl font-semibold text-ink-900">How it works</h2>
+        <ol class="mt-8 grid gap-8 md:grid-cols-3">
+          {steps.map((step, i) => (
+            <li>
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 font-bold text-white">
+                {i + 1}
+              </div>
+              <p class="mt-4 text-sm leading-7 text-ink-700">{step}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-8 text-sm text-ink-700/70">
+          An introduction does not constitute approval or an offer of financing.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-3xl px-5 py-16">
+        <h2 class="text-2xl font-semibold text-ink-900">Frequently asked questions</h2>
+        <div class="mt-8 divide-y divide-ink-900/10">
+          {niche.faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none text-lg font-medium text-ink-900">
+                {f.q}
+              </summary>
+              <p class="mt-3 text-base leading-7 text-ink-700">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Enquiry CTA -->
+    <section id="enquiry" class="scroll-mt-20 bg-brand-600 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-16 text-center">
+        <h2 class="text-3xl font-semibold">Explore your {niche.name.toLowerCase()} options</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-brand-50">
+          Start with a short enquiry. We'll review it and, with your permission, connect you with a
+          relevant financing professional.
+        </p>
+        <a
+          href="/apply"
+          class="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-brand-700 transition hover:bg-sand-50"
+        >
+          Start My Enquiry
+        </a>
+        <p class="mx-auto mt-6 max-w-xl text-sm text-brand-50/90">
+          No financial document uploads. Please don't include your SIN, account numbers or
+          confidential financial details.
+        </p>
+      </div>
+    </section>
+
+    <!-- Related niches: internal linking -->
+    <section class="bg-ink-950 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-14">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-500">
+          Other financing options
+        </h2>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+          {related.map((n) => (
+            <li>
+              <a href={`/${n.slug}/`} class="text-slate-300 hover:text-brand-500">{n.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+</Base>

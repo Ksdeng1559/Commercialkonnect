@@ -1,0 +1,162 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "CommercialKonnect — BC commercial financing options for business owners",
+  description = "Explore commercial financing options and request a connection with a relevant financing professional in British Columbia. A short enquiry, no document uploads, your permission before anything is shared.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const nav = [
+  { label: "Financing Options", href: "#financing-options" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Enquiry", href: "#enquiry" },
+];
+
+// Verification / social links are placeholders until the real URLs are wired in a later slice.
+const footerLinks = [
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Use", href: "#" },
+  { label: "For Financing Professionals", href: "#" },
+];
+
+// Organization markup helps CommercialKonnect rank for local BC financing intent.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  name: "CommercialKonnect",
+  url: Astro.site?.href ?? "https://commercialkonnect.ca",
+  description,
+  areaServed: { "@type": "AdministrativeArea", name: "British Columbia, Canada" },
+  telephone: "+1-778-846-5559",
+  email: "mortgagesbydennis.eng@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "600-1200 West 73rd Avenue",
+    addressLocality: "Vancouver",
+    addressRegion: "BC",
+    postalCode: "V6P 6G5",
+    addressCountry: "CA",
+  },
+  provider: {
+    "@type": "Person",
+    name: "Dennis Eng",
+    affiliation: "DLC Clear Trust Mortgages Inc.",
+  },
+};
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CommercialKonnect" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <set:html set:html={`<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`} />
+
+    <!-- Per-page head extras (e.g. FAQPage schema on money pages) -->
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-white font-sans text-ink-900 antialiased">
+    <header class="sticky top-0 z-40 border-b border-ink-900/10 bg-white/90 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
+        <a href="/" class="text-lg font-bold tracking-tight text-ink-900">
+          Commercial<span class="text-brand-600">Konnect</span>
+        </a>
+
+        <nav class="hidden items-center gap-7 text-sm font-medium text-ink-700 md:flex">
+          {nav.map((item) => (
+            <a href={item.href} class="transition hover:text-brand-600">{item.label}</a>
+          ))}
+          <a
+            href="#enquiry"
+            class="rounded-full bg-brand-600 px-5 py-2 font-semibold text-white transition hover:bg-brand-700"
+          >
+            Explore My Options
+          </a>
+        </nav>
+
+        <!-- Mobile menu: native disclosure, no JS -->
+        <details class="relative md:hidden">
+          <summary class="cursor-pointer list-none rounded-lg border border-ink-900/15 px-3 py-2 text-sm font-medium">
+            Menu
+          </summary>
+          <div class="absolute right-0 mt-2 w-56 rounded-xl border border-ink-900/10 bg-white p-2 shadow-lg">
+            {nav.map((item) => (
+              <a href={item.href} class="block rounded-lg px-3 py-2 text-sm text-ink-700 hover:bg-sand-50">{item.label}</a>
+            ))}
+            <a href="#enquiry" class="mt-1 block rounded-lg bg-brand-600 px-3 py-2 text-center text-sm font-semibold text-white">
+              Explore My Options
+            </a>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="border-t border-ink-900/10 bg-ink-950 text-slate-300">
+      <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
+        <div>
+          <div class="text-lg font-bold text-white">
+            Commercial<span class="text-brand-500">Konnect</span>
+          </div>
+          <p class="mt-3 text-sm leading-6 text-slate-400">
+            Dennis Eng, DLC Clear Trust Mortgages Inc.<br />
+            600-1200 West 73rd Avenue<br />
+            Vancouver, BC V6P 6G5
+          </p>
+          <p class="mt-3 text-sm text-slate-400">
+            <a href="tel:+17788465559" class="hover:text-brand-500">778-846-5559</a><br />
+            <a href="mailto:mortgagesbydennis.eng@gmail.com" class="hover:text-brand-500">mortgagesbydennis.eng@gmail.com</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-white">Verification</h2>
+          <ul class="mt-3 space-y-2 text-sm text-slate-400">
+            <li><a href="#" class="hover:text-brand-500">BCFSA registry</a></li>
+            <li><a href="#" class="hover:text-brand-500">Google</a></li>
+            <li><a href="#" class="hover:text-brand-500">LinkedIn</a></li>
+            <li><a href="#" class="hover:text-brand-500">Instagram</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-white">More</h2>
+          <ul class="mt-3 space-y-2 text-sm text-slate-400">
+            {footerLinks.map((item) => (
+              <li><a href={item.href} class="hover:text-brand-500">{item.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10">
+        <p class="mx-auto max-w-6xl px-5 py-6 text-xs leading-6 text-slate-500">
+          CommercialKonnect provides general education and connections, not financial advice. We do
+          not lend money, approve applications or guarantee financing. An introduction does not
+          constitute approval or an offer of financing.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

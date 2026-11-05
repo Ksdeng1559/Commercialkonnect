@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Brand tokens. Live site exposed no hex; palette chosen for a finance/trust feel:
+   deep ink navy for authority, teal accent for approachability. */
+@theme {
+  --color-ink-950: #0a1726;
+  --color-ink-900: #0e2033;
+  --color-ink-800: #15304a;
+  --color-ink-700: #1d3f60;
+  --color-brand-700: #0f766e;
+  --color-brand-600: #0d9488;
+  --color-brand-500: #14b8a6;
+  --color-sand-50: #f7f8f6;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}

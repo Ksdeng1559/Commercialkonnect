@@ -1,0 +1,194 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Featured product hub. BizCap is a referral/partner funding option CommercialKonnect
+// can introduce you to — not our product, not guaranteed. All BizCap figures are the
+// lender's own published claims, attributed and dated per FLOW_CONTENT_PIPELINE §3.
+// No rate, "approved", or "24 hour" guarantees. Dennis Eng is a BCFSA-licensed mortgage
+// professional; the connection model operates on that basis (broker-first).
+
+const observed = "2026-11-05";
+
+const uses = [
+  "Cover payroll, supplier payments, or a seasonal cash-flow gap",
+  "Restock inventory ahead of a busy period",
+  "Fund equipment or a new contract you can't wait on the bank for",
+  "Bridge a timing gap between money going out and coming in",
+];
+
+const faqs = [
+  {
+    q: "Is this a loan from CommercialKonnect?",
+    a: "No. CommercialKonnect is not a lender. We are a licensed mortgage professional's referral service that, with your permission, introduces you to a relevant funding provider such as BizCap. We do not lend, approve, or guarantee financing.",
+  },
+  {
+    q: "How much funding is available?",
+    a: "BizCap publishes short-term business funding from $10,000 to $2,000,000 (Source: bizcapfunding.ca, observed 2026-11-05). The actual amount, terms, and whether you qualify are decided by the lender, not by us.",
+  },
+  {
+    q: "What does it cost?",
+    a: "Pricing is set by the lender and depends on your business. We don't publish a rate because any figure would be lender- and situation-specific. Ask for a quote through your enquiry.",
+  },
+  {
+    q: "How fast is it?",
+    a: "Alternative funders like BizCap market faster turnaround than a traditional bank, but speed depends on your business and the lender's process. We can't promise a timeline or an outcome.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Business Funding & Lines of Credit in BC | CommercialKonnect"
+  description="Fast short-term business funding and lines of credit for BC business owners. Explore options including BizCap and request a connection with a licensed mortgage professional."
+>
+  <set:html
+    slot="head"
+    set:html={`<script type="application/ld+json">${JSON.stringify(faqSchema)}</script>`}
+  />
+
+  <main>
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-ink-950 to-ink-900 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-16 md:py-20">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-500">Featured funding</p>
+        <h1 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">
+          Business funding and lines of credit for BC businesses
+        </h1>
+        <!-- Answer-first (GEO): direct answer before any marketing -->
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+          Short-term business funding gives BC owners flexible capital for cash flow, inventory, or
+          growth, without the wait of a traditional bank. CommercialKonnect, a licensed mortgage
+          professional, reviews your enquiry and, with your permission, connects you with a relevant
+          funding provider such as BizCap. This is not an approval or an offer of financing.
+        </p>
+        <a
+          href="#enquiry"
+          class="mt-8 inline-block rounded-full bg-brand-600 px-7 py-3 text-base font-semibold text-white transition hover:bg-brand-500"
+        >
+          Explore My Options
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured partner: BizCap (attributed) -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-4xl px-5 py-16">
+        <h2 class="text-2xl font-semibold text-ink-900">Featured funding partner: BizCap</h2>
+        <p class="mt-4 text-base leading-8 text-ink-700">
+          BizCap is an alternative business funder operating in Canada. Where a bank application
+          doesn't fit or can't move fast enough, BizCap's products are built around cash flow rather
+          than paperwork. The figures below are BizCap's own published claims, not ours.
+        </p>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-ink-900/10 bg-sand-50 p-6">
+            <h3 class="font-semibold text-ink-900">Small business funding</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-700">
+              Short-term business funding, published range $10K–$2M.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-ink-900/10 bg-sand-50 p-6">
+            <h3 class="font-semibold text-ink-900">Line of capital</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-700">
+              Revolving funds to draw on when you need them — see our
+              <a href="/business-line-of-credit/" class="text-brand-600 hover:text-brand-700">business line of credit</a> page.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-ink-900/10 bg-sand-50 p-6">
+            <h3 class="font-semibold text-ink-900">Revenue-based financing</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-700">
+              Funding structured around your revenue to ease cash-flow constraints.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-ink-900/10 bg-sand-50 p-6">
+            <h3 class="font-semibold text-ink-900">Bridging finance</h3>
+            <p class="mt-2 text-sm leading-7 text-ink-700">
+              Short-term funding to bridge a temporary cash-flow or timing gap.
+            </p>
+          </div>
+        </div>
+
+        <p class="mt-6 text-xs leading-6 text-ink-700/70">
+          Source: bizcapfunding.ca · Observed: {observed} · Status: Unverified, pending analyst
+          review. Products, amounts, speed, and eligibility are determined by the lender and are
+          subject to qualification. CommercialKonnect does not set or guarantee any of them.
+        </p>
+      </div>
+    </section>
+
+    <!-- Common uses -->
+    <section class="bg-sand-50">
+      <div class="mx-auto max-w-4xl px-5 py-16">
+        <h2 class="text-2xl font-semibold text-ink-900">When business funding helps</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {uses.map((use) => (
+            <li class="flex gap-3 text-base leading-7 text-ink-700">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-600" aria-hidden="true"></span>
+              {use}
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-ink-700/70">
+          Illustrative uses, not a promise of funding for any specific situation.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white">
+      <div class="mx-auto max-w-3xl px-5 py-16">
+        <h2 class="text-2xl font-semibold text-ink-900">Frequently asked questions</h2>
+        <div class="mt-8 divide-y divide-ink-900/10">
+          {faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="cursor-pointer list-none text-lg font-medium text-ink-900">{f.q}</summary>
+              <p class="mt-3 text-base leading-7 text-ink-700">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- E-E-A-T -->
+    <section class="bg-sand-50">
+      <div class="mx-auto max-w-3xl px-5 py-12">
+        <p class="text-sm leading-7 text-ink-700">
+          Reviewed by <strong>Dennis Eng</strong>, a BCFSA-licensed mortgage professional with DLC
+          Clear Trust Mortgages Inc. Licensing details are published on our contact and compliance
+          information.
+        </p>
+      </div>
+    </section>
+
+    <!-- Enquiry CTA -->
+    <section id="enquiry" class="scroll-mt-20 bg-brand-600 text-white">
+      <div class="mx-auto max-w-4xl px-5 py-16 text-center">
+        <h2 class="text-3xl font-semibold">Explore your business funding options</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-brand-50">
+          Start with a short enquiry. We'll review it and, with your permission, connect you with a
+          relevant funding provider.
+        </p>
+        <a
+          href="/apply"
+          class="mt-8 inline-block rounded-full bg-white px-8 py-3 text-base font-semibold text-brand-700 transition hover:bg-sand-50"
+        >
+          Start My Enquiry
+        </a>
+        <p class="mx-auto mt-6 max-w-xl text-sm text-brand-50/90">
+          No financial document uploads. Please don't include your SIN, account numbers or
+          confidential financial details. An introduction does not constitute approval or an offer of
+          financing.
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>

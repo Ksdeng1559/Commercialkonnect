@@ -1,0 +1,126 @@
+---
+import Base from "../layouts/Base.astro";
+import { PURPOSES, PRODUCT_OPTIONS, AMOUNTS, TIMINGS } from "../lib/enquiry";
+
+const error = Astro.url.searchParams.get("error");
+const errorMessage =
+  error === "2"
+    ? "Something went wrong saving your enquiry. Please try again in a moment."
+    : error
+      ? "Please check the required fields and try again."
+      : null;
+
+const field = "mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-4 py-2.5 text-ink-900 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/20";
+const label = "block text-sm font-medium text-ink-900";
+---
+
+<Base
+  title="Start your financing enquiry | CommercialKonnect"
+  description="Tell us what you need. A short enquiry, no document uploads. We'll review it and, with your permission, connect you with a relevant financing professional in BC."
+>
+  <main class="bg-sand-50">
+    <div class="mx-auto max-w-2xl px-5 py-16">
+      <h1 class="text-3xl font-semibold text-ink-900">Start your enquiry</h1>
+      <p class="mt-3 text-base leading-7 text-ink-700">
+        A few quick questions. No financial document uploads. Please don't include your SIN, account
+        numbers or confidential financial details.
+      </p>
+
+      {errorMessage && (
+        <div class="mt-6 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+          {errorMessage}
+        </div>
+      )}
+
+      <form method="POST" action="/api/apply" class="mt-8 space-y-6">
+        <input type="hidden" name="source_page" value="/apply" />
+        <!-- Honeypot: hidden from users, must stay empty -->
+        <div class="hidden" aria-hidden="true">
+          <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div>
+          <label class={label} for="purpose">What are you financing?</label>
+          <select id="purpose" name="purpose" required class={field}>
+            <option value="" disabled selected>Select one…</option>
+            {PURPOSES.map((p) => <option value={p}>{p}</option>)}
+          </select>
+        </div>
+
+        <div>
+          <label class={label} for="product">Financing product</label>
+          <select id="product" name="product" required class={field}>
+            <option value="" disabled selected>Select one…</option>
+            {PRODUCT_OPTIONS.map((p) => <option value={p.value}>{p.label}</option>)}
+          </select>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label class={label} for="amount">Approximate amount (CAD)</label>
+            <select id="amount" name="amount" required class={field}>
+              <option value="" disabled selected>Select one…</option>
+              {AMOUNTS.map((a) => <option value={a}>{a}</option>)}
+            </select>
+          </div>
+          <div>
+            <label class={label} for="timing">Desired timing</label>
+            <select id="timing" name="timing" required class={field}>
+              <option value="" disabled selected>Select one…</option>
+              {TIMINGS.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label class={label} for="name">Your name</label>
+            <input id="name" name="name" type="text" required maxlength="120" class={field} />
+          </div>
+          <div>
+            <label class={label} for="business">Business name <span class="text-ink-700/60">(optional)</span></label>
+            <input id="business" name="business" type="text" maxlength="160" class={field} />
+          </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label class={label} for="email">Email</label>
+            <input id="email" name="email" type="email" required maxlength="160" class={field} />
+          </div>
+          <div>
+            <label class={label} for="phone">Phone <span class="text-ink-700/60">(optional)</span></label>
+            <input id="phone" name="phone" type="tel" maxlength="40" class={field} />
+          </div>
+        </div>
+
+        <fieldset class="space-y-3 rounded-lg border border-ink-900/15 p-4">
+          <label class="flex items-start gap-3 text-sm text-ink-700">
+            <input type="checkbox" name="consent" required class="mt-1" />
+            <span>
+              I consent to CommercialKonnect reviewing my enquiry and, with my permission, connecting
+              me with a relevant financing professional. I understand this is not an approval or an
+              offer of financing. <span class="text-red-600">*</span>
+            </span>
+          </label>
+          <label class="flex items-start gap-3 text-sm text-ink-700">
+            <input type="checkbox" name="sms_consent" class="mt-1" />
+            <span>Optional: you may text me at the number above. Reply STOP anytime to opt out.</span>
+          </label>
+        </fieldset>
+
+        <button
+          type="submit"
+          class="w-full rounded-full bg-brand-600 px-8 py-3 text-base font-semibold text-white transition hover:bg-brand-700"
+        >
+          Submit Enquiry
+        </button>
+
+        <p class="text-xs leading-6 text-ink-700/70">
+          CommercialKonnect provides general education and connections, not financial advice. We do
+          not lend money, approve applications or guarantee financing.
+        </p>
+      </form>
+    </div>
+  </main>
+</Base>
