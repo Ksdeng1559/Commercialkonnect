@@ -6,6 +6,16 @@ Ground truth for what exists. ICM invariant 9: status lives on disk. Hand-mainta
 
 Legend: `spec` = contract written, not built · `ref` = demonstrated in the static prototype only · `todo` = not started · `blocked` = waiting on a dependency.
 
+## Intake pipeline (feeds Layer 1) — [INTAKE.md](INTAKE.md)
+
+| Stage | State | Note |
+|---|---|---|
+| 01 application capture (varied applicant types + consent) | spec | funding_applications |
+| 02 clarification call (optional transcribed Google Meet) | spec | consent evidence before transcript storage |
+| 03 classification into silos (app + transcript, provenance) | spec | agent extraction; unknown stays unknown |
+| 04 client brief synthesis (source-linked, draft) | spec | broker reviews; no approval language |
+| 05 handoff → QUALIFICATION | spec | feeds the verdict + HITL gate |
+
 ## Deal-qualification backlog (Layer 1)
 
 | Ticket | State | Depends on | Note |
