@@ -28,6 +28,20 @@ export const AMOUNTS = [
   "Not sure",
 ] as const;
 
+
+/** Product-specific enquiry bands, not lender limits or underwriting criteria. */
+export const PRODUCT_AMOUNT_BANDS: Record<string, readonly string[]> = {
+  "business-line-of-credit": ["Under $25k", "$25k – $50k", "$50k – $100k", "$100k – $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M+", "Not sure"],
+  "working-capital": ["Under $25k", "$25k – $50k", "$50k – $100k", "$100k – $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M+", "Not sure"],
+  "equipment-financing": ["Under $25k", "$25k – $50k", "$50k – $100k", "$100k – $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M – $5M", "$5M+", "Not sure"],
+  "commercial-mortgages": ["Under $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M – $5M", "$5M – $10M", "$10M – $25M", "$25M+", "Not sure"],
+  "construction-financing": ["Under $500k", "$500k – $1M", "$1M – $2M", "$2M – $5M", "$5M – $10M", "$10M – $25M", "$25M – $50M", "$50M+", "Not sure"],
+  "business-acquisition-financing": ["Under $100k", "$100k – $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M – $5M", "$5M – $10M", "$10M – $20M", "$20M+", "Not sure"],
+  "not-sure": ["Under $25k", "$25k – $50k", "$50k – $100k", "$100k – $250k", "$250k – $500k", "$500k – $1M", "$1M – $2M", "$2M – $5M", "$5M – $10M", "$10M+", "Not sure"],
+};
+export const amountBandsFor = (product: string): readonly string[] =>
+  PRODUCT_AMOUNT_BANDS[product] ?? PRODUCT_AMOUNT_BANDS["not-sure"];
+
 export const TIMINGS = [
   "As soon as possible",
   "1 – 3 months",
@@ -45,7 +59,7 @@ const checkbox = z
 export const enquirySchema = z.object({
   purpose: z.enum(PURPOSES),
   product: z.enum(productValues),
-  amount: z.enum(AMOUNTS),
+  amount: z.string().trim().min(1).max(40),
   timing: z.enum(TIMINGS),
   name: z.string().trim().min(1, "Please enter your name").max(120),
   business: z.string().trim().max(160).optional().default(""),
@@ -57,6 +71,6 @@ export const enquirySchema = z.object({
   source_page: z.string().trim().max(200).optional().default("/apply"),
   // Honeypot: real users never fill this. Must be empty.
   company_website: z.string().max(0).optional().default(""),
-});
+}).refine((v) => amountBandsFor(v.product).includes(v.amount), { path: ["amount"], message: "Choose an amount range for the selected financing product" });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;
