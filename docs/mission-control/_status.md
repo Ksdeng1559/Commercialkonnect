@@ -22,7 +22,7 @@ Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — 
 
 | Ticket | State | Depends on | Note |
 |---|---|---|---|
-| MC-00 reconcile main + PRs #1–#6 | todo | docs/branch inspection | produce actual-vs-planned map + ADRs first |
+| MC-00 reconcile main + PRs #1–#6 | in-progress | docs/branch inspection | main merged into this branch (brings current app/src + `src/lib/supabase/server.ts`); intake code typechecks (`tsc --noEmit`: 0 errors in `src/lib/intake`). Still todo: PR #1–#6 actual-vs-planned map + ADRs |
 | MC-01 port app shell + Mission Control view | ref | MC-00 | prototype only; no live claims |
 | MC-02 typed Client Brain matching/qualification engine | spec | MC-00 | categorical match/out_of_mandate/needs_review |
 | MC-03 workspace security + RLS foundation | todo | MC-00, Mortgage Mix spec | two-tenant denial tests |
