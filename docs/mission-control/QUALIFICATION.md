@@ -2,6 +2,8 @@
 
 Status: spec, not built. Extends [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) state machines and the [CLIENT_BRAIN.md](CLIENT_BRAIN.md) matching engine (MC-02). No automation here makes a lending decision, promises approval, or submits anything to a lender without a recorded human approval.
 
+Input to qualification comes from [INTAKE.md](INTAKE.md): a funding application + clarification call (optionally a transcribed Google Meet) → classified silos → a source-linked client brief. Qualification consumes that brief; it does not collect it.
+
 ## What this adds
 
 1. A registry of **business-funding verticals** a deal can be qualified against.
