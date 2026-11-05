@@ -3,6 +3,9 @@ import Base from "../layouts/Base.astro";
 import { PURPOSES, PRODUCT_OPTIONS, AMOUNTS, TIMINGS } from "../lib/enquiry";
 
 const error = Astro.url.searchParams.get("error");
+const selectedProduct = Astro.url.searchParams.get("product");
+const selectedAmount = Astro.url.searchParams.get("amount");
+const selectedProvince = Astro.url.searchParams.get("province");
 const errorMessage =
   error === "2"
     ? "Something went wrong saving your enquiry. Please try again in a moment."
@@ -34,6 +37,7 @@ const label = "block text-sm font-medium text-ink-900";
 
       <form method="POST" action="/api/apply" class="mt-8 space-y-6">
         <input type="hidden" name="source_page" value="/apply" />
+        {selectedProvince && <p class="rounded-lg bg-white p-3 text-sm text-ink-700">Selected province: {selectedProvince === "BC" ? "British Columbia" : selectedProvince === "AB" ? "Alberta" : selectedProvince === "ON" ? "Ontario" : "Other Canadian province"}. We will confirm your location during follow-up.</p>}
         <!-- Honeypot: hidden from users, must stay empty -->
         <div class="hidden" aria-hidden="true">
           <label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off" /></label>
@@ -51,7 +55,7 @@ const label = "block text-sm font-medium text-ink-900";
           <label class={label} for="product">Financing product</label>
           <select id="product" name="product" required class={field}>
             <option value="" disabled selected>Select one…</option>
-            {PRODUCT_OPTIONS.map((p) => <option value={p.value}>{p.label}</option>)}
+            {PRODUCT_OPTIONS.map((p) => <option value={p.value} selected={selectedProduct === p.value}>{p.label}</option>)}
           </select>
         </div>
 
@@ -60,7 +64,7 @@ const label = "block text-sm font-medium text-ink-900";
             <label class={label} for="amount">Approximate amount (CAD)</label>
             <select id="amount" name="amount" required class={field}>
               <option value="" disabled selected>Select one…</option>
-              {AMOUNTS.map((a) => <option value={a}>{a}</option>)}
+              {AMOUNTS.map((a) => <option value={a} selected={selectedAmount === a}>{a}</option>)}
             </select>
           </div>
           <div>
