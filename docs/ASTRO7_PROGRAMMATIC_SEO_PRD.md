@@ -187,3 +187,67 @@ A researched OpenSEO cluster produces an approved Harvey brief, approved Sanity 
 - [SEO financing intent research](./SEO_UNSECURED_BUSINESS_CREDIT_VS_REAL_ESTATE_SECURITY.md)
 
 **Decision note:** This child PRD proposes replacing the WordPress public acquisition stack only. It does not replace the existing Next.js broker product or claim that the repo has already migrated to Astro.
+
+## 14. Video, graphics and interactive financing tools (proposed extension; November 2026)
+
+### Purpose and implementation boundary
+Extend the public acquisition experience beyond static landing pages while preserving fast, indexable HTML and the secure lead-intake boundary. This is an **implementation specification**, not a statement that these features are deployed. The dedicated public Astro deployment currently uses Astro 6 on a separate working branch; Astro 7 adoption requires compatibility and regression testing. No major-version change is approved by this appendix alone.
+
+### Content blocks and assets
+- **Video education:** optional HeyGen or self-hosted explainers for construction cash-flow gaps, business lines of credit, commercial mortgage preparation and equipment financing. Prefer poster-first, click-to-load players; captions/transcripts, disclosure of synthetic speakers where applicable, consent-safe analytics, and accessible controls.
+- **Graphics:** use Astro's supported image pipeline for optimized informative graphics; include dimensions, responsive formats and descriptive alternative text. Preserve source/licensing metadata in Sanity. Use lightweight SVG for infographics and diagrams, not rasterized text-only images.
+- **Editorial components:** `VideoExplainer.astro`, `FinanceInfographic.astro`, `CalculatorEmbed.astro`, `RelatedFinancingGuides.astro`, `FinancingCTA.astro`. Store content and asset references in approved Sanity records; do not embed unreviewed lender claims.
+
+### First six conversion tools
+| Tool / proposed route | Initial inputs | Output (illustrative) | Qualified CTA |
+| --- | --- | --- | --- |
+| Commercial mortgage calculator /tools/commercial-mortgage-calculator/ | principal, rate, amortization, optional down payment | indicative principal-and-interest payment, cash needed, assumptions | commercial mortgage enquiry |
+| Business line-of-credit calculator /tools/business-line-of-credit-calculator/ | credit limit, expected draw, annual rate, usage days | indicative interest cost, utilization | LOC enquiry |
+| Construction cash-flow gap calculator /tools/construction-cash-flow-calculator/ | payroll/supplier outflows, invoice receipts and timing | timing gap and peak cash requirement | construction/working capital enquiry |
+| Equipment financing calculator /tools/equipment-financing-calculator/ | asset cost, down payment, rate and term | indicative installment estimate | equipment financing enquiry |
+| Financing readiness assessment /tools/financing-readiness/ | product, province, operating history, documentation | educational checklist / missing information, **no underwriting approval** | existing application wizard |
+| Business acquisition funding estimator /tools/acquisition-funding-calculator/ | purchase price, equity, transaction costs and assumptions | illustrative funding gap | acquisition financing enquiry |
+
+All calculations require explicit assumptions, CAD denominations, financial-methodology notes, visible limitations and validation against edge cases. Never represent a calculation as an approved loan amount, binding offer, lender quote or individualized financial advice.
+
+### Implementation pattern
+- **Astro public routes:** static educational content and metadata; interactive widgets load as narrowly scoped client islands using plain TypeScript for simple tools or React only for complex state/charts.
+- **Shared model:** versioned `financingProductConfig` defines product labels, intake purposes, indicative enquiry bands, corresponding calculator, landing-page CTA and backend validation. The amount-band definitions must be reconciled with the current `web/src/lib/enquiry.ts`; avoid duplicating home-page slider ranges and wizard logic.
+- **Calculation code:** put deterministic pure functions into `src/lib/calculators/` and separately unit-test boundary conditions, rounding, CAD display, zero-rate and out-of-range inputs. Keep lender-specific rates and limits outside generic formulas unless verified and dated.
+- **Shared funnel:** `education or video -> calculator -> funding assessment -> contact and consent -> secure enquiry API -> Supabase -> human-reviewed qualification / broker CRM`. Carry `tool_id`, `tool_version`, origin page, UTM parameters and a minimal non-sensitive result summary. Consent for optional remarketing is separate from the enquiry request and partner sharing.
+- **Security:** do not persist full questionnaire data in query strings, send personal data to media embeds, expose service-role credentials, or post directly to CRM from a client island. Rate-limit and validate form API server-side. Never show a success state before confirmed persistence.
+- **SEO:** each calculator has a readable static explanation, worked example, assumptions, FAQ and clear internal links, not a JavaScript-only empty shell. Appropriate structured data must describe only actual visible features; video markup and thumbnails require accurate metadata.
+- **Performance/accessibility:** defer videos, honor reduced motion, keyboard-accessible sliders and form fields, test mobile breakpoints and Core Web Vitals.
+
+### Suggested module layout
+```text
+web/src/components/media/
+  VideoExplainer.astro
+  FinanceInfographic.astro
+web/src/components/tools/
+  CalculatorEmbed.astro
+  FinancingCTA.astro
+web/src/lib/calculators/
+  commercialMortgage.ts
+  lineOfCredit.ts
+  cashFlowGap.ts
+  equipmentFinance.ts
+web/src/lib/financing/
+  productConfig.ts
+web/src/pages/tools/
+  commercial-mortgage-calculator.astro
+  business-line-of-credit-calculator.astro
+  construction-cash-flow-calculator.astro
+  equipment-financing-calculator.astro
+  financing-readiness.astro
+  acquisition-funding-calculator.astro
+```
+
+### Staged delivery and acceptance
+1. **P0 — stabilize current funnel:** fix product-specific amount alignment between the home-page selector, wizard and server validation; ensure all eight questionnaire stages persist to Supabase; verify consent, attribution and Broker Mission Control handoff in an end-to-end test.
+2. **P1 — reusable media:** implement approved poster-first video and optimized graphic blocks, publish one evidence-backed contractor cash-flow explainer.
+3. **P1 — first tools:** release the business LOC and commercial mortgage calculators with tested formulas, accessible inputs and contextual application CTAs; measure starts, completions and qualified leads without assuming conversion lift.
+4. **P2 — full tool library:** add construction, equipment, readiness and acquisition tools; use approved niche/city SEO pages for distribution.
+5. **Astro 7 upgrade gate:** verify current official Astro 7 release, integration compatibility (`@astrojs/vercel`, Sanity, Tailwind, optional React), Node support, build output, accessibility and successful enquiry persistence on preview before changing the existing Astro 6 dependency.
+
+**Definition of done:** An approved page may display an accessible media block and an independently tested interactive tool; an enquiry carries verified product-specific amounts and source attribution through the secure API and database to the CRM, with no fabricated financing quote or unauthorized partner disclosure.
