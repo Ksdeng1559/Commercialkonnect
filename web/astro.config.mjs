@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
-import sitemap from '@astrojs/sitemap';
 
 // Pages stay static (prerendered) by default. Only routes that opt out via
 // `export const prerender = false` run on-demand — currently just /api/apply.
@@ -10,12 +9,4 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://commercialkonnect.ca',
   adapter: vercel(),
-  integrations: [
-    sitemap({
-      filter: (url) => {
-        const pathname = new URL(url).pathname;
-        return !/^\/(apply|thank-you|api)(\/|$)/.test(pathname);
-      },
-    }),
-  ],
 });
