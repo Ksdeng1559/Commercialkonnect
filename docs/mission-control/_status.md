@@ -6,7 +6,7 @@ Ground truth for what exists. ICM invariant 9: status lives on disk. Hand-mainta
 
 Legend: `spec` = contract written, not built · `scaffold` = typed code/schema landed, not wired to a provider/live DB, checks not run · `ref` = demonstrated in the static prototype only · `todo` = not started · `blocked` = waiting on a dependency.
 
-Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — funding_verticals, funding_applications, clarification_calls, intake_classification, client_briefs; RLS on, no permissive policies (MC-03).
+Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — funding_verticals, funding_applications, clarification_calls, intake_classification, client_briefs. RLS on; tenant policies added in `supabase/migrations/20261105_intake_rls_policies.sql` (MC-03, scaffold — not yet verified against a live DB).
 
 ## Intake pipeline (feeds Layer 1) — [INTAKE.md](INTAKE.md)
 
@@ -22,10 +22,10 @@ Intake schema: `supabase/migrations/20261105_intake_funding.sql` (scaffold) — 
 
 | Ticket | State | Depends on | Note |
 |---|---|---|---|
-| MC-00 reconcile main + PRs #1–#6 | in-progress | docs/branch inspection | main merged into this branch (brings current app/src + `src/lib/supabase/server.ts`); intake code typechecks (`tsc --noEmit`: 0 errors in `src/lib/intake`). Still todo: PR #1–#6 actual-vs-planned map + ADRs |
+| MC-00 reconcile main + PRs #1–#6 | done | docs/branch inspection | main merged into this branch (merge `30e67db`, brings current app/src + `src/lib/supabase/server.ts`); intake typechecks (`tsc --noEmit`: 0 errors in `src/lib/intake`). PR #1–#6 actual-vs-planned map in [RECONCILE.md](RECONCILE.md); decisions in [adr/](adr/) 0001–0003 |
 | MC-01 port app shell + Mission Control view | ref | MC-00 | prototype only; no live claims |
 | MC-02 typed Client Brain matching/qualification engine | spec | MC-00 | categorical match/out_of_mandate/needs_review |
-| MC-03 workspace security + RLS foundation | todo | MC-00, Mortgage Mix spec | two-tenant denial tests |
+| MC-03 workspace security + RLS foundation | scaffold | MC-00, Mortgage Mix spec | `20261105_intake_rls_policies.sql`: `current_org_id()` + tenant policies on the 5 intake tables. NOT applied to a live DB; two-tenant denial test written (commented in the migration), not run — no DB in CI |
 | MC-04 persist draft/reviewed/active Brain | todo | MC-02, MC-03 | |
 | MC-05 bounded real ingestion + evidence | todo | MC-03, BuildData plan | no fixture leakage |
 | MC-06 real priorities/briefs/qualification | todo | MC-01,02,04,05 | |
@@ -68,4 +68,4 @@ Dispatch disabled. WF-01→MC-02/04 · WF-02→MC-05/06/08 · WF-03→MC-05/06 �
 | Company-readiness rollup (revenue/invoices/unit economics) | todo | fed by MC-10 outcomes + Billr; later contract |
 
 ## Checks present
-`prototype/verify-*.cjs` (8): reference, chief, latest, market, pilot, briefing, ooda, broker, sales-card — DOM-stub only. No qualification-engine or underwriting-gate check exists yet (add with MC-02 / QUALIFICATION).
+`prototype/verify-*.cjs` (8): reference, chief, latest, market, pilot, briefing, ooda, broker, sales-card — DOM-stub only. No qualification-engine or underwriting-gate check exists yet (add with MC-02 / QUALIFICATION). Intake: `src/lib/intake/*.test.ts` (node:test, not run — no runner); MC-03 two-tenant denial test commented in `20261105_intake_rls_policies.sql` (not run — no DB in CI).
