@@ -57,6 +57,11 @@ Check: brief is source-linked (no uncited claim); unknowns listed explicitly; no
 ### 05 Handoff to qualification
 The classified silos + brief become the opportunity's input to [QUALIFICATION.md](QUALIFICATION.md): automated verdict (`auto_qualified` / `out_of_mandate` / `needs_review`), then broker review, then the HITL gate before underwriting. Intake never qualifies or submits anything itself.
 
+## Scaffold (landed, not wired to a provider or live DB)
+- Adapter: `src/lib/intake/transcript-adapter.ts` — stages 03→04. Real: consent gate (`assertRecordingConsent`), unknown-preserving merge (`mergePreservingUnknown`), source-linked draft brief (`summarizeToBrief`), orchestrator (`reviewTranscriptToBrief`). Model boundary `TranscriptClassifier.classify` is a stub (`NotConfiguredClassifier` throws rather than fabricate).
+- Checks: `src/lib/intake/transcript-adapter.test.ts` (node:test) — consent, no-fabrication, unknown preservation, conflict surfacing. Not yet run: no test runner in package.json; repo gate is `tsc --noEmit`.
+- Schema: `supabase/migrations/20261105_intake_funding.sql` — the tables below, RLS on, no permissive policies (await MC-03). Consent gate also enforced in DB (`transcript_requires_consent` check).
+
 ## Data (proposed, reconcile under MC-00)
 - `funding_applications`: id, workspace_id, applicant_type, product, amount_cad, industry, geo, use_of_funds, consent_basis, source, submitted_at, dedup_key, status.
 - `clarification_calls`: id, application_id, workspace_id, participants, observed_at, recording_consent_evidence, transcript_source_id, provider.
