@@ -1,6 +1,8 @@
-# KonstructionComOS
+# KommercialConnect
 
-**Construction Intelligence & Capital Origination OS** — a multi-tenant B2B SaaS for discovering early construction opportunities, identifying project stakeholders, and managing financing outreach.
+**Commercial & Business Financing, Connected.** KommercialConnect is the proposed borrower-facing brand for a Canadian B2B platform that connects businesses and commercial property owners with finance brokers. The platform is supported by a construction intelligence and capital origination system that discovers early project opportunities, identifies stakeholders, and manages financing workflows.
+
+> **Repository/product status:** The GitHub repository is still named `KonstructionComOS`. KommercialConnect is the proposed public brand; domain availability and trademark clearance are not confirmed. The application remains an MVP scaffold, and public-facing brand changes have not yet been implemented in the app.
 
 ## Latest additions — 2026-10-20
 
@@ -145,16 +147,33 @@ A Notion product-definition doc (§26, locked 2026-10-14) specifies a *different
 ## In-progress design: GTM lead-source review queue
 A doc-only branch (`docs/gtm-lead-source-playbook`, open PR #2) hands off a client-brain + offer + strategy-matching + review-queue workflow for converting construction-project signals into evidence-backed, human-reviewed opportunities. Source docs: `client.brain.md`, `docs/GTM_LEAD_SOURCE_PLAYBOOK.md`, `docs/GTM_ENRICHMENT.md`, `docs/GTM_WIREFRAME.md`, `docs/GTM_EXECUTION_LOOP.md`, `docs/GTM_GOALS_SUCCESS.md` (on that branch, not yet on `main`).
 
+**Conversation inbox (planned):** Chatwoot is the intended shared inbox for human website/social conversations and response handling. The canonical inquiry, consent evidence and attribution remain in the intake/Supabase layer; Atomic CRM remains the intended business-development record. No live connection is configured or claimed. See [`docs/CHATWOOT_INTEGRATION.md`](docs/CHATWOOT_INTEGRATION.md) for the data boundaries, flow and rollout gates.
+
+**Video sales workflow:** [Commercial & Business Financing Video Sales Workflow](docs/COMMERCIAL_FINANCING_VIDEO_SALES.md) defines the commercial mortgage and business-financing VSL sequence, audience-specific scripts, qualification and attribution measures, privacy safeguards, and staged Dubb/Sendspark/Hippo provider evaluation. This is GTM/product guidance; video features are not implemented in the app.
+
 Brainstorming is underway on this repo's `main` to scope and design the first buildable slice. Scoped so far (not yet approved/implemented):
 - First slice = pure TS strategy engine (`src/lib/gtm/`, CAP-01/02/03 only, categorical Research/Review/Ready/Hold output, no numeric scoring) + a review-queue UI (`/gtm`) — entirely mock-mode, two contrasting synthetic client-brain profiles, no persistence.
 - Explicitly deferred: fact-confirmation forms, capital qualification Kanban, internal opportunity promotion, Today view, outcome/feedback capture — all named in the source docs as later steps.
 - Depends on nothing from the Mortgage Mix or Atomic CRM tracks above; reuses none of their tenancy work since this slice has no DB yet.
 - No spec file exists yet — this section is a status pointer for other sessions/tools picking up context, not a committed plan.
 
-## Roadmap
-See `docs/PRD.md` and `docs/ARCHITECTURE.md`. This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
 
-## Approved public frontend: ClearConnect (Lovable)
+**Planned AI Chief of Staff (OODA Loop):** [Decision framework and implementation specification](docs/OODA_CHIEF_OF_STAFF.md) applies **Observe → Orient → Decide → Act** to Mission Control, including a daily executive briefing, evidence-backed top-three actions, human approval gates, agent execution audit and outcome feedback. [Notion source](https://app.notion.com/p/3ff9e94cf0a4810a857bfb686383b314). This is a product design, **not yet implemented**.
+
+## Roadmap
+See `docs/PRD.md` and `docs/ARCHITECTURE.md`. The evidence-backed market problem hypotheses and validation implications are summarized in [`docs/PRODUCT_MARKET_FIT_EVIDENCE.md`](docs/PRODUCT_MARKET_FIT_EVIDENCE.md); segment features and benefits are in [`docs/FEATURES_AND_BENEFITS.md`](docs/FEATURES_AND_BENEFITS.md). This is an MVP scaffold, **not** a production-ready financing, compliance or data-enrichment platform.
+
+**Planned research feature — multi-agent provider evaluation:** Separate research agents will test Exa, Tavily, and Parallel on the same BC project-signal queries, output schema, and research budget, with manual research as a baseline. The evaluation will compare source-backed accuracy, relevance, freshness, duplicates, review time, reliability, and cost per verified project. **This is a plan only; no provider integration or agent bake-off is implemented.** See [`docs/EXA_RESEARCH_INTEGRATION.md`](docs/EXA_RESEARCH_INTEGRATION.md) for the test protocol, safeguards, and rollout gates.
+
+## Public brand and frontend status
+
+**Proposed borrower-facing brand:** KommercialConnect — “Commercial & Business Financing, Connected.” Use this brand for business/property-owner acquisition, financing intake, broker matching, consent, and borrower status communication once validated and implemented.
+
+**Operating platform:** KonstructionComOS remains the construction intelligence and broker operations layer: project signals, stakeholder discovery, enrichment, human-reviewed qualification, broker workflows, and outcome tracking. The intended handoff passes only the data needed for routing and qualification, with consent and source provenance.
+
+The current ClearConnect/Klick2Client frontend below is an existing prototype and design source. It has not been rebranded or integrated as KommercialConnect. Domain registration, trademark clearance, and legal/compliance review remain outstanding.
+
+## Existing public frontend prototype: ClearConnect (Lovable)
 
 **Source website:** https://clearconnectcom.lovable.app/  
 **Editable Lovable project:** https://lovable.dev/projects/136ade9c-5e7f-4aea-95d7-de34af9aabc0
@@ -211,3 +230,39 @@ Verification: source syntax and all eight reference/chief/latest/market/pilot/br
 Opportunities now includes a sample sales intelligence card with signal, financing relevance as inference, unknown funding request, sponsor/authority gaps, discovery questions, source confidence and downloadable text. The hosted sample remains synthetic. A separate private five-project BuildData review pack was prepared from existing ClearClose records; it is not committed or embedded in public assets. No live provider query, personal contact lookup, CRM import or outreach occurred.
 
 Read [the BuildData population contract](docs/mission-control/SALES_INTELLIGENCE.md) before implementing real records. All 452 stored source records lacked publisher URL, licence and attribution; normalized owner roles can conflict with raw contractor fields. Preserve provenance and review those gaps before production population. Permit values are not financing requests. Run `node verify-sales-card.cjs` alongside the existing checks. Nine domain/DOM-stub checks pass; this card update has not had browser QA.
+
+**Planned GTM enrichment alternative — Deepline:** Evaluate [getaero-io / Deepline](https://github.com/getaero-io) for company and contact enrichment, decision-maker discovery, signal research and lead qualification alongside existing Exa/Tavily/Parallel options. This is **documentation and a proposed opt-in provider bake-off only**, not an implemented integration. See [`docs/DEEPLINE_GTM_ENRICHMENT_ALTERNATIVE.md`](docs/DEEPLINE_GTM_ENRICHMENT_ALTERNATIVE.md) for adapter design, BC sample evaluation, compliance safeguards, cost controls and adoption gates.
+
+
+**Planned unified GTM tool gateway — Treg:** Evaluate [Treg](https://github.com/superdesigndev/treg) as an optional agent-facing catalog/proxy for third-party data and team-owned tools. Benchmark Treg-mediated enrichment against direct Exa/Tavily/Parallel routes and Deepline workflows; keep source provenance, spend controls, tenant privacy, human review and direct-provider fallback. **Planning only; not installed or production-integrated.** See [`docs/TREG_GTM_DATA_GATEWAY.md`](docs/TREG_GTM_DATA_GATEWAY.md).
+
+
+## GTM enrichment adapter — engineering status (October 20, 2026)
+
+The vendor-neutral GTM provider adapter **has been scaffolded on a separate feature branch**, not merged into `main` or deployed. It is intended to give Chief of Staff and GTM agents a consistent interface while comparing enrichment providers without lock-in.
+
+- **Implementation branch:** [`feature/gtm-provider-adapter`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter)
+- **Source:** [`src/lib/gtm/providers/`](https://github.com/Ksdeng1559/KonstructionComOS/tree/feature/gtm-provider-adapter/src/lib/gtm/providers)
+- **Handoff:** [GTM provider adapter implementation](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/docs/GTM_PROVIDER_ADAPTER_IMPLEMENTATION.md)
+- **Provider candidates:** Treg (tool gateway), Deepline (GTM enrichment workflows), Exa, Tavily, Parallel and manual baseline.
+- **Implemented in branch:** TypeScript contract, provider registry, capability validation, explicit feature flags (off by default), basic response validation, per-request spend-cap checks and mandatory review flags.
+- **Not implemented:** Vendor API calls, runtime tenant authorization, verified vendor pricing, persistence/audit ledger, automated tests, routing/approval UI or production integration. The scaffold's spend cap does not replace pre-call billing authorization.
+
+**Next steps:** Review upstream API terms and data rights; implement and test one server-side provider adapter behind a flag; compare 50 BC companies/projects against direct providers and manual research; add authenticated tenant scoping, Supabase provenance/usage persistence, consent/suppression controls and human approval before any outbound or broker routing. Do not expose the scaffold as a production API or assume a public construction signal proves financing need.
+
+
+## Claude Code handoff — OODA Chief of Staff implementation
+
+The detailed phased engineering plan is maintained in the [feature/gtm-provider-adapter README](https://github.com/Ksdeng1559/KonstructionComOS/blob/feature/gtm-provider-adapter/README.md#claude-code-execution-plan--gtm-enrichment--ooda-chief-of-staff). **Claude Code should check out that feature branch and read its execution plan**, together with `AGENTS.md`, `CLAUDE.md`, `docs/OODA_CHIEF_OF_STAFF.md`, and the provider/OODA pipeline documents on that branch. The plan sequences tenancy and real-data gates, provider evaluation, persistent OODA decisioning, approval-controlled agent actions, dashboard work and regression testing. The branch contains **prototypes only**, not a production integration; do not merge before review and verified tests. First deliver an authorized, sourced BC prospect → Signal → Orientation → needs-review proposal → approved internal-only action → audited outcome vertical slice.
+
+### Planned — subscription weighted round-robin lead distribution
+
+CommercialKonnect's future broker marketplace will use eligibility-first, subscription-weighted round-robin matching with caps, time-limited exclusive offers, broker accept/decline, reassignment, consent/audit logs and a distinct human-approved co-broker review queue. See [`docs/PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md`](docs/PLANNED_SUBSCRIPTION_ROUND_ROBIN_ROUTING.md). **Documentation only: not built or deployed; paid lead allocation requires province/product-specific compliance and brokerage approval.**
+
+### Client acquisition and video sample library (planning)
+
+See [`docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md`](docs/COMMERCIALKONNECT_CLIENT_ACQUISITION_VIDEO_PLAYBOOK.md) for the CommercialKonnect borrower-acquisition framework: financing-problem campaigns, video-to-consultation landing-page funnels, broker routing, attribution/KPIs and publication gates. It indexes six HeyGen Video Agent sessions and two ChatGPT-origin sample source projects (HyperFrames bank-decline and Remotion BC business-funding). **These are example/session references, not verified published video masters or deployed acquisition automations.**
+
+### Customer acquisition funnel — Custom Viral Content Engine
+
+The [Viral Content Engine acquisition funnel](docs/VIRAL_CONTENT_ENGINE_ACQUISITION_FUNNEL.md) maps the supplied 16-command menu and `/workflow` to research, scripts, platform adaptation, PDF lead magnets, optional assessment, Atomic CRM handoff, broker review and revenue attribution. First pilot: BC contractor cash flow with three hooks and a CASHFLOW readiness checklist. It extends the existing acquisition SOP and video playbook while keeping broker-client acquisition distinct from borrower lead generation. **Documentation/manual-first specification only; plugin API, publishing, DM automation and CRM connection are not implemented by this update.**
