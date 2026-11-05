@@ -4,19 +4,21 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "CommercialKonnect — BC commercial financing options for business owners",
   description = "Explore commercial financing options and request a connection with a relevant financing professional in British Columbia. A short enquiry, no document uploads, your permission before anything is shared.",
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 const nav = [
-  { label: "Financing Options", href: "#financing-options" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Enquiry", href: "#enquiry" },
+  { label: "Financing Options", href: "/#financing-options" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Enquiry", href: "/apply" },
 ];
 
 // Verification / social links are placeholders until the real URLs are wired in a later slice.
@@ -60,6 +62,8 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
