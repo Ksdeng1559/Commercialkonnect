@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "status": "design-only",
+  "dispatch_enabled": false,
+  "framework_manifest": "agent-sources.lock.json",
+  "task_policy": {
+    "max_attempts": 3,
+    "max_retries_after_first_attempt": 2,
+    "require_active_brain_for_broker_operations": true,
+    "outbound_auto_approval": false
+  },
+  "workflows": [
+    {
+      "id": "WF-01",
+      "name": "Client interview and reviewed Client Brain",
+      "backlog_reference": "MC-02, MC-04",
+      "role_ids": [
+        "chief-of-staff",
+        "discovery-coach",
+        "workflow-architect",
+        "evidence-collector"
+      ],
+      "nodes": [
+        {
+          "id": "WF-01-1",
+          "objective": "Read approved interview inputs",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-01-2",
+          "objective": "Prepare structured interview and unknowns",
+          "depends_on": [
+            "WF-01-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-01-3",
+          "objective": "Validate profile draft",
+          "depends_on": [
+            "WF-01-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-01-4",
+          "objective": "Obtain authorized review and activate",
+          "depends_on": [
+            "WF-01-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [],
+      "automatic_external_actions": false
+    },
+    {
+      "id": "WF-02",
+      "name": "Signal to financing discovery",
+      "backlog_reference": "MC-05, MC-06, MC-08",
+      "role_ids": [
+        "chief-of-staff",
+        "discovery-coach",
+        "deal-strategist",
+        "outbound-strategist",
+        "evidence-collector"
+      ],
+      "nodes": [
+        {
+          "id": "WF-02-1",
+          "objective": "Verify dated source and sponsor",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-02-2",
+          "objective": "Resolve authority and mandate fit",
+          "depends_on": [
+            "WF-02-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-02-3",
+          "objective": "Prepare financing questions and proof brief",
+          "depends_on": [
+            "WF-02-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-02-4",
+          "objective": "Review eligible conversation approach",
+          "depends_on": [
+            "WF-02-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [
+        "LeadSniperAI",
+        "licensed-enrichment"
+      ],
+      "automatic_external_actions": false
+    },
+    {
+      "id": "WF-03",
+      "name": "Business growth financing",
+      "backlog_reference": "MC-05, MC-06",
+      "role_ids": [
+        "chief-of-staff",
+        "discovery-coach",
+        "loan-assistant",
+        "evidence-collector"
+      ],
+      "nodes": [
+        {
+          "id": "WF-03-1",
+          "objective": "Verify expansion signal",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-03-2",
+          "objective": "Confirm property or business financing purpose",
+          "depends_on": [
+            "WF-03-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-03-3",
+          "objective": "Prepare specialty intake and missing documents",
+          "depends_on": [
+            "WF-03-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-03-4",
+          "objective": "Review qualified next action",
+          "depends_on": [
+            "WF-03-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [
+        "LeadSniperAI",
+        "licensed-enrichment"
+      ],
+      "automatic_external_actions": false
+    },
+    {
+      "id": "WF-04",
+      "name": "Approved approach to held qualified meeting",
+      "backlog_reference": "MC-08, MC-09, MC-10, MC-16",
+      "role_ids": [
+        "chief-of-staff",
+        "offer-strategist",
+        "outbound-strategist",
+        "evidence-collector"
+      ],
+      "nodes": [
+        {
+          "id": "WF-04-1",
+          "objective": "Prepare relevant offer and draft",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-04-2",
+          "objective": "Review contact basis content and suppression",
+          "depends_on": [
+            "WF-04-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-04-3",
+          "objective": "Hand off to authorized Harvey and calendar adapters",
+          "depends_on": [
+            "WF-04-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-04-4",
+          "objective": "Record actual held outcome and attribution",
+          "depends_on": [
+            "WF-04-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [
+        "Harvey",
+        "calendar"
+      ],
+      "automatic_external_actions": false
+    },
+    {
+      "id": "WF-05",
+      "name": "Requirement to verified MVP feature",
+      "backlog_reference": "MC-00 through MC-16",
+      "role_ids": [
+        "orchestrator",
+        "workflow-architect",
+        "multi-agent-architect",
+        "backend-architect",
+        "frontend-developer",
+        "security-reviewer",
+        "evidence-collector",
+        "reality-checker"
+      ],
+      "nodes": [
+        {
+          "id": "WF-05-1",
+          "objective": "Reconcile source requirements and actual code",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-05-2",
+          "objective": "Specify states contracts and architecture",
+          "depends_on": [
+            "WF-05-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-05-3",
+          "objective": "Implement bounded feature slice",
+          "depends_on": [
+            "WF-05-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-05-4",
+          "objective": "Verify domain security and browser behavior",
+          "depends_on": [
+            "WF-05-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-05-5",
+          "objective": "Review evidence and completion claims",
+          "depends_on": [
+            "WF-05-4"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [],
+      "automatic_external_actions": false
+    },
+    {
+      "id": "WF-06",
+      "name": "Outcome review and next work plan",
+      "backlog_reference": "MC-10, MC-13, MC-15",
+      "role_ids": [
+        "chief-of-staff",
+        "evidence-collector"
+      ],
+      "nodes": [
+        {
+          "id": "WF-06-1",
+          "objective": "Read actual meetings accepted tasks and usage",
+          "depends_on": [],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-06-2",
+          "objective": "Reconcile target outcomes blockers and unknown costs",
+          "depends_on": [
+            "WF-06-1"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-06-3",
+          "objective": "Prepare decision brief",
+          "depends_on": [
+            "WF-06-2"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        },
+        {
+          "id": "WF-06-4",
+          "objective": "Propose bounded next plan for review",
+          "depends_on": [
+            "WF-06-3"
+          ],
+          "required_output": "Evidence-linked artifact or explicit unknown/blocker",
+          "acceptance": "Validate against AGENCY_AGENTS.md and linked MC ticket; no inferred external action"
+        }
+      ],
+      "runtime_adapters": [],
+      "automatic_external_actions": false
+    }
+  ]
+}

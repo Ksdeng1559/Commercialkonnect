@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "mode": "reference-only",
+  "repository": "https://github.com/Ksdeng1559/agency-agents",
+  "upstream": "https://github.com/msitarzewski/agency-agents",
+  "reviewed_revision": "652b2692f8d8ec2b1f1a38e559073e287dfdc469",
+  "reviewed_date": "2026-10-17",
+  "license": "MIT",
+  "installation_performed": false,
+  "runtime_connected": false,
+  "files": [
+    {
+      "role_id": "chief-of-staff",
+      "path": "specialized/specialized-chief-of-staff.md",
+      "sha256": "c0d053f19f32d369b6e9a4ded3a3b93efd792648b88b28f0ecd37a899b91b7b3",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/specialized/specialized-chief-of-staff.md"
+    },
+    {
+      "role_id": "workflow-architect",
+      "path": "specialized/specialized-workflow-architect.md",
+      "sha256": "a7a73de5d9d3d748f4b30a2d632511304a97d42feb9fbf2a3e7cac27e7386e52",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/specialized/specialized-workflow-architect.md"
+    },
+    {
+      "role_id": "discovery-coach",
+      "path": "sales/sales-discovery-coach.md",
+      "sha256": "8244a25e5b8785058b19ef92dca9e543a2c990e4dde1166d194f14514e3ae278",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/sales/sales-discovery-coach.md"
+    },
+    {
+      "role_id": "evidence-collector",
+      "path": "testing/testing-evidence-collector.md",
+      "sha256": "ff1868ae89f3be62f6f0da1fc8693582f18578c77751b8a65a53169ef15ececd",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/testing/testing-evidence-collector.md"
+    },
+    {
+      "role_id": "orchestrator",
+      "path": "specialized/agents-orchestrator.md",
+      "sha256": "3f900ee286eba5a809388ecc22ad860c4a3ef9ed7ff25488e80eac18f3a0f317",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/specialized/agents-orchestrator.md"
+    },
+    {
+      "role_id": "multi-agent-architect",
+      "path": "engineering/engineering-multi-agent-systems-architect.md",
+      "sha256": "d93dd20fef67bf85a537ba0f869fad1a17d0e589f20899d1bbe1f095a7bcb91b",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/engineering/engineering-multi-agent-systems-architect.md"
+    },
+    {
+      "role_id": "offer-strategist",
+      "path": "sales/sales-offer-lead-gen-strategist.md",
+      "sha256": "75a12987fb2a205ac029c2ebf43d1ae1a1502d1707ab4921923928489ff3778c",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/sales/sales-offer-lead-gen-strategist.md"
+    },
+    {
+      "role_id": "outbound-strategist",
+      "path": "sales/sales-outbound-strategist.md",
+      "sha256": "4f6c8abf9c936fbe5f4b66fc8044096e3dd5199f8f8ae9d0309ad92bc0653174",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/sales/sales-outbound-strategist.md"
+    },
+    {
+      "role_id": "deal-strategist",
+      "path": "sales/sales-deal-strategist.md",
+      "sha256": "fdd92f2ced04ad842e25fd9ebcc341372ce2630d4ec152a29c53f7b8535b855e",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/sales/sales-deal-strategist.md"
+    },
+    {
+      "role_id": "loan-assistant",
+      "path": "specialized/loan-officer-assistant.md",
+      "sha256": "3d6bfdb598187fb19fba6ab4b50ff357870cda04ea846aa975649d04788df84b",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/specialized/loan-officer-assistant.md"
+    },
+    {
+      "role_id": "reality-checker",
+      "path": "testing/testing-reality-checker.md",
+      "sha256": "6d32fcdb114233e13902ec6372d50293b120e85d490b5e81d372c29808f988a1",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/testing/testing-reality-checker.md"
+    },
+    {
+      "role_id": "backend-architect",
+      "path": "engineering/engineering-backend-architect.md",
+      "sha256": "45d94306c8f0f4c51efb76066008297fa4e87ce5b69f509cfede224084b74dfb",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/engineering/engineering-backend-architect.md"
+    },
+    {
+      "role_id": "frontend-developer",
+      "path": "engineering/engineering-frontend-developer.md",
+      "sha256": "35961da50f408e00eb6189c87825ac5e62e6b1bf9de3dee198a95536c6d2619e",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/engineering/engineering-frontend-developer.md"
+    },
+    {
+      "role_id": "security-reviewer",
+      "path": "security/security-appsec-engineer.md",
+      "sha256": "29282b0e428402e514a3632395af8fc56723e3a20bc4d9b4892aa223f25575e6",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/security/security-appsec-engineer.md"
+    },
+    {
+      "role_id": "billing-engineer",
+      "path": "engineering/engineering-payments-billing-engineer.md",
+      "sha256": "ce47609b6805087e2f731ea62f69edffaf61e1968049042e2ca3d225d4392b40",
+      "source_url": "https://github.com/Ksdeng1559/agency-agents/blob/652b2692f8d8ec2b1f1a38e559073e287dfdc469/engineering/engineering-payments-billing-engineer.md"
+    }
+  ]
+}
