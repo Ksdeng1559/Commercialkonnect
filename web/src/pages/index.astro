@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { niches } from "../data/niches";
+import { PRODUCT_OPTIONS } from "../lib/enquiry";
 
 const trustSignals = [
   "BC first",
@@ -42,6 +43,75 @@ const steps = [
           Buying commercial property, managing cash flow or planning your next project? Tell us what
           you need and request a connection with a relevant financing professional.
         </p>
+
+        <!-- Progressive financing enquiry: no personal information collected here. -->
+        <form id="financing-hero-form" action="/apply" method="GET" class="mt-9 max-w-3xl rounded-2xl border border-white/15 bg-white p-6 text-ink-900 shadow-xl md:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand-700">Start your financing enquiry</p>
+          <h2 class="mt-2 text-2xl font-semibold">What financing are you looking for?</h2>
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="hero-product" class="block text-sm font-semibold">Financing type</label>
+              <select id="hero-product" name="product" required class="mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-3 py-3 text-base">
+                {PRODUCT_OPTIONS.map((p) => <option value={p.value}>{p.label}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="hero-province" class="block text-sm font-semibold">Province</label>
+              <select id="hero-province" name="province" class="mt-2 w-full rounded-lg border border-ink-900/20 bg-white px-3 py-3 text-base">
+                <option value="BC">British Columbia</option>
+                <option value="AB">Alberta</option>
+                <option value="ON">Ontario</option>
+                <option value="other">Other Canadian province</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <label for="hero-amount" class="text-sm font-semibold">Approximate financing amount</label>
+              <output id="hero-amount-label" for="hero-amount" class="text-xl font-bold text-brand-700">$250,000</output>
+            </div>
+            <input id="hero-amount" type="range" min="25000" max="2000000" step="25000" value="250000" class="mt-4 w-full accent-brand-600" aria-label="Financing amount in Canadian dollars" />
+            <div class="mt-1 flex justify-between text-xs text-ink-700"><span>$25,000</span><span>$2 million+</span></div>
+            <label class="mt-3 flex items-center gap-2 text-sm"><input id="hero-unsure" type="checkbox" class="accent-brand-600" /> I'm not sure of the amount</label>
+            <input id="hero-amount-band" type="hidden" name="amount" value="$250k – $500k" />
+          </div>
+          <button type="submit" class="mt-6 w-full rounded-full bg-brand-600 px-6 py-3.5 font-semibold text-white transition hover:bg-brand-700">Continue My Enquiry →</button>
+          <p class="mt-3 text-xs leading-5 text-ink-700">No credit check or financial document uploads at this stage. This is an enquiry, not an approval or financing offer.</p>
+        </form>
+        <script>
+          const heroForm = document.querySelector<HTMLFormElement>("#financing-hero-form");
+          if (heroForm) {
+            const amount = heroForm.querySelector<HTMLInputElement>("#hero-amount")!;
+            const label = heroForm.querySelector<HTMLOutputElement>("#hero-amount-label")!;
+            const band = heroForm.querySelector<HTMLInputElement>("#hero-amount-band")!;
+            const unsure = heroForm.querySelector<HTMLInputElement>("#hero-unsure")!;
+            const product = heroForm.querySelector<HTMLSelectElement>("#hero-product")!;
+            const ranges: Record<string, [number, number, number]> = {
+              "commercial-mortgages": [250000, 25000000, 250000],
+              "construction-financing": [500000, 50000000, 500000],
+              "equipment-financing": [25000, 5000000, 25000],
+              "business-line-of-credit": [25000, 2000000, 25000],
+              "working-capital": [25000, 2000000, 25000],
+              "business-acquisition-financing": [100000, 20000000, 100000],
+            };
+            const fmt = (n: number) => new Intl.NumberFormat("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 }).format(n);
+            const sync = () => {
+              const n = Number(amount.value);
+              amount.disabled = unsure.checked;
+              label.textContent = unsure.checked ? "Not sure" : fmt(n);
+              band.value = unsure.checked ? "Not sure" : n < 100000 ? "Under $100k" : n < 250000 ? "$100k – $250k" : n < 500000 ? "$250k – $500k" : n < 1000000 ? "$500k – $1M" : n < 2000000 ? "$1M – $2M" : "$2M+";
+            };
+            product.addEventListener("change", () => {
+              const [min, max, step] = ranges[product.value] || [25000, 2000000, 25000];
+              amount.min = String(min); amount.max = String(max); amount.step = String(step);
+              amount.value = String(Math.min(max, Math.max(min, Number(amount.value))));
+              sync();
+            });
+            amount.addEventListener("input", sync);
+            unsure.addEventListener("change", sync);
+            sync();
+          }
+        </script>
 
         <div class="mt-9 flex flex-wrap gap-4">
           <a
