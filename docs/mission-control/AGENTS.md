@@ -13,6 +13,7 @@ Repo root `AGENTS.md` / `CLAUDE.md` and `docs/` (PRD, ARCHITECTURE, FRONTEND_INT
 | See what's actually done vs planned | [_status.md](_status.md) |
 | Build the domain model, RLS, state machines, server ops | [SYSTEM_DESIGN.md](SYSTEM_DESIGN.md) |
 | Work the backlog (MC-00…MC-20) | [IMPLEMENTATION.md](IMPLEMENTATION.md) |
+| Intake a funding application + clarification call → classify → brief | [INTAKE.md](INTAKE.md) |
 | Qualify a deal: verticals, automation, broker review, underwriting gate | [QUALIFICATION.md](QUALIFICATION.md) |
 | Build the Client Brain interview + matching | [CLIENT_BRAIN.md](CLIENT_BRAIN.md) |
 | Add the agent coordinator | [CHIEF_OF_STAFF.md](CHIEF_OF_STAFF.md) |
@@ -25,7 +26,7 @@ Repo root `AGENTS.md` / `CLAUDE.md` and `docs/` (PRD, ARCHITECTURE, FRONTEND_INT
 
 ## Roles (logical, not folders — catalog-only pass, nothing moved)
 - **Catalog**: this file, README, START_HERE, LATEST_REFERENCE, _status.md
-- **Contracts**: SYSTEM_DESIGN, QUALIFICATION, CLIENT_BRAIN, CHIEF_OF_STAFF, IMPLEMENTATION
+- **Contracts**: SYSTEM_DESIGN, INTAKE, QUALIFICATION, CLIENT_BRAIN, CHIEF_OF_STAFF, IMPLEMENTATION
 - **Factory (stable reference)**: AGENCY_AGENTS, RESEARCH_PROVIDERS, agent-sources.lock.json, workflow-registry.json
 - **Briefings**: CLIENT_BRIEFINGS, SALES_INTELLIGENCE, BROKER_MVP_ROLLOUT
 - **Product (reference)**: prototype/ + its verify-*.cjs checks
