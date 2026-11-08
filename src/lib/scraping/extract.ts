@@ -380,7 +380,6 @@ export function buildLender(params: {
     domain,
     products,
     territory,
-    territories,
     regulator,
     licence_no,
     ltv,

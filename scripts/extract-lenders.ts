@@ -11,6 +11,7 @@
  */
 
 import { readdir, readFile, writeFile } from "node:fs/promises";
+import type { Dirent } from "node:fs";
 import path from "node:path";
 import { buildLender } from "../src/lib/scraping/extract";
 import type { ScrapedLender } from "../src/lib/scraping/types";
@@ -29,7 +30,7 @@ interface CaptureMeta {
 }
 
 async function main() {
-  let domains: string[];
+  let domains: Dirent[];
   try {
     domains = await readdir(OUTPUT_ROOT, { withFileTypes: true });
   } catch {
