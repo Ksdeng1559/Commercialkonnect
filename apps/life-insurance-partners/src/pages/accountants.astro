@@ -1,0 +1,91 @@
+---
+const benefits = [
+  {title:'Protect your advisory relationship',body:'Remain the client’s trusted accounting adviser while CommercialKonnect handles the financing conversation.'},
+  {title:'Identify capital needs earlier',body:'Cash-flow reviews, tax planning and expansion discussions often surface legitimate funding requirements.'},
+  {title:'Coordinate with permission',body:'We seek the client’s consent before any private details are shared and provide appropriate introduction updates.'}
+];
+const needs = [
+  {title:'Working capital',body:'Bridge the timing gap between receivables, payroll and suppliers.'},
+  {title:'Commercial mortgages',body:'Explore purchasing or refinancing commercial real estate.'},
+  {title:'Growth and equipment',body:'Fund expansion, equipment, inventory or new facilities.'},
+  {title:'Acquisition and succession',body:'Evaluate funding for ownership changes and acquisitions.'}
+];
+const provinces = ['British Columbia','Alberta','Ontario','Saskatchewan','Manitoba','Quebec','Nova Scotia','New Brunswick','Newfoundland and Labrador','Prince Edward Island','Yukon','Northwest Territories','Nunavut'];
+---
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CommercialKonnect accountant referral network for Canadian business owners. Introduce clients to business financing and commercial mortgage specialists with permission." />
+  <title>Accountant Referral Partners | CommercialKonnect</title>
+</head>
+<body>
+<header>
+  <div class="container navigation">
+    <a href="/accountants" class="brand" aria-label="CommercialKonnect accountant partners home">COMMERCIAL<span>KONNECT</span></a>
+    <nav aria-label="Main navigation">
+      <a href="https://commercialkonnect.ca/">Home</a>
+      <a href="#benefits">Partner Benefits</a>
+      <a href="#solutions">Financing Solutions</a>
+      <a href="#process">How It Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="button header-cta">Become a Partner</a>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="container hero-layout">
+      <div>
+        <p class="eyebrow">FOR ACCOUNTANTS &amp; BUSINESS ADVISERS IN CANADA</p>
+        <h1>You know their numbers.<br/><em>Help fund their next chapter.</em></h1>
+        <p class="lead">When your business-owner clients need working capital, commercial property financing or acquisition funding, make a permission-based introduction to CommercialKonnect.</p>
+        <div class="actions"><a class="button" href="#contact">Join Our Referral Network</a><a class="outline" href="#process">See How Referrals Work</a></div>
+        <p class="fine">Your client relationship remains yours. No financing outcomes are guaranteed.</p>
+      </div>
+      <aside class="hero-card"><p class="eyebrow">THE ACCOUNTANT’S ADVANTAGE</p><h2>Spot the opportunity without becoming the lender.</h2><div class="steps"><span>01 &nbsp; Recognize a funding requirement</span><span>02 &nbsp; Obtain client permission</span><span>03 &nbsp; Introduce a financing specialist</span></div></aside>
+    </div>
+  </section>
+  <section class="section" id="benefits"><div class="container"><p class="eyebrow dark">WHY PARTNER</p><h2>More value for business owners.<br/><em>Clear professional boundaries.</em></h2><div class="cards">{benefits.map((b)=><article class="card"><h3>{b.title}</h3><p>{b.body}</p></article>)}</div></div></section>
+  <section class="section muted" id="solutions"><div class="container"><p class="eyebrow dark">FINANCING SOLUTIONS</p><h2>Business milestones worth discussing</h2><div class="cards two-cols">{needs.map((n)=><article class="card"><h3>{n.title}</h3><p>{n.body}</p></article>)}</div></div></section>
+  <section class="section" id="process"><div class="container"><p class="eyebrow dark">SIMPLE PROCESS</p><h2>How accountant referrals work</h2><div class="process">{['Identify an appropriate business funding objective','Ask for the business owner’s express permission','Introduce the client to CommercialKonnect','Coordinate next steps while respecting confidentiality'].map((s,i)=><div><strong>0{i+1}</strong><span>{s}</span></div>)}</div><p class="fine darkfine">Client details should not be submitted through this partner enquiry form. Any referral arrangement is subject to applicable professional rules, disclosures and approvals.</p></div></section>
+  <section class="section muted" id="contact"><div class="container contact-grid">
+    <div><p class="eyebrow dark">BECOME A REFERRAL PARTNER</p><h2>Start a conversation.</h2><p>Tell us about your accounting practice. We’ll contact you about the referral partnership process.</p><p>Mortgage services by Dennis Eng</p><p><a href="mailto:mortgagesbydennis.eng@gmail.com">mortgagesbydennis.eng@gmail.com</a></p></div>
+    <div class="form-panel"><h3>Accountant Partner Enquiry</h3><form id="accountant-form">
+      <div class="field-grid"><label>Full name *<input name="full_name" autocomplete="name" required maxlength="120"/></label><label>Work email *<input type="email" name="email" autocomplete="email" required maxlength="254"/></label></div>
+      <div class="field-grid"><label>Firm or practice *<input name="agency" required maxlength="160"/></label><label>Phone (optional)<input name="phone" type="tel" autocomplete="tel" maxlength="40"/></label></div>
+      <div class="field-grid"><label>Province or territory *<select name="province" required><option value="">Select location</option>{provinces.map(p=><option value={p}>{p}</option>)}</select></label><label>Client focus<select name="client_focus"><option value="">Select focus</option><option>Small business owners</option><option>Incorporated professionals</option><option>Mid-market companies</option><option>Business acquisitions</option><option>Other</option></select></label></div>
+      <label>Tell us about your practice<textarea name="message" rows="4" maxlength="1200" placeholder="Optional; do not include client details"></textarea></label>
+      <label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"/></label>
+      <label class="consent"><input type="checkbox" name="consent" required/><span>I agree that CommercialKonnect may contact me about my partnership enquiry. I have not supplied any client’s private information.</span></label>
+      <button class="button" type="submit" id="submit">Submit Partner Enquiry</button><p id="form-status" role="status" aria-live="polite"></p>
+    </form></div>
+  </div></section>
+</main>
+<footer><div class="container footer-main"><div><strong>COMMERCIAL<span>KONNECT</span></strong><p>Business finance referrals for Canadian professional advisers.</p></div><div><a href="https://commercialkonnect.ca/">Home</a><a href="#benefits">Partner Benefits</a><a href="#contact">Contact</a></div><div><p>Mortgage services by Dennis Eng</p><a href="mailto:mortgagesbydennis.eng@gmail.com">mortgagesbydennis.eng@gmail.com</a></div></div><div class="container footer-bottom">© 2026 <a href="https://klicksmartai.com/" target="_blank" rel="noopener noreferrer">KlickSmartAI.com</a>. All rights reserved.</div></footer>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#accountant-form');
+  const status = document.querySelector<HTMLElement>('#form-status');
+  const button = document.querySelector<HTMLButtonElement>('#submit');
+  form?.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!form || !status || !button || !form.reportValidity()) return;
+    button.disabled = true;
+    status.textContent = 'Sending your enquiry…';
+    const payload = Object.fromEntries(new FormData(form).entries());
+    try {
+      const response = await fetch('/api/accountant-enquiry', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Unable to submit enquiry');
+      status.textContent = 'Thank you. Your partner enquiry was received.';
+      form.reset();
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : 'Submission failed. Please try again.';
+    } finally { button.disabled = false; }
+  });
+</script>
+<style>
+:root{--navy:#092339;--teal:#29c9ad;--text:#183648;--muted:#627682;--light:#f0f7f6}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text)}a{color:inherit}h1,h2,h3,p{margin-top:0}.container{max-width:1140px;width:calc(100% - 40px);margin:auto}header,footer{background:var(--navy);color:#fff}header{position:sticky;top:0;z-index:10}.navigation{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:82px}.brand{font-size:19px;font-weight:850;letter-spacing:-.055em;text-decoration:none}.brand span,footer strong span{color:var(--teal)}nav{display:flex;flex-wrap:wrap;gap:20px;font-size:13px}nav a,footer a{text-decoration:none}nav a:hover,footer a:hover{text-decoration:underline}.button{background:var(--teal);border:0;border-radius:5px;padding:13px 18px;color:#092339;font-weight:800;display:inline-block;text-decoration:none;cursor:pointer}.button:disabled{opacity:.5}.header-cta{white-space:nowrap;font-size:13px}.hero{background:radial-gradient(ellipse at 87% 22%,#1f6471,transparent 50%),var(--navy);color:#fff;padding:95px 0}.hero-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:70px;align-items:center}h1{font-size:clamp(37px,5vw,63px);line-height:1.12;letter-spacing:-.05em}h2{font-size:clamp(28px,3vw,44px);line-height:1.2;letter-spacing:-.04em}h1 em,h2 em{font-style:normal;color:var(--teal)}.lead{font-size:17px;color:#c4d7dc}.eyebrow{font-size:12px;color:var(--teal);font-weight:800;letter-spacing:.13em}.eyebrow.dark{color:#127e75}.actions{display:flex;align-items:center;gap:18px;margin:26px 0;flex-wrap:wrap}.outline{color:#fff;text-decoration:none;border-bottom:1px solid var(--teal);font-weight:700}.fine{font-size:12px;color:#bed1d7}.darkfine{color:#627682;margin-top:25px}.hero-card{background:#fff;color:var(--text);padding:36px;border-radius:12px;box-shadow:0 25px 65px #0004}.hero-card h2{font-size:28px}.steps{display:grid;margin-top:30px}.steps span{border-top:1px solid #d5e7e5;padding:15px 0;font-size:14px}.section{padding:85px 0}.muted{background:var(--light)}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:33px}.cards.two-cols{grid-template-columns:repeat(2,1fr)}.card{padding:30px;background:#fff;border:1px solid #dae9e6;border-radius:8px}.card h3{font-size:20px}.card p{color:var(--muted);font-size:14px}.process{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}.process>div{padding:22px 12px;border-top:3px solid var(--teal)}.process strong{display:block;color:#13877d;margin-bottom:12px}.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:68px}.contact-grid>div:first-child p{color:var(--muted)}.contact-grid a{overflow-wrap:anywhere}.form-panel{background:#fff;padding:32px;box-shadow:0 15px 45px #18364812;border-radius:10px}.form-panel h3{font-size:23px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-size:13px;font-weight:700;margin-bottom:18px}input:not([type=checkbox]),select,textarea{display:block;width:100%;margin-top:7px;padding:12px;border:1px solid #c7d6d5;border-radius:4px;font:inherit;font-size:15px}textarea{resize:vertical}.consent{display:flex;gap:12px;align-items:flex-start;font-size:12px;font-weight:500}.consent input{margin-top:5px}.trap{position:absolute;left:-9999px}#form-status{font-size:13px;color:#126c63;margin-top:12px}.footer-main{display:grid;grid-template-columns:1.3fr .7fr 1fr;gap:25px;padding:40px 0}.footer-main>div:nth-child(2){display:flex;flex-direction:column;gap:9px}.footer-main p{font-size:13px;color:#a9c3cb}.footer-main a{font-size:13px;color:#71dfd0;overflow-wrap:anywhere}.footer-bottom{border-top:1px solid #315164;padding:20px 0;font-size:13px;color:#a9c3cb}.footer-bottom a{color:#71dfd0}@media(max-width:950px){.hero-layout,.contact-grid{grid-template-columns:1fr;gap:36px}.cards,.process{grid-template-columns:1fr 1fr}nav{gap:10px}}@media(max-width:730px){header{position:static}.navigation{flex-wrap:wrap;padding:15px 0;gap:12px}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding-bottom:5px}.header-cta{margin-left:auto}.hero{padding:65px 0}.cards,.cards.two-cols,.process,.field-grid,.footer-main{grid-template-columns:1fr}.section{padding:60px 0}.form-panel{padding:23px}}
+</style>
+</body></html>
