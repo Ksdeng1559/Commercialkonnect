@@ -1,0 +1,14 @@
+{
+  "name": "commercialkonnect-commercial-insurance-referrals",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.16.0",
+    "@astrojs/netlify": "^6.0.0"
+  }
+}
